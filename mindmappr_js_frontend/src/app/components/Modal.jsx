@@ -4,12 +4,9 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';  
 import Login from './login';
 import Register from './register';
-interface mod {
-  log:boolean,
-  reg:boolean
-}
+
 const popup = () => {
-    const [show, setShow] = useState<mod>({log:false,reg:false});
+    const [show, setShow] = useState({log:false,reg:false});
 
     const handlelog = () => setShow({log:!show.log,reg:false});
     const handlereg = () => setShow({log:false,reg:!show.reg});

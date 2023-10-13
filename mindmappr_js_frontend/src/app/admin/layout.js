@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+
 import { Inter } from 'next/font/google'
 import './styles/global.css'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -7,15 +7,13 @@ import Navbar from '../components/Header'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Mindmapper',
   description: 'A notion clone',
 }
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
 }) {
   return (
     <html lang="en">
