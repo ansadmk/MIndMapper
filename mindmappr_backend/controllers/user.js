@@ -33,7 +33,8 @@ module.exports = {
     const { username, password } = value;
 
     if (value) {
-        const users=userSchema.findOne({username:username})
+        const users=await userSchema.findOne({username:username})
+        console.log(users);
         if(users){
            const pass= bcrypt.compare(password,users.password)
            console.log(pass);
@@ -66,6 +67,8 @@ module.exports = {
                 message:"user not found"
             })
         }
+    }else{
+      console.log(error.message);
     }
   },
 };
