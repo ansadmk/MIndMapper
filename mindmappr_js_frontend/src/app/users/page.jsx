@@ -1,10 +1,12 @@
+import { signIn,signOut,useSession } from "next-auth/react"
 import Image from "next/image"
 
 
 export default function Home() {
+  const {data}=useSession()
   return (
     <div className="d-flex flex-column">
-    <Image src="/frontpage.svg" alt="me" width="1024" height="720" className="container m-auto img-fluid"/>
+          hello {data.user.name}
     </div>
   )
 }

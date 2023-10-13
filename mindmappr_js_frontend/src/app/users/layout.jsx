@@ -2,8 +2,9 @@
 import { Inter } from 'next/font/google'
 import './styles/global.css'
 import 'bootstrap/dist/css/bootstrap.css'
-import Footer from '../components/Footer'
-import Navbar from '../components/Header'
+import SessionProvider from "../users/components/sessionProvider"
+import { getServerSession } from 'next-auth'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,16 +13,17 @@ export const metadata = {
   description: 'A notion clone',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }) {
+  const session= await getServerSession()
   return (
     <html lang="en">
       
       <body className={inter.className}>
-      <Navbar/>
-        {children}
-        <Footer/>
+      <SessionProvider session={session}>{children}</SessionProvider>
+       
+       
         </body>
     </html>
   )
