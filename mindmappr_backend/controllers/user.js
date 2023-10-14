@@ -20,7 +20,7 @@ module.exports = {
             email: email,
           });
           res.json({
-            status: "sucess",
+            status: "success",
           });
         }
       });
@@ -64,6 +64,7 @@ module.exports = {
            }
         }else{
             res.json({
+              status:"failed",
                 message:"user not found"
             })
         }

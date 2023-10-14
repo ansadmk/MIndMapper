@@ -1,19 +1,45 @@
-
+"use client"
 import React from 'react'
 import { Form ,Button} from 'react-bootstrap'
-import { signIn,signOut,useSession } from "next-auth/react"
 import Sign from './sign'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
+import { useCookies } from 'react-cookie'
 
 const login = () => {
+const router =useRouter()
+const [cookies,setCookie]=useCookies(['token'])
+const handlesub=async(e)=>{
+  
+  e.preventDefault()
+  const username=e.target.username.value
+  const password=e.target.password.value
+  
+  const res=await axios.post("http://127.0.0.1:4000/api/user/login",{
+    "username":username,
+    "password":password
+  })
+  
+  if(res.data.status==="success"){
+    setCookie("token",res.data.jwt_token)
+    console.log(cookies);
+    alert("logged in success")
+  
+   router.push("/users")
+  }
+  else{
+    alert("failed")
+  }
+}
   return (
-    <Form.Group className='p-5 d-flex flex-column gap-2' >
-        <Form.Control type="text" placeholder="username" id="username" className='mb-2' />
-        <Form.Control type="password" placeholder='password' id='password' />
-       <Button variant='secondary' className='w-100 m-auto mt-4'>Continue</Button>
+    <form className='p-5 d-flex flex-column gap-2' onSubmit={handlesub} >
+        <input type="text" placeholder="username" id="username" className='mb-2' />
+        <input type="password" placeholder='password' id='password' />
+       <Button variant='secondary' className='w-100 m-auto mt-4' type='submit'>Continue</Button>
       <Sign/>
       
 
-    </Form.Group>
+    </form>
   )
 }
 

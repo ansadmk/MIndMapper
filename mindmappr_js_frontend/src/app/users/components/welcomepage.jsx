@@ -9,9 +9,7 @@ export default function Welcome() {
  
   return (
     <div className="d-flex flex-column">
-        <img src={data?.user?.image} alt="" />
-          hello {data?.user?.name}
-          <Button onClick={()=>signOut()}>signout</Button>
+        
     </div>
   )
 }
