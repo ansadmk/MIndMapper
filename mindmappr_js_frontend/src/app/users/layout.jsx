@@ -1,6 +1,5 @@
 
 import { Inter } from 'next/font/google'
-import './styles/global.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import SessionProvider from "../users/components/sessionProvider"
 import { getServerSession } from 'next-auth'

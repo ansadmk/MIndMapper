@@ -3,6 +3,8 @@ import Navbar from "./components/Header";
 import Footer from "./components/Footer";
 import "./styles/global.css";
 import "bootstrap/dist/css/bootstrap.css";
+import SessionProvider from "./users/components/sessionProvider"
+import { getServerSession } from 'next-auth'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,13 +13,16 @@ export const metadata = {
   description: "A notion clone",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session= await getServerSession()
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
+      <SessionProvider session={session}>
+        
         {children}
-        <Footer />
+       
+        </SessionProvider>
       </body>
     </html>
   );
