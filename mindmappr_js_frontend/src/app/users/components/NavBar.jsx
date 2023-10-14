@@ -5,7 +5,7 @@ import { signIn,signOut,useSession } from "next-auth/react"
 import { useRouter } from 'next/navigation';
 
 const NavBar = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const {data}=useSession()
   const router=useRouter()
   const handleClose = () => setShow(false);
@@ -28,8 +28,18 @@ const NavBar = () => {
         <img src={data?.user?.image} alt="" className='img-fluid w-25 h-25'/>
          <div className='text-center mt-4'> hello {data?.user?.name}</div>
           <Button variant='' onClick={()=>handleout()} className='w-50'>signout</Button>
-    </div>
-      
+        </div>
+         <div className='mt-5'>
+          <ul className='d-flex flex-column gap-4'>
+            <li>search</li>
+            <li>notifications</li>
+            <li>Add new page</li>
+          </ul>
+          <div className='border-5 bg-black'>
+              <div></div>
+          </div>
+         </div>
+
         </Offcanvas.Body>
       </Offcanvas>
     </>
