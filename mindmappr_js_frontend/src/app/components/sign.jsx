@@ -8,8 +8,8 @@ const sign = () => {
     
   return (
     <div className="d-flex flex-column gap-2">
-    <Button onClick={()=>signIn('google',{ callbackUrl: 'http://localhost:3000/users'})}>Google</Button>
-    <Button onClick={()=>signIn('github',{ callbackUrl: 'http://localhost:3000/users'})}>Github</Button>
+    <Button onClick={()=>signIn('google',{ callbackUrl: 'http://localhost:3000/Users'})}>Google</Button>
+    <Button onClick={()=>signIn('github',{ callbackUrl: 'http://localhost:3000/Users'})}>Github</Button>
     </div>
   )
 }

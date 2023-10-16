@@ -4,19 +4,22 @@ import { Button, Offcanvas } from "react-bootstrap";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { deleteCookie, getCookie } from 'cookies-next';
 
 const NavBar = () => {
   const [show, setShow] = useState(true);
   const { data } = useSession();
   const router = useRouter();
+ const cookie=getCookie('token')
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
   const handleout = () => {
-    signOut();
+    data?signOut():deleteCookie('token')
     router.push("/");
   };
   return (
     <div className="position-relative ">
+      {cookie?null:router.push('/')}
       <Button
         variant=""
         onClick={toggleShow}

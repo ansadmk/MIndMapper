@@ -4,11 +4,12 @@ import { Form ,Button} from 'react-bootstrap'
 import Sign from './sign'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import { useCookies } from 'react-cookie'
+// import { useCookies } from 'react-cookie'
+import { setCookie } from 'cookies-next';
 
 const login = () => {
 const router =useRouter()
-const [cookies,setCookie]=useCookies(['token'])
+// const [cookies,setCookie]=useCookies(['token'])
 const handlesub=async(e)=>{
   
   e.preventDefault()
@@ -22,10 +23,10 @@ const handlesub=async(e)=>{
   
   if(res.data.status==="success"){
     setCookie("token",res.data.jwt_token)
-    console.log(cookies);
+    
     alert("logged in success")
   
-   router.push("/users")
+   router.push("/Users")
   }
   else{
     alert("failed")

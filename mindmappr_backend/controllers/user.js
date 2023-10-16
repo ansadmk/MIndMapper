@@ -72,6 +72,15 @@ module.exports = {
       console.log(error.message);
     }
   },
- 
+ userDetails:async(req,res)=>{
+      const user= await userSchema.findOne({_id:req.token.id})
+      if(user){
+        res.json({
+          status:"success",
+          message:"fetched successfully",
+          data:user
+        })
+      }
+ }
 
 };

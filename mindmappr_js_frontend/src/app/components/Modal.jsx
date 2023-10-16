@@ -15,8 +15,8 @@ const popup = () => {
     const handlelog = () => setShow({log:!show.log,reg:false});
     const handlereg = () => setShow({log:false,reg:!show.reg});
     useEffect(()=>{
-    data?.user?.name?router.push('/user'):null}
-    ,[])
+    data?.user.name?router.push('/Users'):null}
+    )
     return (
       <div className='d-flex'>
       

@@ -9,4 +9,4 @@ const pageSchema=mongoose.Schema({
 
 })
 
-module.exports=mongoose.model("pages",userSchema)
+module.exports=mongoose.model("pages",pageSchema)

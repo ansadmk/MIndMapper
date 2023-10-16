@@ -24,7 +24,7 @@ const register = () => {
       "password":password
     })
      if(res.data.status=="success"){
-          router.push("/users");
+          router.push("/Users");
           alert("successfully logged in")
      
      }else{
