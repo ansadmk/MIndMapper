@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import 'bootstrap/dist/css/bootstrap.css'
 import SessionProvider from "../users/components/sessionProvider"
 import { getServerSession } from 'next-auth'
-import NavBar from './components/NavBar'
+import SideBar from './components/SideBar'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,7 +21,7 @@ export default async function RootLayout({
     <html lang="en">
       
       <body className={inter.className}>
-      <NavBar/>
+      <SideBar/>
       <SessionProvider session={session}>{children}</SessionProvider>
        
        
