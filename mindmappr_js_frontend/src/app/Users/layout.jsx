@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 import SessionProvider from "../Users/components/sessionProvider"
 import { getServerSession } from 'next-auth'
 import SideBar from './components/SideBar'
-import {Provider} from "react-redux"
-import { store } from '../redux/store'
+import StoreProvider from '../redux/StoreProvider'
+
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,15 +22,17 @@ export default async function RootLayout({
   
   
   return (
+    <StoreProvider>
     <html lang="en">
       
       <body className={inter.className}>
-       <Provider store={store}>
+       
       <SideBar/>
       <SessionProvider session={session}>{children}</SessionProvider>
-      </Provider>
+     
        
         </body>
     </html>
+    </StoreProvider>
   )
 }
