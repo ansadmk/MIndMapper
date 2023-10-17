@@ -73,7 +73,8 @@ module.exports = {
     }
   },
  userDetails:async(req,res)=>{
-      const user= await userSchema.findOne({_id:req.token.id})
+      const user= await userSchema.findOne({_id:res.token.id})
+      
       if(user){
         res.json({
           status:"success",

@@ -1,6 +1,4 @@
 import { Inter } from "next/font/google";
-import Navbar from "./components/Header";
-import Footer from "./components/Footer";
 import "./styles/global.css";
 import "bootstrap/dist/css/bootstrap.css";
 import SessionProvider from "./Users/components/sessionProvider"

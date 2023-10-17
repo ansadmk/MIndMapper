@@ -1,4 +1,5 @@
-const { createSlice } = require("@reduxjs/toolkit");
+"use client"
+const { createSlice,useDispatch } = require("@reduxjs/toolkit");
 const { default: axios } = require("axios");
 const { getCookie } = require("cookies-next");
 const cookie=getCookie('token')
@@ -17,5 +18,7 @@ const slice=createSlice({
         }
     }
 })
+const dispatch=useDispatch()
+dispatch(getDetails())
 export const {getDetails}=slice.actions
 export default slice.reducer

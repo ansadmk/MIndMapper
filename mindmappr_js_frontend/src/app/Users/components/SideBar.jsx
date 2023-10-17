@@ -5,11 +5,10 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { deleteCookie, getCookie } from 'cookies-next';
-import axios from "axios";
+import {useSelector} from "react-redux";
 
 const NavBar = () => {
   const [show, setShow] = useState(true);
-  const [response,setResponse]=useState({})
   const { data } = useSession();
   const router = useRouter();
  const cookie=getCookie('token')
@@ -19,15 +18,7 @@ const NavBar = () => {
     data?signOut():deleteCookie('token')
     router.push("/");
   };
-  useEffect(async function(){
-    var res=await axios.get("http://127.0.0.1:4000/api/user/userdetails",{
-      headers:{
-        Authorization:`Bearer ${cookie}`
-      }
-    })
-    setResponse(res.data)
-    console.log(res)
-  },[])
+ const res=useSelector(store=>store.Axios)
   return (
     <div className="position-relative ">
       {cookie?null:router.push('/')}
@@ -69,7 +60,7 @@ const NavBar = () => {
                   height="64"
                   className="me-3"
                 />
-                <div className="text-center mt-4"> hello {response?.data?.username}</div>
+                <div className="text-center mt-4"> hello {res.username}</div>
               </>
             )}
             <Button variant="" onClick={() => handleout()} className="w-50">
