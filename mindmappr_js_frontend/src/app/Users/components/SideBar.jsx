@@ -9,6 +9,7 @@ import axios from "axios";
 
 const NavBar = () => {
   const [show, setShow] = useState(true);
+  const [response,setResponse]=useState({})
   const { data } = useSession();
   const router = useRouter();
  const cookie=getCookie('token')
@@ -18,12 +19,14 @@ const NavBar = () => {
     data?signOut():deleteCookie('token')
     router.push("/");
   };
-  useEffect(function(){
-    var res=axios.get("http://127.0.0.1:4000/api/user/userdetails",{
+  useEffect(async function(){
+    var res=await axios.get("http://127.0.0.1:4000/api/user/userdetails",{
       headers:{
         Authorization:`Bearer ${cookie}`
       }
     })
+    setResponse(res.data)
+    console.log(res)
   },[])
   return (
     <div className="position-relative ">
@@ -54,7 +57,7 @@ const NavBar = () => {
                   className="img-fluid w-25 h-25"
                 />
                 <div className="text-center mt-4">
-                  hello {data ? data?.user?.name :res.data.data.username}
+                  hello {data?.user?.name }
                 </div>
               </>
             ) : (
@@ -66,7 +69,7 @@ const NavBar = () => {
                   height="64"
                   className="me-3"
                 />
-                <div className="text-center mt-4"> hello user</div>
+                <div className="text-center mt-4"> hello {response?.data?.username}</div>
               </>
             )}
             <Button variant="" onClick={() => handleout()} className="w-50">
