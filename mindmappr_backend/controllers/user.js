@@ -82,6 +82,9 @@ module.exports = {
           data:user
         })
       }
+ },
+ createPages:async(req,res)=>{
+  
  }
 
 };
