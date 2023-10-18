@@ -6,13 +6,22 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { deleteCookie, getCookie } from 'cookies-next';
 import {useSelector,useDispatch} from "react-redux";
-import { getDetails } from "@/app/redux/slice";
+import { userFetchStatus ,getDetails} from "@/app/redux/slice";
+import { FetchUsers } from "@/app/redux/Axioses";
 
 
-const NavBar = () => {
-  const dispatch=useDispatch  
-  const user=useSelector(state=>state.Axios.userDetails)
+
+const NavBar =  () => {
   const [show, setShow] = useState(true);
+  const dispatch=useDispatch()
+  const user=useSelector(getDetails)
+  useEffect(()=>{
+    if (userFetchStatus!="standby") {
+      dispatch(FetchUsers())
+    }
+  },[])
+  
+  
   const { data } = useSession();
   const router = useRouter();
  const cookie=getCookie('token')
@@ -22,11 +31,7 @@ const NavBar = () => {
     data?signOut():deleteCookie('token')
     router.push("/");
   };
-  (
-    function(){
-      dispatch(getDetails())
-    }
-)()
+  
   return (
     <div className="position-relative ">
       {cookie?null:router.push('/')}
@@ -68,7 +73,7 @@ const NavBar = () => {
                   height="64"
                   className="me-3"
                 />
-                <div className="text-center mt-4"> hello {user.data.username}</div>
+                <div className="text-center mt-4"> hello {user?.data?.username}</div>
               </>
             )}
             <Button variant="" onClick={() => handleout()} className="w-50">

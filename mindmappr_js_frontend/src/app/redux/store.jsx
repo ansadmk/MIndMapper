@@ -1,12 +1,16 @@
 "use client"
 const { configureStore } = require("@reduxjs/toolkit");
-import { createWrapper } from "next-redux-wrapper";
-import reduce from "./slice"
+
+import reduce, { getDetails } from "./slice"
 const stores=configureStore({
     reducer:{
         Axios:reduce
     },
-    devTools:true
-
+    devTools:true,
+    // middleware:(get)=>get({
+    //     serializableCheck:false
+    // })
+  
 })
+
 export const store=stores

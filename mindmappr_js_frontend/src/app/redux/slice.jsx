@@ -1,25 +1,33 @@
 "use client"
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { getCookie } from "cookies-next";
+import { FetchUsers } from "./Axioses";
 
 
-const cookie=getCookie('token')
 const slice=createSlice({
     name:"axios",
     initialState:{
+        status:"standby",
         userDetails:{}
+
     },
-    reducers:{
-        getDetails:async (state,action)=>{
-            const res=await axios.get("http://127.0.0.1:4000/api/user/userdetails",{
-                headers:{
-                  Authorization:`Bearer ${cookie}`
-                }})
-            state.userDetails=res.data    
-        }
-    }
+    reducers:{},
+    extraReducers: (builder) => {
+        builder
+          .addCase(FetchUsers.pending, (state) => {
+            state.status = 'loading';
+          })
+          .addCase(FetchUsers.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.userDetails = action.payload;
+          })
+          .addCase(FetchUsers.rejected, (state, action) => {
+            state.status = 'failed';
+            
+          });
+      },
 })
 
-export const {getDetails}=slice.actions
+
+export const userFetchStatus=(s)=>s.Axios.status
+export const getDetails=(s)=>s.Axios.userDetails
 export default slice.reducer
