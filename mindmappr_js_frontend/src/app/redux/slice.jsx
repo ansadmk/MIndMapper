@@ -33,7 +33,7 @@ const slice1=createSlice({
      profileStats:false
   },
   reducers:{
-    changeProfileStats:(state)=>state.profileStats=!state.profileStats
+    changeProfileStats:(state)=>{state.profileStats=!state.profileStats}
   },
 })
 
@@ -41,5 +41,6 @@ const slice1=createSlice({
 export const userFetchStatus=(s)=>s.Axios.status
 export const getDetails=(s)=>s.Axios.userDetails
 export const ProfileStats=(s)=>s.Axios.profileStats
+export const {changeProfileStats}=slice1.actions
 export const Modalslice=slice1.reducer
 export default slice.reducer

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { deleteCookie, getCookie } from 'cookies-next';
 import {useSelector,useDispatch} from "react-redux";
-import { userFetchStatus ,getDetails} from "@/app/redux/slice";
+import { userFetchStatus ,getDetails, changeProfileStats} from "@/app/redux/slice";
 import { FetchUsers } from "@/app/redux/Axioses";
 
 
@@ -21,7 +21,7 @@ const NavBar =  () => {
     }
   },[])
   
-  
+  const handledis=()=>dispatch(changeProfileStats())
   const { data } = useSession();
   const router = useRouter();
  const cookie=getCookie('token')
@@ -84,7 +84,7 @@ const NavBar =  () => {
             <ul className="d-flex flex-column gap-4">
               <li>search</li>
               <li>notifications</li>
-              <li>Add new page</li>
+              <li ><Button onClick={()=>handledis()}>Add new page</Button></li>
             </ul>
             <div className="border-5 bg-black">
               <div></div>
