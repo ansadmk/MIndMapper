@@ -7,10 +7,11 @@ const slice=createSlice({
     name:"axios",
     initialState:{
         status:"standby",
-        userDetails:{}
-
+        userDetails:{},
     },
-    reducers:{},
+    reducers:{
+      
+    },
     extraReducers: (builder) => {
         builder
           .addCase(FetchUsers.pending, (state) => {
@@ -26,8 +27,19 @@ const slice=createSlice({
           });
       },
 })
+const slice1=createSlice({
+  name:"userModal",
+  initialState:{
+     profileStats:false
+  },
+  reducers:{
+    changeProfileStats:(state)=>state.profileStats=!state.profileStats
+  },
+})
 
 
 export const userFetchStatus=(s)=>s.Axios.status
 export const getDetails=(s)=>s.Axios.userDetails
+export const ProfileStats=(s)=>s.Axios.profileStats
+export const Modalslice=slice1.reducer
 export default slice.reducer
