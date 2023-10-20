@@ -5,6 +5,7 @@ const pageSchema=mongoose.Schema({
     content:String,
     createdAt:Date,
     updatedAt:Date,
+    role:String,
     settings:Object
 
 })

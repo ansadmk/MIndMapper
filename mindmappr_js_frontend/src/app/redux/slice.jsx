@@ -1,6 +1,6 @@
 "use client"
 import { createSlice } from "@reduxjs/toolkit";
-import { FetchUsers } from "./Axioses";
+import { FetchUsers, createPageResponse,FetchPages } from "./Axioses";
 
 
 const slice=createSlice({
@@ -8,6 +8,10 @@ const slice=createSlice({
     initialState:{
         status:"standby",
         userDetails:{},
+        createPageStatus:"standby",
+        createPageRes:{},
+        FetchPageStatus:"standby",
+        FetchPageres:{}
     },
     reducers:{
       
@@ -21,10 +25,32 @@ const slice=createSlice({
             state.status = 'succeeded';
             state.userDetails = action.payload;
           })
-          .addCase(FetchUsers.rejected, (state, action) => {
+          .addCase(FetchUsers.rejected, (state, ) => {
             state.status = 'failed';
             
-          });
+          })
+          .addCase(createPageResponse.pending, (state) => {
+            state.createPageStatus = 'loading';
+          })
+          .addCase(createPageResponse.fulfilled, (state, action) => {
+            state.createPageStatus = 'succeeded';
+            state.createPageRes = action.payload;
+          })
+          .addCase(createPageResponse.rejected, (state, ) => {
+            state.createPageStatus = 'failed';
+            
+          })
+          .addCase(FetchPages.pending, (state) => {
+            state.FetchPageStatus = 'loading';
+          })
+          .addCase(FetchPages.fulfilled, (state, action) => {
+            state.FetchPageStatus = 'succeeded';
+            state.FetchPageres = action.payload;
+          })
+          .addCase(FetchPages.rejected, (state, ) => {
+            state.FetchPageStatus = 'failed';
+            
+          })
       },
 })
 const slice1=createSlice({
@@ -40,6 +66,10 @@ const slice1=createSlice({
 
 export const userFetchStatus=(s)=>s.Axios.status
 export const getDetails=(s)=>s.Axios.userDetails
+export const createpagestatus=(s)=>s.Axios.createPageStatus
+export const createpageres=(s)=>s.Axios.createPageRes
+export const fetchpagestatus=(s)=>s.Axios.FetchPageStatus
+export const fetchpageres=(s)=>s.Axios.FetchPageres
 export const ProfileStats=(s)=>s.profileStats.profileStats
 export const {changeProfileStats}=slice1.actions
 export const Modalslice=slice1.reducer

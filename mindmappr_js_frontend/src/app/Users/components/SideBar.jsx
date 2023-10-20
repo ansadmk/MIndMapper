@@ -15,6 +15,9 @@ const NavBar =  () => {
   const [show, setShow] = useState(true);
   const dispatch=useDispatch()
   const user=useSelector(getDetails)
+  const handlePageCreation=()=>{
+    
+  }
   useEffect(()=>{
     if (userFetchStatus!="standby") {
       dispatch(FetchUsers())
@@ -80,7 +83,7 @@ const NavBar =  () => {
             <ul className="d-flex flex-column gap-4">
               <li>search</li>
               <li>notifications</li>
-              <li >Add new page</li>
+              <li className="link" onClick={()=>handlePageCreation()} >Add new page</li>
               
             </ul>
             <div className="border-5 bg-black">

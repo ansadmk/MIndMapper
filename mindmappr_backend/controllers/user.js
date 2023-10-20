@@ -85,14 +85,44 @@ module.exports = {
       }
  },
  createPages:async(req,res)=>{
-  const {parent,userId,content}=req.body
-  await pageSchema.create({
+  const {parent,content,role}=req.body
+  const page=await pageSchema.create({
     title:parent,
-    owner:userId,
+    owner:res.token.id,
     content:content,
     createdAt:Date.now(),
-    
+    role:role
   })
+  if (page) {
+    res.json({
+      status:"success",
+      message:"created"
+    })
+  } else {
+    res.json({
+      status:"failed",
+      message:"not created"
+    })
+  }
+ },
+ fetchpages:async(req,res)=>{
+      const mainpages=await pageSchema.find({owner:res.token.id,role:"main"})
+      const subpages=await pageSchema.find({owner:res.token.id,role:"sub"})
+       if(mainpages){
+        res.json({
+          status:"success",
+          message:"successfully fetched",
+          data:{
+            mainpages:mainpages,
+            subpages:subpages
+          }
+        })
+       }else{
+        res.json({
+          status:"failed",
+          message:"failed to fetched"
+        })
+       }
  }
 
 };
