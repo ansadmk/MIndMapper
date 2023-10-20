@@ -56,10 +56,12 @@ const slice=createSlice({
 const slice1=createSlice({
   name:"userModal",
   initialState:{
-     profileStats:false
+     profileStats:false,
+     showPageForm:false
   },
   reducers:{
-    changeProfileStats:(state)=>{state.profileStats=!state.profileStats}
+    changeProfileStats:(state)=>{state.profileStats=!state.profileStats},
+    changeShowPageForm:(state)=>{state.showPageForm=!state.showPageForm}
   },
 })
 
@@ -71,6 +73,7 @@ export const createpageres=(s)=>s.Axios.createPageRes
 export const fetchpagestatus=(s)=>s.Axios.FetchPageStatus
 export const fetchpageres=(s)=>s.Axios.FetchPageres
 export const ProfileStats=(s)=>s.profileStats.profileStats
-export const {changeProfileStats}=slice1.actions
+export const showPageForm=(s)=>s.profileStats.showPageForm
+export const {changeProfileStats,changeShowPageForm}=slice1.actions
 export const Modalslice=slice1.reducer
 export default slice.reducer

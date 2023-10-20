@@ -1,23 +1,22 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Button, Offcanvas } from "react-bootstrap";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { deleteCookie, getCookie } from 'cookies-next';
+import { getCookie } from 'cookies-next';
 import {useSelector,useDispatch} from "react-redux";
-import { userFetchStatus ,getDetails, changeProfileStats} from "@/app/redux/slice";
+import { userFetchStatus ,getDetails, changeProfileStats, changeShowPageForm} from "@/app/redux/slice";
 import { FetchUsers } from "@/app/redux/Axioses";
 
 
 
 const NavBar =  () => {
   const [show, setShow] = useState(true);
+  const [page,setpage]= useState(false)
   const dispatch=useDispatch()
   const user=useSelector(getDetails)
-  const handlePageCreation=()=>{
-    
-  }
+  const handlePageCreation=()=>dispatch(changeShowPageForm())
   useEffect(()=>{
     if (userFetchStatus!="standby") {
       dispatch(FetchUsers())
