@@ -85,8 +85,14 @@ module.exports = {
       }
  },
  createPages:async(req,res)=>{
-  const {parent}=req.body
-  await 
+  const {parent,userId,content}=req.body
+  await pageSchema.create({
+    title:parent,
+    owner:userId,
+    content:content,
+    createdAt:Date.now(),
+    
+  })
  }
 
 };

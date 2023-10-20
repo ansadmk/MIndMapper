@@ -30,7 +30,7 @@ const Profile = () => {
           <Button variant="" onClick={() => handleout()} className="w-75 h-75 border-0 mt-2">
               signout
             </Button>
-            hello
+           
           </Modal.Body>
           
         </Modal>

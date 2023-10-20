@@ -35,7 +35,7 @@ const NavBar =  () => {
       <Button
         variant=""
         onClick={toggleShow}
-        className="ms-5 mt-5 p-0 pt-0 fs-1 border-0 position-absolute top-0 start-0 translate-middle"
+        className="fs-3 border-0 "
       >
         🟰
       </Button>
@@ -44,6 +44,7 @@ const NavBar =  () => {
         onHide={handleClose}
         scroll={true}
         backdrop={false}
+        
       >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title></Offcanvas.Title>
