@@ -1,5 +1,6 @@
 require('dotenv').config()
 const userSchema = require("../model/user");
+const pageSchema=require('../model/pages')
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { uservalid } = require("../model/SchemaValidation");
@@ -84,7 +85,8 @@ module.exports = {
       }
  },
  createPages:async(req,res)=>{
-  
+  const {parent}=req.body
+  await 
  }
 
 };

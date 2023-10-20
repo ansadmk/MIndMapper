@@ -27,10 +27,7 @@ const NavBar =  () => {
  const cookie=getCookie('token')
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
-  const handleout = () => {
-    data?signOut():deleteCookie('token')
-    router.push("/");
-  };
+  
   
   return (
     <div className="position-relative ">
@@ -52,7 +49,7 @@ const NavBar =  () => {
           <Offcanvas.Title></Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <div className="d-flex">
+          <div className="d-flex link" onClick={()=>handledis()}>
             {data?.user ? (
               <>
                 <img
@@ -76,15 +73,14 @@ const NavBar =  () => {
                 <div className="text-center mt-4"> hello {user?.data?.username}</div>
               </>
             )}
-            <Button variant="" onClick={() => handleout()} className="w-50">
-              signout
-            </Button>
+            
           </div>
           <div className="mt-5">
             <ul className="d-flex flex-column gap-4">
               <li>search</li>
               <li>notifications</li>
-              <li ><Button onClick={()=>handledis()}>Add new page</Button></li>
+              <li >Add new page</li>
+              
             </ul>
             <div className="border-5 bg-black">
               <div></div>

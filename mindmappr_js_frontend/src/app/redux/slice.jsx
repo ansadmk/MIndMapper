@@ -40,7 +40,7 @@ const slice1=createSlice({
 
 export const userFetchStatus=(s)=>s.Axios.status
 export const getDetails=(s)=>s.Axios.userDetails
-export const ProfileStats=(s)=>s.Axios.profileStats
+export const ProfileStats=(s)=>s.profileStats.profileStats
 export const {changeProfileStats}=slice1.actions
 export const Modalslice=slice1.reducer
 export default slice.reducer
