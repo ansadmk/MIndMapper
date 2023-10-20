@@ -82,7 +82,7 @@ const NavBar =  () => {
             <ul className="d-flex flex-column gap-4">
               <li>search</li>
               <li>notifications</li>
-              <li className="link" onClick={()=>handlePageCreation()} >Add new page</li>
+              <li  ><Button onClick={()=>handlePageCreation()}>Add new page</Button></li>
               
             </ul>
             <div className="border-5 bg-black">
