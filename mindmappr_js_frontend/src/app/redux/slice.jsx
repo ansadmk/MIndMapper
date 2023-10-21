@@ -1,6 +1,6 @@
 "use client"
 import { createSlice } from "@reduxjs/toolkit";
-import { FetchUsers, createPageResponse,FetchPages } from "./Axioses";
+import { FetchUsers, createPageResponse,FetchPages, cloudinary } from "./Axioses";
 
 
 const slice=createSlice({
@@ -11,7 +11,9 @@ const slice=createSlice({
         createPageStatus:"standby",
         createPageRes:{},
         FetchPageStatus:"standby",
-        FetchPageres:{}
+        FetchPageres:{},
+        cloudstatus:"standby",
+        cloudResponse:''
     },
     reducers:{
       
@@ -44,11 +46,24 @@ const slice=createSlice({
             state.FetchPageStatus = 'loading';
           })
           .addCase(FetchPages.fulfilled, (state, action) => {
+            
             state.FetchPageStatus = 'succeeded';
             state.FetchPageres = action.payload;
           })
-          .addCase(FetchPages.rejected, (state, ) => {
+          .addCase(FetchPages.rejected, (state ) => {
             state.FetchPageStatus = 'failed';
+            
+          })
+          .addCase(cloudinary.pending, (state) => {
+            state.cloudstatus = 'loading';
+          })
+          .addCase(cloudinary.fulfilled, (state, action) => {
+            
+            state.cloudstatus = 'succeeded';
+            state.cloudResponse = action.payload;
+          })
+          .addCase(cloudinary.rejected, (state ) => {
+            state.cloudstatus = 'failed';
             
           })
       },
@@ -57,7 +72,8 @@ const slice1=createSlice({
   name:"userModal",
   initialState:{
      profileStats:false,
-     showPageForm:false
+     showPageForm:false,
+     
   },
   reducers:{
     changeProfileStats:(state)=>{state.profileStats=!state.profileStats},
@@ -65,7 +81,8 @@ const slice1=createSlice({
   },
 })
 
-
+export const cloudstatus=(s)=>s.Axios.cloudstatus
+export const cloudResponse=(s)=>s.Axios.cloudResponse
 export const userFetchStatus=(s)=>s.Axios.status
 export const getDetails=(s)=>s.Axios.userDetails
 export const createpagestatus=(s)=>s.Axios.createPageStatus
