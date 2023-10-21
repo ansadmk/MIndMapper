@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { getCookie } from 'cookies-next';
 import {useSelector,useDispatch} from "react-redux";
-import { userFetchStatus ,getDetails, changeProfileStats, changeShowPageForm, createpagestatus} from "@/app/redux/slice";
+import { userFetchStatus ,getDetails, changeProfileStats, changeShowPageForm, createpagestatus, fetchpagestatus, fetchpageres} from "@/app/redux/slice";
 import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
 
 
@@ -15,12 +15,15 @@ const NavBar =  () => {
   const [show, setShow] = useState(true);
   const dispatch=useDispatch()
   const user=useSelector(getDetails)
+  // const pages=useSelector(fetchpageres)
+  const pages=useSelector(createpagestatus)
+  console.log(pages);
   const handlePageCreation=()=>dispatch(changeShowPageForm())
   useEffect(()=>{
     if (userFetchStatus!="standby") {
       dispatch(FetchUsers())
     }
-    if(createpagestatus=="succeeded"){
+    if(fetchpagestatus!="standby"){
        dispatch(FetchPages())
     }
 
@@ -88,7 +91,7 @@ const NavBar =  () => {
               <li  ><Button onClick={()=>handlePageCreation()}>Add new page</Button></li>
               <li className="h-100">
                 <div className="border h-100 border-black rounded-5">
-                   
+                   {pages?.data?.mainpages?.map((data)=><h2>{data.content}</h2>)}
                 </div>
               </li>
             </ul>
