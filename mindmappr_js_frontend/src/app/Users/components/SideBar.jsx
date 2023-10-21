@@ -6,14 +6,13 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { getCookie } from 'cookies-next';
 import {useSelector,useDispatch} from "react-redux";
-import { userFetchStatus ,getDetails, changeProfileStats, changeShowPageForm} from "@/app/redux/slice";
-import { FetchUsers } from "@/app/redux/Axioses";
+import { userFetchStatus ,getDetails, changeProfileStats, changeShowPageForm, createpagestatus} from "@/app/redux/slice";
+import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
 
 
 
 const NavBar =  () => {
   const [show, setShow] = useState(true);
-  const [page,setpage]= useState(false)
   const dispatch=useDispatch()
   const user=useSelector(getDetails)
   const handlePageCreation=()=>dispatch(changeShowPageForm())
@@ -21,6 +20,10 @@ const NavBar =  () => {
     if (userFetchStatus!="standby") {
       dispatch(FetchUsers())
     }
+    if(createpagestatus=="succeeded"){
+       dispatch(FetchPages())
+    }
+
   },[])
   
   const handledis=()=>dispatch(changeProfileStats())
@@ -78,16 +81,18 @@ const NavBar =  () => {
             )}
             
           </div>
-          <div className="mt-5">
-            <ul className="d-flex flex-column gap-4">
+          <div className="mt-5 h-75">
+            <ul className="d-flex flex-column gap-4 h-75">
               <li>search</li>
               <li>notifications</li>
               <li  ><Button onClick={()=>handlePageCreation()}>Add new page</Button></li>
-              
+              <li className="h-100">
+                <div className="border h-100 border-black rounded-5">
+                   
+                </div>
+              </li>
             </ul>
-            <div className="border-5 bg-black">
-              <div></div>
-            </div>
+           
           </div>
         </Offcanvas.Body>
       </Offcanvas>

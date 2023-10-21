@@ -4,12 +4,12 @@ import { Form ,Button} from 'react-bootstrap'
 import Sign from './sign'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-// import { useCookies } from 'react-cookie'
+
 import { setCookie } from 'cookies-next';
 
 const login = () => {
 const router =useRouter()
-// const [cookies,setCookie]=useCookies(['token'])
+
 const handlesub=async(e)=>{
   
   e.preventDefault()
