@@ -1,6 +1,6 @@
 "use client"
 import { createPageResponse } from "@/app/redux/Axioses";
-import { changeShowPageForm, showPageForm } from "@/app/redux/slice";
+import { changeMainPageListRender, changeShowPageForm, showPageForm } from "@/app/redux/slice";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,6 +15,7 @@ const CreatePage = () => {
  dispatch(createPageResponse({parent:"main",role:"main",content:content}))
  router.push('/Users')
  dispatch(changeShowPageForm())
+ dispatch(changeMainPageListRender())
  }
   return (
     <div className="border-5 border w-100 h-100">

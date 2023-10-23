@@ -11,15 +11,16 @@ import {
   getDetails,
   changeProfileStats,
   changeShowPageForm,
-  createpagestatus,
   fetchpagestatus,
   fetchpageres,
+  changemainPageListRender,
+  changeMainPageListRender,
 } from "@/app/redux/slice";
 import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
 
 const NavBar = () => {
   const [show, setShow] = useState(true);
-  const [loading, setloading] = useState(false);
+  const renderpage=useSelector(changemainPageListRender)
   const dispatch = useDispatch();
   const user = useSelector(getDetails);
   const pages = useSelector(fetchpageres);
@@ -30,16 +31,18 @@ const NavBar = () => {
      
   const handlePageCreation = () => dispatch(changeShowPageForm());
   useEffect(() => {
-    
+     
       dispatch(FetchUsers());
-    
-      
-      dispatch(FetchPages());
-    
-  
-    
-},[]);
+      dispatch(FetchPages());}
+,[]);
+useEffect(() => {
+     if(renderpage){
+  dispatch(FetchUsers());
+  dispatch(FetchPages());
+  dispatch(changeMainPageListRender());
 
+}}
+);
   const handledis = () => dispatch(changeProfileStats());
   const { data } = useSession();
   const router = useRouter();

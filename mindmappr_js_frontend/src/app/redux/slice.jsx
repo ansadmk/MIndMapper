@@ -73,15 +73,19 @@ const slice1=createSlice({
   initialState:{
      profileStats:false,
      showPageForm:false,
+     mainPageListRender:false
      
   },
   reducers:{
     changeProfileStats:(state)=>{state.profileStats=!state.profileStats},
-    changeShowPageForm:(state)=>{state.showPageForm=!state.showPageForm}
+    changeShowPageForm:(state)=>{state.showPageForm=!state.showPageForm},
+    changeMainPageListRender:(state)=>{state.mainPageListRender=!state.mainPageListRender}
   },
 })
 
 export const cloudstatus=(s)=>s.Axios.cloudstatus
+export const changemainPageListRender=(s)=>s.profileStats.mainPageListRender
+
 export const cloudResponse=(s)=>s.Axios.cloudResponse
 export const userFetchStatus=(s)=>s.Axios.status
 export const getDetails=(s)=>s.Axios.userDetails
@@ -91,6 +95,6 @@ export const fetchpagestatus=(s)=>s.Axios.FetchPageStatus
 export const fetchpageres=(s)=>s.Axios.FetchPageres
 export const ProfileStats=(s)=>s.profileStats.profileStats
 export const showPageForm=(s)=>s.profileStats.showPageForm
-export const {changeProfileStats,changeShowPageForm}=slice1.actions
+export const {changeProfileStats,changeShowPageForm,changeMainPageListRender}=slice1.actions
 export const Modalslice=slice1.reducer
 export default slice.reducer

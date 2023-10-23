@@ -4,6 +4,7 @@ const pageSchema = require("../model/pages");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { uservalid } = require("../model/SchemaValidation");
+const  axios= require( "axios")
 module.exports = {
   register: async (req, res) => {
     const { error, value } = uservalid.validate(req.body);
@@ -125,4 +126,17 @@ module.exports = {
       });
     }
   },
+  setProfile:async(req,res)=>{
+    const {image}=req.body
+    const respon = await axios.post(
+      "https://api.cloudinary.com/v1_1/duamefd9c/upload",
+      image,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log(respon.url);
+  }
 };

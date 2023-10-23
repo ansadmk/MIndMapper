@@ -51,4 +51,18 @@ export const cloudinary = createAsyncThunk("redux/cloudinary", async (data) => {
   );
   return respon
 });
-
+export const setprofile = createAsyncThunk("redux/cloudinary", async ({url}) => {
+  console.log(data);
+  const respon = await axios.post(
+    "http://127.0.0.1:4000/api/user/setprofile",
+    {
+      Image:url,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${cookie}`
+      },
+    }
+  );
+  return respon
+});
