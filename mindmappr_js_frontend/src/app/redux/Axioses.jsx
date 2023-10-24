@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getCookie } from "cookies-next";
+
+
 const cookie = getCookie("token");
 export const FetchUsers = createAsyncThunk("redux/fetchUsers", async () => {
   const res = await axios.get("http://127.0.0.1:4000/api/user/userdetails", {
@@ -39,7 +41,7 @@ export const FetchPages = createAsyncThunk("redux/fetchpages", async () => {
   return respo.data;
 });
 export const cloudinary = createAsyncThunk("redux/cloudinary", async (data) => {
-  console.log(data);
+  
   const respon = await axios.post(
     "https://api.cloudinary.com/v1_1/duamefd9c/upload",
     data,
@@ -51,12 +53,13 @@ export const cloudinary = createAsyncThunk("redux/cloudinary", async (data) => {
   );
   return respon
 });
-export const setprofile = createAsyncThunk("redux/cloudinary", async ({url}) => {
-  console.log(data);
-  const respon = await axios.post(
+export const setprofile = createAsyncThunk("redux/setprofile", async ({url,name}) => {
+  console.log(url);
+  const response = await axios.post(
     "http://127.0.0.1:4000/api/user/setprofile",
     {
       Image:url,
+      name:name
     },
     {
       headers: {
@@ -64,5 +67,5 @@ export const setprofile = createAsyncThunk("redux/cloudinary", async ({url}) => 
       },
     }
   );
-  return respon
+  return response
 });

@@ -78,14 +78,15 @@ useEffect(() => {
               </>
             ) : (
               <>
+              {user?.data?.image ? <img src={user?.data?.image} alt="" width={64} height={64} />  :
                 <Image
                   src="/user.png"
                   alt="me"
                   width="64"
                   height="64"
                   className="me-3"
-                />
-                <div className="text-center mt-4">
+                />}
+                <div className="text-center mt-4 ms-5">
                   {" "}
                   hello {user?.data?.username}
                 </div>

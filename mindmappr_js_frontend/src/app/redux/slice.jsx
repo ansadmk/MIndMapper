@@ -1,6 +1,6 @@
 "use client"
 import { createSlice } from "@reduxjs/toolkit";
-import { FetchUsers, createPageResponse,FetchPages, cloudinary } from "./Axioses";
+import { FetchUsers, createPageResponse,FetchPages, cloudinary,setprofile } from "./Axioses";
 
 
 const slice=createSlice({
@@ -13,7 +13,8 @@ const slice=createSlice({
         FetchPageStatus:"standby",
         FetchPageres:{},
         cloudstatus:"standby",
-        cloudResponse:''
+        cloudResponse:'',
+        setProfile:''
     },
     reducers:{
       
@@ -65,6 +66,9 @@ const slice=createSlice({
           .addCase(cloudinary.rejected, (state ) => {
             state.cloudstatus = 'failed';
             
+          })
+          .addCase(setprofile.fulfilled, (state, action) =>{
+            state.setProfile = action.payload;
           })
       },
 })

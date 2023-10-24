@@ -127,16 +127,11 @@ module.exports = {
     }
   },
   setProfile:async(req,res)=>{
-    const {image}=req.body
-    const respon = await axios.post(
-      "https://api.cloudinary.com/v1_1/duamefd9c/upload",
-      image,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-    console.log(respon.url);
+    const {Image,name}=req.body
+  await userSchema.updateOne({_id:res.token.id}, { $set:{ image: Image ,username:name}})
+    res.json({
+      status:"success",
+      message:"successfully changed"
+    })
   }
 };
