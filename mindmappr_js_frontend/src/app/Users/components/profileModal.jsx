@@ -42,10 +42,10 @@ const Profile = () => {
 
     setTimeout(
       () => dispatch(setprofile({ url: cloudres?.data?.secure_url })),
-      4444
+      5555
     );
-    setTimeout(() => dispatch(changeProfileStats()), 5555);
-    setTimeout(() => dispatch(changeMainPageListRender()), 5555);
+    setTimeout(() => dispatch(changeProfileStats()), 5600);
+    setTimeout(() => dispatch(changeMainPageListRender()), 5600);
   };
   const handleusername = (e) => {
     e.preventDefault();
@@ -79,11 +79,12 @@ const Profile = () => {
                     className="me-3"
                   />
                 )}
-
+                 
                 <input
                   type="file"
                   className="h-25  "
                   onChange={(e) => setfile(e.target.files[0])}
+                  
                 />
                 <Button
                   variant=""

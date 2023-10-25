@@ -17,12 +17,13 @@ import {
   changeMainPageListRender,
   offset,
   changeOffset,
+  changeCurrentPage,
 } from "@/app/redux/slice";
 import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
 
 const NavBar = () => {
   const [show, setShow] = useState(true);
-  const renderpage=useSelector(changemainPageListRender)
+  const renderpage = useSelector(changemainPageListRender);
   const dispatch = useDispatch();
   const user = useSelector(getDetails);
   const pages = useSelector(fetchpageres);
@@ -30,29 +31,27 @@ const NavBar = () => {
   console.log(pages);
   const userfetchstatus = useSelector(userFetchStatus);
   const fetchPagestatus = useSelector(fetchpagestatus);
-  console.log(userfetchstatus,fetchPagestatus);
-     
+  console.log(userfetchstatus, fetchPagestatus);
+
   const handlePageCreation = () => dispatch(changeShowPageForm());
   useEffect(() => {
-     
+    dispatch(FetchUsers());
+    dispatch(FetchPages());
+  }, []);
+  useEffect(() => {
+    if (renderpage) {
       dispatch(FetchUsers());
-      dispatch(FetchPages());}
-,[]);
-useEffect(() => {
-     if(renderpage){
-  dispatch(FetchUsers());
-  dispatch(FetchPages());
-  dispatch(changeMainPageListRender());
-
-}}
-);
+      dispatch(FetchPages());
+      dispatch(changeMainPageListRender());
+    }
+  });
   const handledis = () => dispatch(changeProfileStats());
   const { data } = useSession();
   const router = useRouter();
   const cookie = getCookie("token");
-  const handleClose = () => dispatch(changeOffset())
-  const toggleShow = () => dispatch(changeOffset())
-
+  const handleClose = () => dispatch(changeOffset());
+  const toggleShow = () => dispatch(changeOffset());
+  
   return (
     <div className="position-relative ">
       {cookie ? null : router.push("/")}
@@ -81,14 +80,17 @@ useEffect(() => {
               </>
             ) : (
               <>
-              {user?.data?.image ? <img src={user?.data?.image} alt="" width={64} height={64} />  :
-                <Image
-                  src="/user.png"
-                  alt="me"
-                  width="64"
-                  height="64"
-                  className="me-3"
-                />}
+                {user?.data?.image ? (
+                  <img src={user?.data?.image} alt="" width={64} height={64} />
+                ) : (
+                  <Image
+                    src="/user.png"
+                    alt="me"
+                    width="64"
+                    height="64"
+                    className="me-3"
+                  />
+                )}
                 <div className="text-center mt-4 ms-5">
                   {" "}
                   hello {user?.data?.username}
@@ -107,16 +109,18 @@ useEffect(() => {
               </li>
               <li className="h-100">
                 <ul className="border h-100 border-black rounded-5 p-3 overflow-auto">
-                  
-                    {pages?.data?.mainpages?.map((data) => (
-                      <li>
-                        {" "}
-                        <Button variant="" className="fs-3 border-0">
-                          {data.content}
-                        </Button>
-                      </li>
-                    ))
-                  }
+                  {pages?.data?.mainpages?.map((data) => (
+                    <li>
+                      {" "}
+                      <Button
+                        variant=""
+                        className="fs-3 border-0"
+                        onClick={() => dispatch(changeCurrentPage(data.content))}
+                      >
+                        {data.content}
+                      </Button>
+                    </li>
+                  ))}
                 </ul>
               </li>
             </ul>
