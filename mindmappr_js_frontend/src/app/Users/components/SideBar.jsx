@@ -26,6 +26,7 @@ const NavBar = () => {
   const renderpage = useSelector(changemainPageListRender);
   const dispatch = useDispatch();
   const user = useSelector(getDetails);
+  
   const pages = useSelector(fetchpageres);
   const offsetstate = useSelector(offset);
   console.log(pages);
@@ -33,13 +34,19 @@ const NavBar = () => {
   const fetchPagestatus = useSelector(fetchpagestatus);
   console.log(userfetchstatus, fetchPagestatus);
 
-  const handlePageCreation = () => dispatch(changeShowPageForm());
+  const handlePageCreation = () => dispatch(changeShowPageForm(true));
   useEffect(() => {
     dispatch(FetchUsers());
     dispatch(FetchPages());
   }, []);
   useEffect(() => {
     if (renderpage) {
+      dispatch(FetchUsers());
+      dispatch(FetchPages());
+      dispatch(changeMainPageListRender());
+    }
+    if(Object.keys(user).length === 0
+    ){
       dispatch(FetchUsers());
       dispatch(FetchPages());
       dispatch(changeMainPageListRender());
@@ -115,7 +122,9 @@ const NavBar = () => {
                       <Button
                         variant=""
                         className="fs-3 border-0"
-                        onClick={() => dispatch(changeCurrentPage(data.content))}
+                        onClick={() => {dispatch(changeCurrentPage(data.content))
+                          dispatch(changeShowPageForm(false))
+                        }}
                       >
                         {data.content}
                       </Button>

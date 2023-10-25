@@ -7,6 +7,7 @@ import {
   changeProfileStats,
   cloudResponse,
   getDetails,
+  
 } from "@/app/redux/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
@@ -29,24 +30,28 @@ const Profile = () => {
   const handle = () => dispatch(changeProfileStats());
   const handleout = () => {
     data ? signOut() : deleteCookie("token");
-    dispatch(changeProfileStats());
+  
+    dispatch(changeMainPageListRender());
+   
     router.push("/");
+    
   };
   console.log(cloudres);
-  const handleCloud = () => {
+  const handleCloud = (e) => {
+    const files=e.target.files[0]
     const data = new FormData();
     data.append("file", files);
     data.append("upload_preset", "Avatar");
     console.log(cloudres);
     dispatch(cloudinary(data));
 
-    setTimeout(
-      () => dispatch(setprofile({ url: cloudres?.data?.secure_url })),
-      5555
-    );
-    setTimeout(() => dispatch(changeProfileStats()), 5600);
-    setTimeout(() => dispatch(changeMainPageListRender()), 5600);
   };
+  const handleurl=()=>{
+    
+    dispatch(setprofile({ url: cloudres?.data?.secure_url }))
+    dispatch(changeProfileStats())
+    dispatch(changeMainPageListRender())
+  }
   const handleusername = (e) => {
     e.preventDefault();
     const username = e.target.username.value;
@@ -83,12 +88,12 @@ const Profile = () => {
                 <input
                   type="file"
                   className="h-25  "
-                  onChange={(e) => setfile(e.target.files[0])}
+                  onChange={(e) => handleCloud(e)}
                   
                 />
                 <Button
                   variant=""
-                  onClick={() => handleCloud()}
+                  onClick={() =>handleurl()}                  
                   className="w-75 h-75 border-0 bg-white"
                 >
                   Change Profile

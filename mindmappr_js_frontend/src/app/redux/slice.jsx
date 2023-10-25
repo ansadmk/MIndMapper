@@ -83,7 +83,9 @@ const slice1=createSlice({
   },
   reducers:{
     changeProfileStats:(state)=>{state.profileStats=!state.profileStats},
-    changeShowPageForm:(state)=>{state.showPageForm=!state.showPageForm},
+    changeShowPageForm:(state,action)=>{
+        state.showPageForm=action.payload
+    },
     changeMainPageListRender:(state)=>{state.mainPageListRender=!state.mainPageListRender},
     changeOffset:(state)=>{state.offset=!state.offset},
     changeCurrentPage:(state,action)=>{
