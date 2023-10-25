@@ -8,6 +8,6 @@ router.post('/login',login)
 router.get('/userDetails',auth,userDetails)
 router.post('/createPage',auth,createPages)
 router.get('/getPages',auth,fetchpages)
-router.post('/setprofile',auth,setProfile)
+router.patch('/setprofile',auth,setProfile)
 
 module.exports=router

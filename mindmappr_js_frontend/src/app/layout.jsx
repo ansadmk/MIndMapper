@@ -3,6 +3,7 @@ import "./styles/global.css";
 import "bootstrap/dist/css/bootstrap.css";
 import SessionProvider from "./Users/components/sessionProvider"
 import { getServerSession } from 'next-auth'
+import StoreProvider from "./redux/StoreProvider";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,6 +17,7 @@ export default async function RootLayout({ children }) {
   const session= await getServerSession()
  
   return (
+    <StoreProvider>
     <html lang="en">
       <body className={inter.className}>
         
@@ -27,5 +29,6 @@ export default async function RootLayout({ children }) {
         
       </body>
     </html>
+    </StoreProvider>
   );
 }

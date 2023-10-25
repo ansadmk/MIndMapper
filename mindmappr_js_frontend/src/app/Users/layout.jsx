@@ -25,7 +25,7 @@ export default async function RootLayout({
     <StoreProvider>
     <html lang="en">
       
-      <body className={inter.className}>
+      <body className={inter.className} >
        
       <SideBar/>
       <SessionProvider session={session}>{children}</SessionProvider>

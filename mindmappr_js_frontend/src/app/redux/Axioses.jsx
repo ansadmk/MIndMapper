@@ -53,13 +53,15 @@ export const cloudinary = createAsyncThunk("redux/cloudinary", async (data) => {
   );
   return respon
 });
-export const setprofile = createAsyncThunk("redux/setprofile", async ({url,name}) => {
+export const setprofile = createAsyncThunk("redux/setprofile", async ({url,name,pageid,content}) => {
   console.log(url);
-  const response = await axios.post(
+  const response = await axios.patch(
     "http://127.0.0.1:4000/api/user/setprofile",
     {
       Image:url,
-      name:name
+      name:name,
+      pageId:pageid,
+      content:content
     },
     {
       headers: {

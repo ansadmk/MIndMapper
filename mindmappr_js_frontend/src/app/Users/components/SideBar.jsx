@@ -38,20 +38,18 @@ const NavBar = () => {
   useEffect(() => {
     dispatch(FetchUsers());
     dispatch(FetchPages());
+  
   }, []);
   useEffect(() => {
+    
     if (renderpage) {
       dispatch(FetchUsers());
       dispatch(FetchPages());
       dispatch(changeMainPageListRender());
     }
-    if(Object.keys(user).length === 0
-    ){
-      dispatch(FetchUsers());
-      dispatch(FetchPages());
-      dispatch(changeMainPageListRender());
-    }
+    
   });
+ 
   const handledis = () => dispatch(changeProfileStats());
   const { data } = useSession();
   const router = useRouter();
@@ -60,7 +58,7 @@ const NavBar = () => {
   const toggleShow = () => dispatch(changeOffset());
   
   return (
-    <div className="position-relative ">
+    <div className="position-relative " >
       {cookie ? null : router.push("/")}
       <Button variant="" onClick={toggleShow} className="fs-3 border-0 ">
         🟰
@@ -122,7 +120,7 @@ const NavBar = () => {
                       <Button
                         variant=""
                         className="fs-3 border-0"
-                        onClick={() => {dispatch(changeCurrentPage(data.content))
+                        onClick={() => {dispatch(changeCurrentPage(data))
                           dispatch(changeShowPageForm(false))
                         }}
                       >

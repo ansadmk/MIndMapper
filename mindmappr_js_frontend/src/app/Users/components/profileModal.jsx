@@ -31,7 +31,6 @@ const Profile = () => {
   const handleout = () => {
     data ? signOut() : deleteCookie("token");
   
-    dispatch(changeMainPageListRender());
    
     router.push("/");
     
