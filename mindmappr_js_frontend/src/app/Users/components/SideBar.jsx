@@ -15,6 +15,8 @@ import {
   fetchpageres,
   changemainPageListRender,
   changeMainPageListRender,
+  offset,
+  changeOffset,
 } from "@/app/redux/slice";
 import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
 
@@ -24,6 +26,7 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const user = useSelector(getDetails);
   const pages = useSelector(fetchpageres);
+  const offsetstate = useSelector(offset);
   console.log(pages);
   const userfetchstatus = useSelector(userFetchStatus);
   const fetchPagestatus = useSelector(fetchpagestatus);
@@ -47,8 +50,8 @@ useEffect(() => {
   const { data } = useSession();
   const router = useRouter();
   const cookie = getCookie("token");
-  const handleClose = () => setShow(false);
-  const toggleShow = () => setShow((s) => !s);
+  const handleClose = () => dispatch(changeOffset())
+  const toggleShow = () => dispatch(changeOffset())
 
   return (
     <div className="position-relative ">
@@ -57,7 +60,7 @@ useEffect(() => {
         🟰
       </Button>
       <Offcanvas
-        show={show}
+        show={offsetstate}
         onHide={handleClose}
         scroll={true}
         backdrop={false}
