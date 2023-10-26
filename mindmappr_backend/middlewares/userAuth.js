@@ -7,7 +7,7 @@ const auth =(req, res, next) => {
       console.log(token);
       if (token) {
         const verify = jwt.verify(token, process.env.JWT);
-
+        console.log(verify);
         if (verify) {
           res.token=verify
           next();
