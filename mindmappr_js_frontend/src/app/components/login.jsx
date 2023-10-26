@@ -7,12 +7,13 @@ import { useRouter } from 'next/navigation'
 
 import { setCookie } from 'cookies-next';
 import { useDispatch } from 'react-redux'
-import { FetchUsers } from '../redux/Axioses'
+import { FetchPages, FetchUsers } from '../redux/Axioses'
 import { changeMainPageListRender } from '../redux/slice'
 
 const login = () => {
 const router =useRouter()
 const dispatch=useDispatch()
+
 const handlesub=async(e)=>{
   
   e.preventDefault()
@@ -28,7 +29,7 @@ const handlesub=async(e)=>{
     setCookie("token",res.data.jwt_token)
     
     alert("logged in success")
-  
+   
     
    router.push("/Users")
    

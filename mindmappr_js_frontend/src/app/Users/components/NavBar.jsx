@@ -19,7 +19,7 @@ const NavBar = () => {
   }
   return (
     <div className='d-flex justify-content-end w-100 '>
-    <Button onClick={()=>handle()}>
+    <Button variant='' onClick={()=>handle()} className='me-5'>
     🗑
     </Button>
     </div>

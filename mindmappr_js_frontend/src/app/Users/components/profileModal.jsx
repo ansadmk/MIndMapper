@@ -30,7 +30,7 @@ const Profile = () => {
   const handle1 = () => dispatch(changeProfileStats());
   const handleout = () => {
     data ? signOut() : deleteCookie("token");
-  
+    dispatch(changeProfileStats())
    
     router.push("/");
     
