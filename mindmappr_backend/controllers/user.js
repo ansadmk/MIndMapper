@@ -140,6 +140,17 @@ module.exports = {
         status:"success",
         message:"successfully changed"
       })}
-    }
+    },
+    deletePage:async(req,res)=>{
+      const {id}=req.params
+      console.log(id);
+      if(id){
+    await pageSchema.deleteOne({_id:id})
+      res.json({
+        status:"success",
+        message:"successfully deleted"
+      })}
+      
+      }
   
 };

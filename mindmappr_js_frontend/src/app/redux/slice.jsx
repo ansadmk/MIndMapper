@@ -1,6 +1,6 @@
 "use client"
 import { createSlice } from "@reduxjs/toolkit";
-import { FetchUsers, createPageResponse,FetchPages, cloudinary,setprofile } from "./Axioses";
+import { FetchUsers, createPageResponse,FetchPages, cloudinary,setprofile, deletePage } from "./Axioses";
 
 
 const slice=createSlice({
@@ -14,7 +14,9 @@ const slice=createSlice({
         FetchPageres:{},
         cloudstatus:"standby",
         cloudResponse:'',
-        setProfile:''
+        setProfile:'',
+        deletePagestatus:"",
+        
     },
     reducers:{
       
@@ -70,6 +72,9 @@ const slice=createSlice({
           .addCase(setprofile.fulfilled, (state, action) =>{
             state.setProfile = action.payload;
           })
+          .addCase(deletePage.fulfilled, (state, action) =>{
+            state.deletePagestatus = action.payload;
+          })
       },
 })
 const slice1=createSlice({
@@ -103,6 +108,7 @@ const slice1=createSlice({
     }
   },
 })
+export const deletepage=(s)=>s.profileStats.deletePagestatus
 export const editable=(s)=>s.profileStats.editable
 export const currentPage=(s)=>s.profileStats.currentPage
 export const cloudstatus=(s)=>s.Axios.cloudstatus

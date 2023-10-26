@@ -22,7 +22,7 @@ import {
 import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
 
 const NavBar = () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(0);
   const renderpage = useSelector(changemainPageListRender);
   const dispatch = useDispatch();
   const user = useSelector(getDetails);
@@ -45,6 +45,7 @@ const NavBar = () => {
     if (renderpage) {
       dispatch(FetchUsers());
       dispatch(FetchPages());
+      setShow((s)=>s=s++)
       dispatch(changeMainPageListRender());
     }
     
@@ -63,6 +64,7 @@ const NavBar = () => {
       <Button variant="" onClick={toggleShow} className="fs-3 border-0 ">
         🟰
       </Button>
+      {show}
       <Offcanvas
         show={offsetstate}
         onHide={handleClose}

@@ -27,7 +27,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   console.log(ProfileStats);
-  const handle = () => dispatch(changeProfileStats());
+  const handle1 = () => dispatch(changeProfileStats());
   const handleout = () => {
     data ? signOut() : deleteCookie("token");
   
@@ -45,9 +45,9 @@ const Profile = () => {
     dispatch(cloudinary(data));
 
   };
-  const handleurl=()=>{
-    
-    dispatch(setprofile({ url: cloudres?.data?.secure_url }))
+  const handleurl=async ()=>{
+    const url= await cloudres.data.secure_url
+   dispatch(setprofile({ url: url }))
     dispatch(changeProfileStats())
     dispatch(changeMainPageListRender())
   }
@@ -62,7 +62,7 @@ const Profile = () => {
     <div className="">
       <Modal
         show={profilestats}
-        onHide={handle}
+        onHide={handle1}
         className="d-flex align-items-center"
       >
         <Modal.Header closeButton className="border-0">

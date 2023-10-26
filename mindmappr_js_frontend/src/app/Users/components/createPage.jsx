@@ -2,20 +2,20 @@
 import { createPageResponse, setprofile } from "@/app/redux/Axioses";
 import { changeCurrentPage, changeEditable, changeMainPageListRender, changeShowPageForm, changemainPageListRender, currentPage, editable, fetchpageres, offset, showPageForm } from "@/app/redux/slice";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 const CreatePage = () => {
   const subpage=useSelector(fetchpageres).subpages
-  
+  const [state,setState]=useState(false)
   const edit=useSelector(editable)
   const show=useSelector(showPageForm)
   const parent=useSelector(currentPage)
   const offsetstate = useSelector(offset);
   const dispatch=useDispatch()
   const router=useRouter()
-  
+  const rendertest=useSelector(changemainPageListRender)
  const handlePage=(e)=>{
  e.preventDefault()
  console.log(e);
@@ -26,6 +26,13 @@ const CreatePage = () => {
  dispatch(changeShowPageForm(false))
  dispatch(changeMainPageListRender())
  }
+ useEffect(
+  ()=>{
+    if(rendertest){
+      setState((s)=>s=!s)
+    }
+  }
+ )
  
  const handleContent=(e)=>{
  e.preventDefault()
