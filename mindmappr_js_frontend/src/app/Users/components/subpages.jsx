@@ -33,10 +33,18 @@ const Subpagescomp = ({value}) => {
   const handleChange =(e,val)=>{
     e.preventDefault();
     const content = e.target.content.value;
-    dispatch(setprofile({ pageid: val, content: content ,prev:parent.content}));
+    dispatch(setprofile({ pageid: val, content: content ,sub:true}));
     
 
     setState(false)
+  }
+  const handleChange2 =(e,val)=>{
+    e.preventDefault();
+    const content = e.target.value;
+    dispatch(setprofile({ pageid: val, content: content ,sub:true}));
+    
+
+    
   }
   return (
     <div>
@@ -53,7 +61,7 @@ const Subpagescomp = ({value}) => {
               defaultValue={value.content}
           id="content"
           placeholder="Enter your username here"
-         
+          onChange={handleChange2}
           variant="filled"
           type='text'
         />

@@ -127,7 +127,7 @@ module.exports = {
     }
   },
   setProfile:async(req,res)=>{
-    const {Image,name,pageId,content,prev}=req.body
+    const {Image,name,pageId,content,prev,sub}=req.body
     if(Image || name){
   await userSchema.updateOne({_id:res.token.id}, { $set:{ image: Image ,username:name}})
     res.json({
@@ -140,7 +140,10 @@ module.exports = {
       res.json({
         status:"success",
         message:"successfully changed"
-      })}
+      }  )}
+      if(sub){
+        await pageSchema.updateOne({_id:pageId}, { $set:{ content: content}})
+      }
     },
     deletePage:async(req,res)=>{
       const {id,content}=req.params
