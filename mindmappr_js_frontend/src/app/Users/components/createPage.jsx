@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import Subpagescomp from "./subpages";
 
 const CreatePage = () => {
   const reff = useRef(null);
@@ -135,9 +136,9 @@ const CreatePage = () => {
             </form>
           ) : null}
           <ul>
-            {subpage?.data?.subpages.map((data) =>
-              data.title == parent.content ? <li>{data.content}</li> : null
-            )}
+            
+              <Subpagescomp/>
+            
           </ul>
         </div>
       )}
