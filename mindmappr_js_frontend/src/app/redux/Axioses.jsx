@@ -53,7 +53,7 @@ export const cloudinary = createAsyncThunk("redux/cloudinary", async (data) => {
   );
   return respon
 });
-export const setprofile = createAsyncThunk("redux/setprofile", async ({url,name,pageid,content}) => {
+export const setprofile = createAsyncThunk("redux/setprofile", async ({url,name,pageid,content,prev}) => {
   console.log(url);
   const response = await axios.patch(
     "http://127.0.0.1:4000/api/user/setprofile",
@@ -61,7 +61,8 @@ export const setprofile = createAsyncThunk("redux/setprofile", async ({url,name,
       Image:url,
       name:name,
       pageId:pageid,
-      content:content
+      content:content,
+      prev:prev
     },
     {
       headers: {
@@ -71,10 +72,10 @@ export const setprofile = createAsyncThunk("redux/setprofile", async ({url,name,
   );
   return response
 });
-export const deletePage = createAsyncThunk("redux/deletePage", async ({pageid}) => {
+export const deletePage = createAsyncThunk("redux/deletePage", async ({pageid,content}) => {
  
   const response = await axios.delete(
-    `http://127.0.0.1:4000/api/user/deletepage/${pageid}`,
+    `http://127.0.0.1:4000/api/user/deletepage/${pageid}/${content}`,
     {
       headers: {
         Authorization: `Bearer ${cookie}`

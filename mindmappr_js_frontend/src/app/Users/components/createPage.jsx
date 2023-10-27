@@ -5,7 +5,9 @@ import {
   changeEditable,
   changeMainPageListRender,
   changeShowPageForm,
+  changeSubpageRender,
   changemainPageListRender,
+  changesubpageRender,
   currentPage,
   editable,
   fetchpageres,
@@ -13,14 +15,17 @@ import {
   showPageForm,
 } from "@/app/redux/slice";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 const CreatePage = () => {
+  const reff = useRef(null);
   const subpage = useSelector(fetchpageres);
+  const subpageRender =useSelector(changeSubpageRender)
   console.log(subpage?.data?.subpages);
   const [state, setState] = useState(false);
+  
   const edit = useSelector(editable);
   const show = useSelector(showPageForm);
   const parent = useSelector(currentPage);
@@ -28,6 +33,20 @@ const CreatePage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (reff.current && !reff.current.contains(event.target)) {
+        dispatch(changeEditable());
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [reff]);
+  
+ 
   const handlePage = (e) => {
     e.preventDefault();
     console.log(e);
@@ -35,28 +54,34 @@ const CreatePage = () => {
     dispatch(
       createPageResponse({ parent: "main", role: "main", content: content })
     );
-    router.push("/Users");
+    
     dispatch(changeCurrentPage(content));
     dispatch(changeShowPageForm(false));
     dispatch(changeMainPageListRender());
   };
-  const handlenext=(e)=>{
-   e.preventDefault()
-   const content = e.target.next.value;
-   dispatch(
-     createPageResponse({ parent: parent.content, role: "sub", content: content })
-   );
-   
-   setState(false)
+  function handlenext(e) {
+    e.preventDefault();
+    const content = e.target.next.value;
+    dispatch(
+      createPageResponse({
+        parent: parent.content,
+        role: "sub",
+        content: content,
+      })
+    );
+
+   dispatch(changesubpageRender("false")) ;
   }
 
   const handleContent = (e) => {
     e.preventDefault();
     const content = e.target.val.value;
-    dispatch(setprofile({ pageid: parent._id, content: content }));
-    setState(true)
+    dispatch(setprofile({ pageid: parent._id, content: content ,prev:parent.content}));
+    dispatch(changesubpageRender("true")) ;
+   
     dispatch(changeEditable());
     dispatch(changeMainPageListRender());
+    
   };
   return (
     <div className="border-5 border w-100 h-100">
@@ -86,25 +111,35 @@ const CreatePage = () => {
         >
           {edit ? (
             <form action="" onSubmit={handleContent}>
-              <input type="text" defaultValue={parent.content} id="val" />
+              <input
+                type="text"
+                defaultValue={parent.content}
+                id="val"
+                ref={reff}
+
+              />
             </form>
           ) : (
-            <Button variant="" onClick={() => dispatch(changeEditable())}>
+            <Button
+              variant=""
+              onClick={() => {
+                dispatch(changeEditable("true"));
+              }}
+            >
               <h2>{parent.content}</h2>
             </Button>
           )}
-            {state ? <form onSubmit={handlenext}>
-              <input type="text" id="next" />
-            </form> : null}
-            <ul>
-          {
-          
-          subpage?.data?.subpages.map((data)=> data.title==parent.content ? <li>{data.content}</li> : null)
-          
-          }
+          {subpageRender ? (
+            <form onSubmit={handlenext}>
+              <input type="text" id="next" ref={reff}/>
+            </form>
+          ) : null}
+          <ul>
+            {subpage?.data?.subpages.map((data) =>
+              data.title == parent.content ? <li>{data.content}</li> : null
+            )}
           </ul>
         </div>
-        
       )}
     </div>
   );

@@ -6,12 +6,13 @@ import Login from './login';
 import Register from './register';
 import { signIn,signOut,useSession } from "next-auth/react"
 import { useRouter } from 'next/navigation';
+import { getCookie } from 'cookies-next';
 
 const popup = () => {
   const {data}=useSession()
   const router=useRouter()
     const [show, setShow] = useState({log:false,reg:false});
-
+    const cookie = getCookie("token");
     const handlelog = () => setShow({log:!show.log,reg:false});
     const handlereg = () => setShow({log:false,reg:!show.reg});
     useEffect(()=>{
@@ -19,7 +20,7 @@ const popup = () => {
     )
     return (
       <div className='d-flex'>
-      
+      {!cookie ? null : router.push("/Users")}
         <Button variant="" onClick={handlelog}>
           Login
         </Button>

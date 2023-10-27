@@ -13,7 +13,7 @@ const NavBar = () => {
   const router=useRouter()
   console.log(page);
   const handle=()=>{
-    dispatch(deletePage({pageid:page._id}))
+    dispatch(deletePage({pageid:page._id,content:page.content}))
     dispatch(changeMainPageListRender())
      
   }

@@ -18,6 +18,8 @@ import {
   offset,
   changeOffset,
   changeCurrentPage,
+  changeEditable,
+  changesubpageRender,
 } from "@/app/redux/slice";
 import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
 
@@ -35,24 +37,22 @@ const NavBar = () => {
   console.log(userfetchstatus, fetchPagestatus);
 
   const handlePageCreation = () => dispatch(changeShowPageForm(true));
+  
   useEffect(() => {
     dispatch(FetchUsers());
     dispatch(FetchPages());
-   
+     if(!window.location.hash){
+      window.location = window.location + '#loaded';
+   location.reload(false) } 
   }, []);
  
   
   useEffect(() => {
-    
     if (renderpage) {
       dispatch(FetchUsers());
       dispatch(FetchPages());
-      
       dispatch(changeMainPageListRender());
     }
-    
-      
-    
     
   });
  
@@ -129,6 +129,8 @@ const NavBar = () => {
                         className="fs-3 border-0"
                         onClick={() => {dispatch(changeCurrentPage(data))
                           dispatch(changeShowPageForm(false))
+                          dispatch(changeEditable('false'));
+                          dispatch(changesubpageRender('false'))
                         }}
                       >
                         {data.content}

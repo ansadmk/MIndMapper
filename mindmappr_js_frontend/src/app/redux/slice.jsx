@@ -85,7 +85,8 @@ const slice1=createSlice({
      mainPageListRender:false,
      offset:true,
      currentPage:'',
-     editable:false
+     editable:false,
+     subpagerender:false
   },
   reducers:{
     changeProfileStats:(state)=>{state.profileStats=!state.profileStats},
@@ -105,6 +106,14 @@ const slice1=createSlice({
         state.editable=true
       }else{
       state.editable=!state.editable}
+    },
+    changesubpageRender:(state,action)=>{
+      if(action.payload=="false"){
+        state.subpagerender=false
+      }else if(action.payload=="true"){
+        state.subpagerender=true
+      }else{
+      state.subpagerender=!state.subpagerender}
     }
   },
 })
@@ -123,6 +132,7 @@ export const fetchpagestatus=(s)=>s.Axios.FetchPageStatus
 export const fetchpageres=(s)=>s.Axios.FetchPageres
 export const ProfileStats=(s)=>s.profileStats.profileStats
 export const showPageForm=(s)=>s.profileStats.showPageForm
-export const {changeProfileStats,changeShowPageForm,changeMainPageListRender,changeOffset,changeCurrentPage,changeEditable}=slice1.actions
+export const changeSubpageRender=(s)=>s.profileStats.subpagerender
+export const {changeProfileStats,changeShowPageForm,changeMainPageListRender,changeOffset,changeCurrentPage,changeEditable,changesubpageRender}=slice1.actions
 export const Modalslice=slice1.reducer
 export default slice.reducer

@@ -127,25 +127,27 @@ module.exports = {
     }
   },
   setProfile:async(req,res)=>{
-    const {Image,name,pageId,content}=req.body
+    const {Image,name,pageId,content,prev}=req.body
     if(Image || name){
   await userSchema.updateOne({_id:res.token.id}, { $set:{ image: Image ,username:name}})
     res.json({
       status:"success",
       message:"successfully changed"
     })}
-    if(pageId && content){
+    if(pageId && content && prev){
       await pageSchema.updateOne({_id:pageId}, { $set:{ content: content}})
+      await pageSchema.updateMany({title:prev},{$set:{title:content}})
       res.json({
         status:"success",
         message:"successfully changed"
       })}
     },
     deletePage:async(req,res)=>{
-      const {id}=req.params
+      const {id,content}=req.params
       console.log(id);
       if(id){
     await pageSchema.deleteOne({_id:id})
+    await pageSchema.deleteMany({title:content})
       res.json({
         status:"success",
         message:"successfully deleted"

@@ -9,5 +9,5 @@ router.get('/userDetails',auth,userDetails)
 router.post('/createPage',auth,createPages)
 router.get('/getPages',auth,fetchpages)
 router.patch('/setprofile',auth,setProfile)
-router.delete('/deletepage/:id',auth,deletePage)
+router.delete('/deletepage/:id/:content',auth,deletePage)
 module.exports=router

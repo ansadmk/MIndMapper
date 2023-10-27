@@ -4,6 +4,7 @@ import { Form , Alert} from 'react-bootstrap'
 import Sign from './sign'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { Box, TextField } from '@mui/material'
 
 
 const register = () => {
@@ -41,13 +42,58 @@ const register = () => {
 
   }
   return (
-    <form className='p-5 d-flex flex-column gap-2' onSubmit={(e)=>handleSub(e)}>
+    <form className='p-5 d-flex flex-column gap-2' onSubmit={handleSub} >
         <input type="text" placeholder="username" id="username" className='mb-2' />
         <input type="email" placeholder="email" id="email" className='mb-2' />
         <input type="password" placeholder='password' id='password' />
         <input type="password" placeholder="confirm" id="confirm" className='mt-2' />
        <input className='w-100 m-auto mt-4' type='submit' value="submit"/>
        <Sign/>
+       <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      
+      autoComplete="off"
+      onSubmit={handleSub}
+    >
+      <div>
+        
+      <TextField
+          id="username"
+          label="Username"
+          placeholder="Enter your username here"
+          multiline
+          variant="filled"
+          type='text'
+        />
+       <TextField
+          id="email"
+          label="Email"
+          placeholder="Enter your email here "
+          multiline
+          variant="filled"
+          type="email"
+        />
+        <TextField
+          id="password"
+          label="Password"
+          placeholder="Enter your password here"
+          multiline
+          variant="filled"
+          type="password"
+        />
+        <TextField
+          id="confirm"
+          label="Confirm Password"
+          placeholder="Confirm your password here"
+          multiline
+          variant="filled"
+          type="password"
+        />
+      </div>
+    </Box>
     </form>
   )
 }
