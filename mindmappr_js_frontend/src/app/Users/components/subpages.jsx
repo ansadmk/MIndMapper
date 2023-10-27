@@ -13,11 +13,11 @@ import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { createPageResponse, deletePage } from "@/app/redux/Axioses";
+import { createPageResponse, deletePage, setprofile } from "@/app/redux/Axioses";
 
-const Subpagescomp = () => {
+const Subpagescomp = ({value}) => {
   const [state, setState] = useState(false);
-  const subpage = useSelector(fetchpageres);
+  
   const parent = useSelector(currentPage);
   const dispatch = useDispatch();
   const handleStates = (data) => {
@@ -30,34 +30,30 @@ const Subpagescomp = () => {
     dispatch(deletePage({ pageid: data._id, content: data.content }));
     dispatch(changeMainPageListRender());
   };
-  const handleChange =(e)=>{
+  const handleChange =(e,val)=>{
     e.preventDefault();
     const content = e.target.content.value;
-    dispatch(
-      createPageResponse({
-        parent: parent._id,
-        role: "sub",
-        content: content,
-        
-      })
-    );
+    dispatch(setprofile({ pageid: val, content: content ,prev:parent.content}));
+    
+
+    setState(false)
   }
   return (
     <div>
-      {subpage?.data?.subpages.map((value) =>
-        value.title == parent._id ? (
+     
+        {value.title == parent._id ? (
           <li>
             { state ?
             <Box
             component="form"
             autoComplete="off"
-            onSubmit={(e)=>handleChange(e)}
+            onSubmit={(e)=>handleChange(e,value._id)}
           >
               <TextField
               defaultValue={value.content}
           id="content"
           placeholder="Enter your username here"
-          multiline
+         
           variant="filled"
           type='text'
         />
@@ -74,8 +70,8 @@ const Subpagescomp = () => {
               </IconButton>
             </div>}
           </li>
-        ) : null
-      )}
+        ) : null}
+      
     </div>
   );
 };

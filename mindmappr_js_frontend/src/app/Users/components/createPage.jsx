@@ -78,7 +78,7 @@ const CreatePage = () => {
   const handleContent = (e) => {
     e.preventDefault();
     const content = e.target.val.value;
-    dispatch(setprofile({ pageid: parent._id, content: content ,prev:parent.content}));
+    dispatch(setprofile({ pageid: parent._id, content: content ,prev:parent._id}));
     dispatch(changesubpageRender("true")) ;
    
     dispatch(changeEditable());
@@ -137,9 +137,9 @@ const CreatePage = () => {
             </form>
           ) : null}
           <ul>
-            
-              <Subpagescomp/>
-            
+          {subpage?.data?.subpages.map((value) =>
+              <Subpagescomp value={value}/>
+          )}
           </ul>
         </div>
       )}
