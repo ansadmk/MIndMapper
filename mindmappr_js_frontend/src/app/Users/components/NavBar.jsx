@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import { Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const NavBar = () => {
   const dispatch=useDispatch()
@@ -19,8 +19,8 @@ const NavBar = () => {
   }
   return (
     <div className='d-flex justify-content-end w-100 '>
-    <Button variant='' onClick={()=>handle()} className='me-5'>
-    🗑
+    <Button variant='' onClick={()=>handle()} className='me-5 d-flex justify-content-end w-100'>
+    <DeleteForeverIcon/>
     </Button>
     </div>
   )

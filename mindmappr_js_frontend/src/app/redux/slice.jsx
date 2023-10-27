@@ -1,6 +1,7 @@
 "use client"
 import { createSlice } from "@reduxjs/toolkit";
 import { FetchUsers, createPageResponse,FetchPages, cloudinary,setprofile, deletePage } from "./Axioses";
+import { useDispatch } from "react-redux";
 
 
 const slice=createSlice({
@@ -96,8 +97,10 @@ const slice1=createSlice({
     changeMainPageListRender:(state)=>{state.mainPageListRender=!state.mainPageListRender},
     changeOffset:(state)=>{state.offset=!state.offset},
     changeCurrentPage:(state,action)=>{
-       
+      
+     
       state.currentPage=action.payload
+       
     },
     changeEditable:(state,action)=>{
       if(action.payload=="false"){

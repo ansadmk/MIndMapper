@@ -65,9 +65,10 @@ const CreatePage = () => {
     const content = e.target.next.value;
     dispatch(
       createPageResponse({
-        parent: parent.content,
+        parent: parent._id,
         role: "sub",
         content: content,
+        
       })
     );
 
