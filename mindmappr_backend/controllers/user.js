@@ -156,6 +156,14 @@ module.exports = {
         message:"successfully deleted"
       })}
       
+      },
+      setCoverAvatar:async (req,res)=>{
+        const {
+          avatarUrl,
+          coverUrl
+        }=req.body
+        await userSchema.findByIdAndUpdate(res.token.id, { avatar:avatarUrl,cover: coverUrl})
+        
       }
   
 };

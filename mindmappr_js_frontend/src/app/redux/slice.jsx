@@ -18,6 +18,7 @@ const slice=createSlice({
         cloudResponse:'',
         setProfile:'',
         deletePagestatus:"",
+        uploadurl:''
         
     },
     reducers:{
@@ -89,7 +90,8 @@ const slice1=createSlice({
      currentPage:'',
      editable:false,
      subpagerender:false,
-     breadCrumb:[]
+     breadCrumb:[],
+     setCoverAndAvatarForPages:false
   },
   reducers:{
     changeProfileStats:(state)=>{state.profileStats=!state.profileStats},
@@ -133,9 +135,18 @@ const slice1=createSlice({
       //   state.breadCrumb.splice(a) 
       // }
       
-    }
+    },
+    changeSetCoverAndAvatarForPages:(state,action)=>{
+      if(action.payload=="false"){
+        state.setCoverAndAvatarForPages=false
+      }else if(action.payload=="true"){
+        state.setCoverAndAvatarForPages=true
+      }else{
+      state.setCoverAndAvatarForPages=!state.setCoverAndAvatarForPages}
+    },
   },
 })
+export const SetCoverAndAvatarForPages=(s)=>s.profileStats.SetCoverAndAvatarForPages
 export const Breadcrumb=(s)=>s.profileStats.breadCrumb
 export const deletepage=(s)=>s.profileStats.deletePagestatus
 export const editable=(s)=>s.profileStats.editable
@@ -153,6 +164,6 @@ export const fetchpageres=(s)=>s.Axios.FetchPageres
 export const ProfileStats=(s)=>s.profileStats.profileStats
 export const showPageForm=(s)=>s.profileStats.showPageForm
 export const changeSubpageRender=(s)=>s.profileStats.subpagerender
-export const {changeBreadCrumb,changeProfileStats,changeShowPageForm,changeMainPageListRender,changeOffset,changeCurrentPage,changeEditable,changesubpageRender}=slice1.actions
+export const {changeSetCoverAndAvatarForPages,changeBreadCrumb,changeProfileStats,changeShowPageForm,changeMainPageListRender,changeOffset,changeCurrentPage,changeEditable,changesubpageRender}=slice1.actions
 export const Modalslice=slice1.reducer
 export default slice.reducer

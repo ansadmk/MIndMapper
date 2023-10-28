@@ -19,21 +19,22 @@ import { useEffect, useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Subpagescomp from "./subpages";
+import ImageForPages from "./Imageandcover";
 
 const CreatePage = () => {
   const reff = useRef(null);
   const subpage = useSelector(fetchpageres);
-  const subpageRender =useSelector(changeSubpageRender)
+  const subpageRender = useSelector(changeSubpageRender);
   console.log(subpage?.data?.subpages);
   const [state, setState] = useState(false);
-  
+
   const edit = useSelector(editable);
   const show = useSelector(showPageForm);
   const parent = useSelector(currentPage);
   const offsetstate = useSelector(offset);
   const dispatch = useDispatch();
   const router = useRouter();
-  
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (reff.current && !reff.current.contains(event.target)) {
@@ -46,8 +47,7 @@ const CreatePage = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [reff]);
-  
- 
+
   const handlePage = (e) => {
     e.preventDefault();
     console.log(e);
@@ -55,7 +55,7 @@ const CreatePage = () => {
     dispatch(
       createPageResponse({ parent: "main", role: "main", content: content })
     );
-    
+
     dispatch(changeCurrentPage(content));
     dispatch(changeShowPageForm(false));
     dispatch(changeMainPageListRender());
@@ -68,22 +68,22 @@ const CreatePage = () => {
         parent: parent._id,
         role: "sub",
         content: content,
-        
       })
     );
 
-   dispatch(changesubpageRender("false")) ;
+    dispatch(changesubpageRender("false"));
   }
 
   const handleContent = (e) => {
     e.preventDefault();
     const content = e.target.val.value;
-    dispatch(setprofile({ pageid: parent._id, content: content ,prev:parent._id}));
-    dispatch(changesubpageRender("true")) ;
-   
+    dispatch(
+      setprofile({ pageid: parent._id, content: content, prev: parent._id })
+    );
+    dispatch(changesubpageRender("true"));
+
     dispatch(changeEditable());
     dispatch(changeMainPageListRender());
-    
   };
   return (
     <div className="border-5 border w-100 h-100">
@@ -111,6 +111,7 @@ const CreatePage = () => {
               : "justify-content-center align-items-center"
           } h-100`}
         >
+          <ImageForPages/>
           {edit ? (
             <form action="" onSubmit={handleContent}>
               <input
@@ -118,7 +119,6 @@ const CreatePage = () => {
                 defaultValue={parent.content}
                 id="val"
                 ref={reff}
-
               />
             </form>
           ) : (
@@ -133,13 +133,13 @@ const CreatePage = () => {
           )}
           {subpageRender ? (
             <form onSubmit={handlenext}>
-              <input type="text" id="next" ref={reff}/>
+              <input type="text" id="next" ref={reff} />
             </form>
           ) : null}
           <ul>
-          {subpage?.data?.subpages.map((value) =>
-              <Subpagescomp value={value}/>
-          )}
+            {subpage?.data?.subpages.map((value) => (
+              <Subpagescomp value={value} />
+            ))}
           </ul>
         </div>
       )}

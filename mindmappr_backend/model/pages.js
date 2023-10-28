@@ -6,7 +6,8 @@ const pageSchema=mongoose.Schema({
     createdAt:Date,
     updatedAt:Date,
     role:String,
-    image:String,
+    avatar:String,
+    cover:String,
     settings:Object
 
 })

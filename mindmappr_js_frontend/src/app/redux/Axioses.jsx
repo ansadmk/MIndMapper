@@ -63,7 +63,8 @@ export const setprofile = createAsyncThunk("redux/setprofile", async ({url,name,
       pageId:pageid,
       content:content,
       prev:prev,
-      sub:sub
+      sub:sub,
+
     },
     {
       headers: {
@@ -77,6 +78,22 @@ export const deletePage = createAsyncThunk("redux/deletePage", async ({pageid,co
  
   const response = await axios.delete(
     `http://127.0.0.1:4000/api/user/deletepage/${pageid}/${content}`,
+    {
+      headers: {
+        Authorization: `Bearer ${cookie}`
+      },
+    }
+  );
+  return response
+});
+export const sendUrl = createAsyncThunk("redux/coverandAvatar", async ({avatarUrl,coverUrl}) => {
+ 
+  const response = await axios.patch(
+    `http://127.0.0.1:4000/api/user/coveravatar`,
+    {
+      avatarUrl:avatarUrl,
+      coverUrl:coverUrl
+    },
     {
       headers: {
         Authorization: `Bearer ${cookie}`
