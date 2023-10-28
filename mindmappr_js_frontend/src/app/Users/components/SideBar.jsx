@@ -20,56 +20,56 @@ import {
   changeCurrentPage,
   changeEditable,
   changesubpageRender,
+  changeBreadCrumb,
 } from "@/app/redux/slice";
 import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
+import { Avatar, Chip, Stack } from "@mui/material";
 
 const NavBar = () => {
-
   const renderpage = useSelector(changemainPageListRender);
   const dispatch = useDispatch();
   const user = useSelector(getDetails);
-  
+
   const pages = useSelector(fetchpageres);
   const offsetstate = useSelector(offset);
-  
+
   const userfetchstatus = useSelector(userFetchStatus);
   const fetchPagestatus = useSelector(fetchpagestatus);
   console.log(userfetchstatus, fetchPagestatus);
 
   const handlePageCreation = () => dispatch(changeShowPageForm(true));
-  
+
   useEffect(() => {
     dispatch(FetchUsers());
     dispatch(FetchPages());
-     if(!window.location.hash){
-      window.location = window.location + '#loaded';
-   location.reload(false) } 
+    if (!window.location.hash) {
+      window.location = window.location + "#loaded";
+      location.reload(false);
+    }
   }, []);
- 
-  
+
   useEffect(() => {
     if (renderpage) {
       dispatch(FetchUsers());
       dispatch(FetchPages());
       dispatch(changeMainPageListRender());
     }
-    
   });
- 
+
   const handledis = () => dispatch(changeProfileStats());
   const { data } = useSession();
   const router = useRouter();
   const cookie = getCookie("token");
   const handleClose = () => dispatch(changeOffset());
   const toggleShow = () => dispatch(changeOffset());
-  
+
   return (
-    <div className="position-relative " >
+    <div className="position-relative ">
       {cookie ? null : router.push("/")}
       <Button variant="" onClick={toggleShow} className="fs-3 border-0 ">
         🟰
       </Button>
-      
+
       <Offcanvas
         show={offsetstate}
         onHide={handleClose}
@@ -80,7 +80,7 @@ const NavBar = () => {
           <Offcanvas.Title></Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <div className="d-flex link" onClick={() => handledis()}>
+          <div className="d-flex link justify-content-start "  onClick={() => handledis()}>
             {data?.user ? (
               <>
                 <img
@@ -91,23 +91,35 @@ const NavBar = () => {
                 <div className="text-center mt-4">hello {data?.user?.name}</div>
               </>
             ) : (
-              <>
+              <Stack direction="row" >
+                {/* <Stack direction="row" spacing={1}>
+               <Chip avatar={<Avatar>{user?.data?.username.charAt(0).toUpperCase()}</Avatar>} label="Avatar" />
+               <Chip
+               avatar={<Avatar alt="Natacha" src={user?.data?.image} />}
+               label={user?.data?.username}
+               variant="outlined"
+                 />
+               </Stack> */}
                 {user?.data?.image ? (
-                  <img src={user?.data?.image} alt="" width={64} height={64} />
+                  <Chip
+                    avatar={<Avatar alt="Natacha" src={user?.data?.image}  />}
+                    label={user?.data?.username}
+                    variant="outlined"
+                    size="100"
+                    className="p-5 d-flex gap-5"
+                  />
                 ) : (
-                  <Image
-                    src="/user.png"
-                    alt="me"
-                    width="64"
-                    height="64"
-                    className="me-3"
+                  <Chip
+                    avatar={
+                      <Avatar>
+                        {user?.data?.username.charAt(0).toUpperCase()}
+                      </Avatar>
+                    }
+                    label={user?.data?.username}
+                    size="100"
                   />
                 )}
-                <div className="text-center mt-4 ms-5">
-                  {" "}
-                  hello {user?.data?.username}
-                </div>
-              </>
+              </Stack>
             )}
           </div>
           <div className="mt-5 h-75">
@@ -127,10 +139,14 @@ const NavBar = () => {
                       <Button
                         variant=""
                         className="fs-3 border-0"
-                        onClick={() => {dispatch(changeCurrentPage(data))
-                          dispatch(changeShowPageForm(false))
-                          dispatch(changeEditable('false'));
-                          dispatch(changesubpageRender('false'))
+                        onClick={() => {
+                          dispatch(changeCurrentPage(data));
+                          dispatch(changeBreadCrumb({type:'clear'}))
+
+                          dispatch(changeBreadCrumb({type:'push',data:{role:"main",content:data}}))
+                          dispatch(changeShowPageForm(false));
+                          dispatch(changeEditable("false"));
+                          dispatch(changesubpageRender("false"));
                         }}
                       >
                         {data.content}

@@ -4,6 +4,7 @@ import { FetchUsers, createPageResponse,FetchPages, cloudinary,setprofile, delet
 import { useDispatch } from "react-redux";
 
 
+
 const slice=createSlice({
     name:"axios",
     initialState:{
@@ -87,7 +88,8 @@ const slice1=createSlice({
      offset:true,
      currentPage:'',
      editable:false,
-     subpagerender:false
+     subpagerender:false,
+     breadCrumb:[]
   },
   reducers:{
     changeProfileStats:(state)=>{state.profileStats=!state.profileStats},
@@ -117,9 +119,22 @@ const slice1=createSlice({
         state.subpagerender=true
       }else{
       state.subpagerender=!state.subpagerender}
+    },
+    changeBreadCrumb:(state,action)=>{
+           const {data ,type}=action.payload
+      if (type=="push") {
+        state.breadCrumb.push(data) 
+      }else if(type=="clear"){
+        state.breadCrumb=[]
+      }
+      // else if(action.payload.type=="pop"){
+      //   state.breadCrumb.splice(a) 
+      // }
+      
     }
   },
 })
+export const Breadcrumb=(s)=>s.profileStats.breadCrumb
 export const deletepage=(s)=>s.profileStats.deletePagestatus
 export const editable=(s)=>s.profileStats.editable
 export const currentPage=(s)=>s.profileStats.currentPage
@@ -136,6 +151,6 @@ export const fetchpageres=(s)=>s.Axios.FetchPageres
 export const ProfileStats=(s)=>s.profileStats.profileStats
 export const showPageForm=(s)=>s.profileStats.showPageForm
 export const changeSubpageRender=(s)=>s.profileStats.subpagerender
-export const {changeProfileStats,changeShowPageForm,changeMainPageListRender,changeOffset,changeCurrentPage,changeEditable,changesubpageRender}=slice1.actions
+export const {changeBreadCrumb,changeProfileStats,changeShowPageForm,changeMainPageListRender,changeOffset,changeCurrentPage,changeEditable,changesubpageRender}=slice1.actions
 export const Modalslice=slice1.reducer
 export default slice.reducer

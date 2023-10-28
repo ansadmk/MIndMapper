@@ -1,4 +1,5 @@
 import {
+  changeBreadCrumb,
   changeCurrentPage,
   changeEditable,
   changeMainPageListRender,
@@ -22,6 +23,7 @@ const Subpagescomp = ({value}) => {
   const dispatch = useDispatch();
   const handleStates = (data) => {
     dispatch(changeCurrentPage(data));
+    dispatch(changeBreadCrumb({type:'push',data:{role:"sub",content:data}}))
     dispatch(changeShowPageForm(false));
     dispatch(changeEditable("false"));
     dispatch(changesubpageRender("false"));
