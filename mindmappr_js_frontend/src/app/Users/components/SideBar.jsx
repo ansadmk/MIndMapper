@@ -23,7 +23,13 @@ import {
   changeBreadCrumb,
 } from "@/app/redux/slice";
 import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
-import { Avatar, Chip, Stack } from "@mui/material";
+import { Avatar, Badge, Chip, Stack } from "@mui/material";
+import InboxIcon from '@mui/icons-material/Inbox';
+import FindInPageIcon from '@mui/icons-material/FindInPage';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+
+
+
 
 const NavBar = () => {
   const renderpage = useSelector(changemainPageListRender);
@@ -75,11 +81,12 @@ const NavBar = () => {
         onHide={handleClose}
         scroll={true}
         backdrop={false}
+        className="w-25 "
       >
-        <Offcanvas.Header closeButton>
+        <Offcanvas.Header closeButton >
           <Offcanvas.Title></Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body >
           <div className="d-flex link justify-content-start "  onClick={() => handledis()}>
             {data?.user ? (
               <>
@@ -92,21 +99,14 @@ const NavBar = () => {
               </>
             ) : (
               <Stack direction="row" >
-                {/* <Stack direction="row" spacing={1}>
-               <Chip avatar={<Avatar>{user?.data?.username.charAt(0).toUpperCase()}</Avatar>} label="Avatar" />
-               <Chip
-               avatar={<Avatar alt="Natacha" src={user?.data?.image} />}
-               label={user?.data?.username}
-               variant="outlined"
-                 />
-               </Stack> */}
+               
                 {user?.data?.image ? (
                   <Chip
-                    avatar={<Avatar alt="Natacha" src={user?.data?.image}  />}
+                    avatar={<Avatar alt="Natacha" src={user?.data?.image} className="fs-1"  />}
                     label={user?.data?.username}
                     variant="outlined"
                     size="100"
-                    className="p-5 d-flex gap-5"
+                    className="p-2 d-flex gap-3"
                   />
                 ) : (
                   <Chip
@@ -123,12 +123,15 @@ const NavBar = () => {
             )}
           </div>
           <div className="mt-5 h-75">
-            <ul className="d-flex flex-column gap-4 h-75">
-              <li>search</li>
-              <li>notifications</li>
+            <ul className="d-flex flex-column gap-4 h-75 align-items-center ">
+            <li><FindInPageIcon fontSize="large"/></li>
+              <li><Badge badgeContent={4} color="secondary">
+                  <InboxIcon color="action" fontSize="large" />
+                  </Badge></li>
+              
               <li>
-                <Button onClick={() => handlePageCreation()}>
-                  Add new page
+                <Button variant="" onClick={() => handlePageCreation()}>
+                <AddCircleIcon fontSize="large"/>
                 </Button>
               </li>
               <li className="h-100">

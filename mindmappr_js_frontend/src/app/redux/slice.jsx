@@ -126,6 +126,8 @@ const slice1=createSlice({
         state.breadCrumb.push(data) 
       }else if(type=="clear"){
         state.breadCrumb=[]
+      }else if(type=="select"){
+        state.breadCrumb.splice(data+1)
       }
       // else if(action.payload.type=="pop"){
       //   state.breadCrumb.splice(a) 
