@@ -163,6 +163,7 @@ module.exports = {
           coverUrl,
           pageId
         }=req.body
+        console.log(avatarUrl);
         await pageSchema.updateOne({_id:pageId}, { $set:{  avatar:avatarUrl,cover: coverUrl}})
         
       }

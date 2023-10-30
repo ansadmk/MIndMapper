@@ -87,8 +87,8 @@ export const deletePage = createAsyncThunk("redux/deletePage", async ({pageid,co
   return response
 });
 export const sendUrl = createAsyncThunk("redux/coverandAvatar", async ({avatarUrl,coverUrl,pageId}) => {
- 
-  const response = await axios.patch(
+ console.log(avatarUrl);
+  const response = await axios.put(
     `http://127.0.0.1:4000/api/user/coveravatar`,
     {
       avatarUrl:avatarUrl,

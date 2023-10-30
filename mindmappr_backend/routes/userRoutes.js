@@ -10,5 +10,5 @@ router.post('/createPage',auth,createPages)
 router.get('/getPages',auth,fetchpages)
 router.patch('/setprofile',auth,setProfile)
 router.delete('/deletepage/:id/:content',auth,deletePage)
-router.patch('/coveravatar',auth,setCoverAvatar)
+router.put('/coveravatar',auth,setCoverAvatar)
 module.exports=router

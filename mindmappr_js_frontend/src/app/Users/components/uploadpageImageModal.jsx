@@ -1,5 +1,5 @@
 'use client'
-import { sendUrl } from '@/app/redux/Axioses';
+import { cloudinary, sendUrl } from '@/app/redux/Axioses';
 import { changeuploadcover, cloudResponse, currentPage, modalupload } from '@/app/redux/slice';
 
 import Box from '@mui/material/Box';
@@ -41,7 +41,7 @@ const UploadpageImageModal = () => {
 
   };
   const handleSave=()=>{
-    dispatch(sendUrl({pageId:parent._id,avatarUrl:url}))
+    dispatch(sendUrl({pageId:parent._id,avatarUrl:url.data.secure_url}))
   }
   return (
     
@@ -56,11 +56,11 @@ const UploadpageImageModal = () => {
 <Box component="form"
    noValidate
    autoComplete="off"
-   className='d-flex justify-content-center'
+   className='d-flex  '
   >
    <IconButton className='position-relative '>
    <CloudUploadIcon/>
-  <input type="file" style={{opacity:'0'}} className='w-25 rounded-0 position-absolute' onChange={(e)=>setFile(e.target.files[0])}/>
+  <input type="file" style={{opacity:'0'}} className='w-25  position-absolute' onChange={(e)=>setFile(e.target.files[0])}/>
   </IconButton> 
   </Box>
   <Button onClick={()=>handleCloud()}>upload</Button>

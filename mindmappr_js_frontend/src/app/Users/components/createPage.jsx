@@ -8,6 +8,7 @@ import {
   changeSubpageRender,
   changemainPageListRender,
   changesubpageRender,
+  changeuploadcover,
   currentPage,
   editable,
   fetchpageres,
@@ -21,13 +22,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Subpagescomp from "./subpages";
 import ImageForPages from "./Imageandcover";
 import UploadpageImageModal from "./uploadpageImageModal";
+import { Avatar, IconButton } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
 const CreatePage = () => {
+  const [isShown, setIsShown] = useState(false);
   const reff = useRef(null);
   const subpage = useSelector(fetchpageres);
   const subpageRender = useSelector(changeSubpageRender);
   console.log(subpage?.data?.subpages);
-  const [state, setState] = useState(false);
+  
 
   const edit = useSelector(editable);
   const show = useSelector(showPageForm);
@@ -123,7 +127,23 @@ const CreatePage = () => {
               />
             </form>
           ) : (
-            <Button
+            <div className="d-flex"><div >
+            {parent.avatar ? (
+              <div onMouseEnter={() => setIsShown(true)}
+              onMouseLeave={() => setIsShown(false)}>
+                <Avatar
+                  src={parent.avatar}
+                  
+                />
+                {isShown ? (
+                  <IconButton onClick={() => dispatch(changeuploadcover("true"))}>
+                    <EditIcon />
+                  </IconButton>
+                ) : null}{" "}
+              </div>
+            ) : null}
+          </div>
+          <Button
               variant=""
               onClick={() => {
                 dispatch(changeEditable("true"));
@@ -131,6 +151,8 @@ const CreatePage = () => {
             >
               <h2>{parent.content}</h2>
             </Button>
+          </div>
+           
           )}
           {subpageRender ? (
             <form onSubmit={handlenext}>
