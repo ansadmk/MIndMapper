@@ -5,7 +5,6 @@ import { changeuploadcover, cloudResponse, currentPage, modalupload } from '@/ap
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,12 +26,14 @@ const style = {
 const UploadpageImageModal = () => {
     
     const [file,setFile]=useState('')
+    const [file1,setFile1]=useState('')
     const parent =useSelector(currentPage)
     const open=useSelector(modalupload)
     const url =useSelector(cloudResponse)
     const dispatch=useDispatch()
 
-  const handleClose = () => dispatch(changeuploadcover('false'))
+  const handleClose = () => dispatch(changeuploadcover({avatar:"false"}))
+
   const handleCloud = () => {
     const data = new FormData();
     data.append("file", file);
@@ -40,19 +41,37 @@ const UploadpageImageModal = () => {
     dispatch(cloudinary(data));
 
   };
+  const handleCloud1 = () => {
+    const data = new FormData();
+    data.append("file", file1);
+    data.append("upload_preset", "Avatar");
+    dispatch(cloudinary(data));
+
+  };
   const handleSave=()=>{
-    dispatch(sendUrl({pageId:parent._id,avatarUrl:url.data.secure_url}))
+    setTimeout(()=>{dispatch(sendUrl({pageId:parent._id,avatarUrl:url.data.secure_url}))
+    dispatch(changeuploadcover({avatar:"false"}))
+  },2000)
+    
+  }
+  const handleSave1=()=>{
+    setTimeout(()=>{dispatch(sendUrl({pageId:parent._id,coverUrl:url.data.secure_url}))
+    dispatch(changeuploadcover({cover:"false"}))
+  },2000)
+    
   }
   return (
-    
+    <div>
         
 <Modal
-  open={open}
+  open={open.avatar}
   onClose={handleClose}
   aria-labelledby="modal-modal-title"
   aria-describedby="modal-modal-description"
 >
+  
 <Box sx={style} className="rounded-5">
+  <h1>Icon change</h1>
 <Box component="form"
    noValidate
    autoComplete="off"
@@ -69,6 +88,32 @@ const UploadpageImageModal = () => {
   
   
 </Modal>
+<Modal
+  open={open.cover}
+  onClose={() => dispatch(changeuploadcover({cover:"true"}))}
+  aria-labelledby="modal-modal-title"
+  aria-describedby="modal-modal-description"
+>
+  
+<Box sx={style} className="rounded-5">
+  <h1>Cover change</h1>
+<Box component="form"
+   noValidate
+   autoComplete="off"
+   className='d-flex  '
+  >
+   <IconButton className='position-relative '>
+   <CloudUploadIcon/>
+  <input type="file" style={{opacity:'0'}} className='w-25  position-absolute' onChange={(e)=>setFile1(e.target.files[0])}/>
+  </IconButton> 
+  </Box>
+  <Button onClick={()=>handleCloud1()}>upload</Button>
+  <Button onClick={()=>handleSave1()}>save</Button>
+        </Box>
+  
+  
+</Modal>
+</div>
     
   )
 }

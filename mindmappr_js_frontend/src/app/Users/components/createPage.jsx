@@ -135,13 +135,14 @@ const CreatePage = () => {
                   src={parent.avatar}
                   
                 />
-                {isShown ? (
-                  <IconButton onClick={() => dispatch(changeuploadcover("true"))}>
+                
+              </div>
+            ) : null}
+            {isShown ? (
+                  <IconButton onClick={() => dispatch(changeuploadcover({avatar:"true"}))}>
                     <EditIcon />
                   </IconButton>
                 ) : null}{" "}
-              </div>
-            ) : null}
           </div>
           <Button
               variant=""

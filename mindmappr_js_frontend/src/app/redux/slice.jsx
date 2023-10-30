@@ -100,7 +100,7 @@ const slice1 = createSlice({
     subpagerender: false,
     breadCrumb: [],
     setCoverAndAvatarForPages: false,
-    uploadcover: false,
+    uploadcover: {avatar:false,cover:false},
   },
   reducers: {
     changeProfileStats: (state) => {
@@ -119,6 +119,7 @@ const slice1 = createSlice({
       state.currentPage = action.payload;
     },
     changeEditable: (state, action) => {
+          
       if (action.payload == "false") {
         state.editable = false;
       } else if (action.payload == "true") {
@@ -159,12 +160,16 @@ const slice1 = createSlice({
       }
     },
     changeuploadcover: (state, action) => {
-      if (action.payload == "false") {
-        state.uploadcover = false;
-      } else if (action.payload == "true") {
-        state.uploadcover = true;
-      } else {
-      state.uploadcover = !state.uploadcover;}
+      const  {avatar,cover}=action.payload
+      if (avatar == "false") {
+        state.uploadcover.avatar = false;
+      } else if (cover == "true") {
+        state.uploadcover.cover = true;
+      }  else if (cover == "false") {
+        state.uploadcover.cover = false;
+      } else if (avatar == "true") {
+        state.uploadcover.avatar = true;
+      }
     },
   },
 });
