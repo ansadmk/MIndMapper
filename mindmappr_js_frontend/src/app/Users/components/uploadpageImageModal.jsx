@@ -1,12 +1,38 @@
 'use client'
-import { Box, Button, IconButton, Modal } from '@mui/material';
-import React, { useState } from 'react'
+import { sendUrl } from '@/app/redux/Axioses';
+import { changeuploadcover, cloudResponse, currentPage, modalupload } from '@/app/redux/slice';
 
-const uploadpageImageModal = () => {
-    const [open, setOpen] = useState(false);
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { IconButton } from '@mui/material';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+const UploadpageImageModal = () => {
+    
     const [file,setFile]=useState('')
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+    const parent =useSelector(currentPage)
+    const open=useSelector(modalupload)
+    const url =useSelector(cloudResponse)
+    const dispatch=useDispatch()
+
+  const handleClose = () => dispatch(changeuploadcover('false'))
   const handleCloud = () => {
     const data = new FormData();
     data.append("file", file);
@@ -15,25 +41,36 @@ const uploadpageImageModal = () => {
 
   };
   const handleSave=()=>{
-    
+    dispatch(sendUrl({pageId:parent._id,avatarUrl:url}))
   }
   return (
-    <div>
-        <Button onClick={handleOpen}>Open modal</Button>
+    
+        
 <Modal
   open={open}
   onClose={handleClose}
+  aria-labelledby="modal-modal-title"
+  aria-describedby="modal-modal-description"
 >
-  <Box component="form">
-   <IconButton>
-  <input type="file" className='d-none' onChange={(e)=>setFile(e.target.files[0])}/>
+<Box sx={style} className="rounded-5">
+<Box component="form"
+   noValidate
+   autoComplete="off"
+   className='d-flex justify-content-center'
+  >
+   <IconButton className='position-relative '>
+   <CloudUploadIcon/>
+  <input type="file" style={{opacity:'0'}} className='w-25 rounded-0 position-absolute' onChange={(e)=>setFile(e.target.files[0])}/>
   </IconButton> 
   </Box>
   <Button onClick={()=>handleCloud()}>upload</Button>
   <Button onClick={()=>handleSave()}>save</Button>
+        </Box>
+  
+  
 </Modal>
-    </div>
+    
   )
 }
 
-export default uploadpageImageModal
+export default UploadpageImageModal

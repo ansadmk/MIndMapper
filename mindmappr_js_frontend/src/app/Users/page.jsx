@@ -5,6 +5,7 @@ import Welcome from "./components/welcomepage"
 import Profile from "./components/profileModal"
 
 
+
 export default function Home() {
   
   return (

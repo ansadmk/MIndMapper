@@ -2,6 +2,7 @@
 import {
   SetCoverAndAvatarForPages,
   changeSetCoverAndAvatarForPages,
+  changeuploadcover,
   currentPage,
 } from "@/app/redux/slice";
 import { Avatar, Card, CardMedia, IconButton } from "@mui/material";
@@ -29,12 +30,10 @@ const ImageForPages = () => {
       {parent.avatar ? <Avatar src={parent.avatar} /> : null}
       {isShown ? (
         <div className="d-flex">
-          <IconButton>
+          <IconButton onClick={()=>dispatch(changeuploadcover(  "true"))}>
             <EditIcon />
           </IconButton>
-          <IconButton>
-            <AddIcon />
-          </IconButton>
+          
         </div>
       ) : null}
     </div>

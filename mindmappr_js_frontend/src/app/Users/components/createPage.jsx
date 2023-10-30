@@ -20,6 +20,7 @@ import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Subpagescomp from "./subpages";
 import ImageForPages from "./Imageandcover";
+import UploadpageImageModal from "./uploadpageImageModal";
 
 const CreatePage = () => {
   const reff = useRef(null);
@@ -33,7 +34,7 @@ const CreatePage = () => {
   const parent = useSelector(currentPage);
   const offsetstate = useSelector(offset);
   const dispatch = useDispatch();
-  const router = useRouter();
+ 
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -143,6 +144,7 @@ const CreatePage = () => {
           </ul>
         </div>
       )}
+    <UploadpageImageModal/>
     </div>
   );
 };

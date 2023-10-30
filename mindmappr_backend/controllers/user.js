@@ -160,9 +160,10 @@ module.exports = {
       setCoverAvatar:async (req,res)=>{
         const {
           avatarUrl,
-          coverUrl
+          coverUrl,
+          pageId
         }=req.body
-        await userSchema.findByIdAndUpdate(res.token.id, { avatar:avatarUrl,cover: coverUrl})
+        await pageSchema.updateOne({_id:pageId}, { $set:{  avatar:avatarUrl,cover: coverUrl}})
         
       }
   
