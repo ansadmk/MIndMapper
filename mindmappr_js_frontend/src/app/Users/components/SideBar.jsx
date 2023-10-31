@@ -21,6 +21,7 @@ import {
   changeEditable,
   changesubpageRender,
   changeBreadCrumb,
+  PageState,
 } from "@/app/redux/slice";
 import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
 import { Avatar, Badge, Chip, Stack } from "@mui/material";
@@ -38,9 +39,8 @@ const NavBar = () => {
 
   const pages = useSelector(fetchpageres);
   const offsetstate = useSelector(offset);
-
-  const userfetchstatus = useSelector(userFetchStatus);
-  const fetchPagestatus = useSelector(fetchpagestatus);
+ 
+ 
   
 
   const handlePageCreation = () => dispatch(changeShowPageForm(true));
@@ -143,9 +143,9 @@ const NavBar = () => {
                         variant=""
                         className="fs-3 border-0"
                         onClick={() => {
+                          dispatch(PageState(true))
                           dispatch(changeCurrentPage(data));
                           dispatch(changeBreadCrumb({type:'clear'}))
-
                           dispatch(changeBreadCrumb({type:'push',data:{role:"main",content:data}}))
                           dispatch(changeShowPageForm(false));
                           dispatch(changeEditable("false"));

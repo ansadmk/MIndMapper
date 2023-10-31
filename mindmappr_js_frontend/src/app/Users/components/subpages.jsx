@@ -1,4 +1,5 @@
 import {
+  PageState,
   changeBreadCrumb,
   changeCurrentPage,
   changeEditable,
@@ -14,7 +15,7 @@ import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { createPageResponse, deletePage, setprofile } from "@/app/redux/Axioses";
+import { FetchPages, createPageResponse, deletePage, setprofile } from "@/app/redux/Axioses";
 
 const Subpagescomp = ({value}) => {
   const [state, setState] = useState(false);
@@ -22,6 +23,8 @@ const Subpagescomp = ({value}) => {
   const parent = useSelector(currentPage);
   const dispatch = useDispatch();
   const handleStates = (data) => {
+    dispatch(PageState(true))
+
     dispatch(changeCurrentPage(data));
     dispatch(changeBreadCrumb({type:'push',data:{role:"sub",content:data}}))
     dispatch(changeShowPageForm(false));
@@ -35,15 +38,22 @@ const Subpagescomp = ({value}) => {
   const handleChange =(e,val)=>{
     e.preventDefault();
     const content = e.target.content.value;
-    dispatch(setprofile({ pageid: val, content: content ,sub:true}));
-    
-
+    if (content) {
+      
+      dispatch(setprofile({ pageid: val, content: content ,sub:true}));
+    }
+    dispatch(FetchPages())
+    dispatch(PageState(true))
     setState(false)
   }
   const handleChange2 =(e,val)=>{
     e.preventDefault();
     const content = e.target.value;
     dispatch(setprofile({ pageid: val, content: content ,sub:true}));
+    dispatch(FetchPages())
+
+    dispatch(PageState(true))
+
     
 
     

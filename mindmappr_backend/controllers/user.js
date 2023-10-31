@@ -138,7 +138,7 @@ module.exports = {
     })}
     if(pageId && content && prev){
       await pageSchema.updateOne({_id:pageId}, { $set:{ content: content}})
-      await pageSchema.updateMany({title:prev},{$set:{title:content}})
+     
       res.json({
         status:"success",
         message:"successfully changed"
@@ -168,6 +168,22 @@ module.exports = {
         
         await pageSchema.updateOne({_id:pageId}, { $set:{  avatar:avatarUrl,cover: coverUrl}})
         
-      }
+      },
+      fetchSpecpages:async(req,res)=>{
+          try {
+            const {id}=req.params
+            console.log(id,"urhureuhgue");
+            const pages = await pageSchema.findOne({_id:id});
+            res.json({
+              status:"success",
+              message:"successfully fetched",
+              data:pages
+            })
+          } catch (error) {
+            console.log(error.message);
+          }
+             
+            }
+      
   
 };

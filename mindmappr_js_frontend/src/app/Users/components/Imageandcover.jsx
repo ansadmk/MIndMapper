@@ -12,7 +12,7 @@ import EditIcon from "@mui/icons-material/Edit";
 
 const ImageForPages = () => {
   const parent = useSelector(currentPage);
-  const detect = useSelector(SetCoverAndAvatarForPages);
+  
   const dispatch = useDispatch();
   const [isShown, setIsShown] = useState(false);
 
@@ -28,6 +28,15 @@ const ImageForPages = () => {
         className={`col ${parent.cover ? "":"h-100 border"}`}
       >
         <Card className="rounded-5">
+        {isShown ? (
+          <IconButton
+            onClick={() => dispatch(changeuploadcover({ cover: "true" }))}
+            
+          >
+            <EditIcon />
+            <h6>Set Cover</h6>
+          </IconButton>
+        ) : null}
         {parent.cover ? (
           
             <CardMedia
@@ -38,14 +47,7 @@ const ImageForPages = () => {
             />
          
         ) : null}
-        {isShown ? (
-          <IconButton
-            onClick={() => dispatch(changeuploadcover({ cover: "true" }))}
-          >
-            <EditIcon />
-            <h6>Set Cover</h6>
-          </IconButton>
-        ) : null}
+       
          </Card>
         
       </div>

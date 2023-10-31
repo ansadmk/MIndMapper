@@ -91,7 +91,7 @@ const UploadpageImageModal = () => {
 </Modal>
 <Modal
   open={open.cover}
-  onClose={() => dispatch(changeuploadcover({cover:"true"}))}
+  onClose={() => dispatch(changeuploadcover({cover:"false"}))}
   aria-labelledby="modal-modal-title"
   aria-describedby="modal-modal-description"
 >

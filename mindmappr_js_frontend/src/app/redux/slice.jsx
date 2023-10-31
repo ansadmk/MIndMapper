@@ -8,6 +8,7 @@ import {
   setprofile,
   deletePage,
   sendUrl,
+  FetchSpecificPage,
 } from "./Axioses";
 
 
@@ -20,6 +21,8 @@ const slice = createSlice({
     createPageRes: {},
     FetchPageStatus: "standby",
     FetchPageres: {},
+    FetchSpecPageStatus: "standby",
+    FetchSpecPageres: {},
     cloudstatus: "standby",
     cloudResponse: "",
     setProfile: "",
@@ -60,6 +63,16 @@ const slice = createSlice({
       .addCase(FetchPages.rejected, (state) => {
         state.FetchPageStatus = "failed";
       })
+      .addCase(FetchSpecificPage.pending, (state) => {
+        state.FetchSpecPageStatus = "loading";
+      })
+      .addCase(FetchSpecificPage.fulfilled, (state, action) => {
+        state.FetchSpecPageStatus = "succeeded";
+        state.FetchSpecPageres = action.payload;
+      })
+      .addCase(FetchSpecificPage.rejected, (state) => {
+        state.FetchSpecPageStatus = "failed";
+      })
       .addCase(cloudinary.pending, (state) => {
         state.cloudstatus = "loading";
       })
@@ -99,7 +112,7 @@ const slice1 = createSlice({
     editable: false,
     subpagerender: false,
     breadCrumb: [],
-    setCoverAndAvatarForPages: false,
+    Pagestate: false,
     uploadcover: {avatar:false,cover:false},
   },
   reducers: {
@@ -150,14 +163,11 @@ const slice1 = createSlice({
       //   state.breadCrumb.splice(a)
       // }
     },
-    changeSetCoverAndAvatarForPages: (state, action) => {
-      if (action.payload == "false") {
-        state.setCoverAndAvatarForPages = false;
-      } else if (action.payload == "true") {
-        state.setCoverAndAvatarForPages = true;
-      } else {
-        state.setCoverAndAvatarForPages = !state.setCoverAndAvatarForPages;
-      }
+    PageState: (state, action) => {
+    
+        state.Pagestate = action.payload ;
+    
+      
     },
     changeuploadcover: (state, action) => {
       const  {avatar,cover}=action.payload
@@ -175,8 +185,10 @@ const slice1 = createSlice({
 });
 export const modalupload = (s) => s.profileStats.uploadcover
 export const sendurl = (s) => s.Axios.uploadurl;
-export const SetCoverAndAvatarForPages = (s) =>
-  s.profileStats.SetCoverAndAvatarForPages;
+export const getSpecPage = (s) => s.Axios.FetchSpecPageres;
+
+export const Pagestate = (s) =>
+  s.profileStats.Pagestate;
 export const Breadcrumb = (s) => s.profileStats.breadCrumb;
 export const deletepage = (s) => s.profileStats.deletePagestatus;
 export const editable = (s) => s.profileStats.editable;
@@ -196,7 +208,7 @@ export const ProfileStats = (s) => s.profileStats.profileStats;
 export const showPageForm = (s) => s.profileStats.showPageForm;
 export const changeSubpageRender = (s) => s.profileStats.subpagerender;
 export const {
-  changeSetCoverAndAvatarForPages,
+  PageState,
   changeBreadCrumb,
   changeProfileStats,
   changeShowPageForm,

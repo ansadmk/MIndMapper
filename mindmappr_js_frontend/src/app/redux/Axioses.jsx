@@ -40,6 +40,15 @@ export const FetchPages = createAsyncThunk("redux/fetchpages", async () => {
   });
   return respo.data;
 });
+export const FetchSpecificPage = createAsyncThunk("redux/fetchspecpages", async (id) => {
+  console.log(id);
+  const respo = await axios.get(`http://127.0.0.1:4000/api/user/getPages/${id}`, {
+    headers: {
+      Authorization: `Bearer ${cookie}`,
+    },
+  });
+  return respo.data;
+});
 export const cloudinary = createAsyncThunk("redux/cloudinary", async (data) => {
   
   const respon = await axios.post(

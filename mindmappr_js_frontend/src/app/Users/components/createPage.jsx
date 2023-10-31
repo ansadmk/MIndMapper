@@ -1,6 +1,9 @@
 "use client";
-import { createPageResponse, setprofile } from "@/app/redux/Axioses";
+import { FetchPages, FetchSpecificPage, createPageResponse, setprofile } from "@/app/redux/Axioses";
 import {
+  PageState,
+  Pagestate,
+  SetCoverAndAvatarForPages,
   changeCurrentPage,
   changeEditable,
   changeMainPageListRender,
@@ -13,6 +16,7 @@ import {
   currentPage,
   editable,
   fetchpageres,
+  getSpecPage,
   offset,
   showPageForm,
 } from "@/app/redux/slice";
@@ -27,20 +31,30 @@ import { Avatar, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
 const CreatePage = () => {
-  const [isShown, setIsShown] = useState(false);
+  
+  
+
   const reff = useRef(null);
   const subpage = useSelector(fetchpageres);
   const subpageRender = useSelector(changeSubpageRender);
   
-  const pages = useSelector(fetchpageres);
-  const createResponse=useSelector(createpageres)
+
+  const page=useSelector(getSpecPage)
+  console.log(page);
+  const state=useSelector(Pagestate)
+
   const edit = useSelector(editable);
   const show = useSelector(showPageForm);
   const parent = useSelector(currentPage);
   const offsetstate = useSelector(offset);
   const dispatch = useDispatch();
- 
-
+  
+  useEffect(()=>{
+    if(state && parent){
+      dispatch(FetchSpecificPage(parent._id))
+      dispatch(PageState(false))
+    }
+  })
   useEffect(() => {
     function handleClickOutside(event) {
       if (reff.current && !reff.current.contains(event.target)) {
@@ -62,7 +76,7 @@ const CreatePage = () => {
       createPageResponse({ parent: "main", role: "main", content: content })
     );
 
-    dispatch(changeCurrentPage(content));
+    
     dispatch(changeShowPageForm(false));
     dispatch(changeMainPageListRender());
   };
@@ -87,9 +101,9 @@ const CreatePage = () => {
       setprofile({ pageid: parent._id, content: content, prev: parent._id })
     );
     dispatch(changesubpageRender("true"));
-
     dispatch(changeEditable());
     dispatch(changeMainPageListRender());
+    dispatch(PageState(true))
   };
   return (
     <div className="border-5 border w-100 h-100">
@@ -122,7 +136,7 @@ const CreatePage = () => {
             <form action="" onSubmit={handleContent}>
               <input
                 type="text"
-                defaultValue={parent.content}
+                defaultValue={page?.data?.content}
                 id="val"
                 ref={reff}
               />
@@ -135,7 +149,7 @@ const CreatePage = () => {
                 dispatch(changeEditable("true"));
               }}
             >
-              <h2>{parent.content}</h2>
+              <h2>{page?.data?.content}</h2>
             </Button>
           
            
@@ -147,7 +161,7 @@ const CreatePage = () => {
           ) : null}
           <ul>
             {subpage?.data?.subpages.map((value) => (
-              <Subpagescomp value={value} />
+              <Subpagescomp value={value}  />
             ))}
           </ul>
         </div>
