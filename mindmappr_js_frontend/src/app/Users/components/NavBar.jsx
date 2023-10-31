@@ -12,7 +12,7 @@ const NavBar = () => {
   const page=useSelector(currentPage)
   const crumb=useSelector(Breadcrumb)
    
-  console.log(page);
+ 
   const handle=()=>{
     dispatch(deletePage({pageid:page._id,content:page.content}))
     dispatch(changeMainPageListRender())

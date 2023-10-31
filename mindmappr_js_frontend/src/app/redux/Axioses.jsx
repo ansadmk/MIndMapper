@@ -54,7 +54,7 @@ export const cloudinary = createAsyncThunk("redux/cloudinary", async (data) => {
   return respon
 });
 export const setprofile = createAsyncThunk("redux/setprofile", async ({url,name,pageid,content,prev,sub}) => {
-  console.log(url);
+  
   const response = await axios.patch(
     "http://127.0.0.1:4000/api/user/setprofile",
     {
@@ -87,7 +87,7 @@ export const deletePage = createAsyncThunk("redux/deletePage", async ({pageid,co
   return response
 });
 export const sendUrl = createAsyncThunk("redux/coverandAvatar", async ({avatarUrl,coverUrl,pageId}) => {
- console.log(avatarUrl);
+ 
   const response = await axios.put(
     `http://127.0.0.1:4000/api/user/coveravatar`,
     {

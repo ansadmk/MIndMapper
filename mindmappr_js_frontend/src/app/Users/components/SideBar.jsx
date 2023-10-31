@@ -41,7 +41,7 @@ const NavBar = () => {
 
   const userfetchstatus = useSelector(userFetchStatus);
   const fetchPagestatus = useSelector(fetchpagestatus);
-  console.log(userfetchstatus, fetchPagestatus);
+  
 
   const handlePageCreation = () => dispatch(changeShowPageForm(true));
 

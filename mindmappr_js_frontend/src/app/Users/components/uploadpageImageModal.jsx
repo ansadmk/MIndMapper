@@ -48,14 +48,15 @@ const UploadpageImageModal = () => {
     dispatch(cloudinary(data));
 
   };
-  const handleSave=()=>{
-    setTimeout(()=>{dispatch(sendUrl({pageId:parent._id,avatarUrl:url.data.secure_url}))
+  const handleSave= async ()=>{
+     const lin= await url.data.secure_url
+    setTimeout(()=>{dispatch(sendUrl({pageId:parent._id,avatarUrl:lin}))
     dispatch(changeuploadcover({avatar:"false"}))
   },2000)
     
   }
   const handleSave1=()=>{
-    setTimeout(()=>{dispatch(sendUrl({pageId:parent._id,coverUrl:url.data.secure_url}))
+    setTimeout(()=>{dispatch(sendUrl({pageId:parent._id,coverUrl:url?.data?.secure_url}))
     dispatch(changeuploadcover({cover:"false"}))
   },2000)
     

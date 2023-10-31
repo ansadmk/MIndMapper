@@ -10,7 +10,7 @@ import { Box, TextField } from '@mui/material'
 const register = () => {
   const router=useRouter()
   const handleSub= async (e)=>{
-    console.log('hi');
+    
     e.preventDefault()
     const username=e.target.username.value
     const email=e.target.email.value
@@ -33,7 +33,7 @@ const register = () => {
         alert("failed")
      }
     }else{
-      console.log('alert');
+     
       alert("password does'nt match")
       
       

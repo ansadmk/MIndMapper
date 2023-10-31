@@ -35,10 +35,10 @@ module.exports = {
 
     if (value) {
       const users = await userSchema.findOne({ username: username });
-      console.log(users);
+      
       if (users) {
         const pass = bcrypt.compare(password, users.password);
-        console.log(pass);
+        
         if (pass) {
           const token = jwt.sign({ id: users._id }, process.env.JWT);
           if (token) {
@@ -89,10 +89,12 @@ module.exports = {
       createdAt: Date.now(),
       role: role,
     });
+    
     if (page) {
       res.json({
         status: "success",
         message: "created",
+        data:page
       });
     } else {
       res.json({
@@ -147,7 +149,7 @@ module.exports = {
     },
     deletePage:async(req,res)=>{
       const {id,content}=req.params
-      console.log(id);
+      
       if(id){
     await pageSchema.deleteOne({_id:id})
     await pageSchema.deleteMany({title:content})
@@ -163,7 +165,7 @@ module.exports = {
           coverUrl,
           pageId
         }=req.body
-        console.log(avatarUrl);
+        
         await pageSchema.updateOne({_id:pageId}, { $set:{  avatar:avatarUrl,cover: coverUrl}})
         
       }

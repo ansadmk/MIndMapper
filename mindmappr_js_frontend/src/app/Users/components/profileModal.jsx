@@ -35,13 +35,13 @@ const Profile = () => {
     router.push("/");
     
   };
-  console.log(cloudres);
+  
   const handleCloud = (e) => {
     const files=e.target.files[0]
     const data = new FormData();
     data.append("file", files);
     data.append("upload_preset", "Avatar");
-    console.log(cloudres);
+    
     dispatch(cloudinary(data));
 
   };

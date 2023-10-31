@@ -4,10 +4,10 @@ const auth =(req, res, next) => {
   
       const auth = req.headers["authorization"];
       const token = auth && auth.split(" ")[1];
-      console.log(token);
+     
       if (token) {
         const verify = jwt.verify(token, process.env.JWT);
-        console.log(verify);
+      
         if (verify) {
           res.token=verify
           next();

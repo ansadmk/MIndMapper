@@ -9,6 +9,7 @@ import {
   changemainPageListRender,
   changesubpageRender,
   changeuploadcover,
+  createpageres,
   currentPage,
   editable,
   fetchpageres,
@@ -30,9 +31,9 @@ const CreatePage = () => {
   const reff = useRef(null);
   const subpage = useSelector(fetchpageres);
   const subpageRender = useSelector(changeSubpageRender);
-  console.log(subpage?.data?.subpages);
   
-
+  const pages = useSelector(fetchpageres);
+  const createResponse=useSelector(createpageres)
   const edit = useSelector(editable);
   const show = useSelector(showPageForm);
   const parent = useSelector(currentPage);
@@ -55,7 +56,7 @@ const CreatePage = () => {
 
   const handlePage = (e) => {
     e.preventDefault();
-    console.log(e);
+    
     const content = e.target.main.value;
     dispatch(
       createPageResponse({ parent: "main", role: "main", content: content })
@@ -110,7 +111,7 @@ const CreatePage = () => {
         </form>
       ) : (
         <div
-          className={`d-flex flex-column ${
+          className={`d-flex gap-5 flex-column ${
             offsetstate
               ? "justify-content-center align-items-center me-5 "
               : "justify-content-center align-items-center"
@@ -127,23 +128,7 @@ const CreatePage = () => {
               />
             </form>
           ) : (
-            <div className="d-flex"><div >
-            {parent.avatar ? (
-              <div onMouseEnter={() => setIsShown(true)}
-              onMouseLeave={() => setIsShown(false)}>
-                <Avatar
-                  src={parent.avatar}
-                  
-                />
-                
-              </div>
-            ) : null}
-            {isShown ? (
-                  <IconButton onClick={() => dispatch(changeuploadcover({avatar:"true"}))}>
-                    <EditIcon />
-                  </IconButton>
-                ) : null}{" "}
-          </div>
+           
           <Button
               variant=""
               onClick={() => {
@@ -152,7 +137,7 @@ const CreatePage = () => {
             >
               <h2>{parent.content}</h2>
             </Button>
-          </div>
+          
            
           )}
           {subpageRender ? (
