@@ -18,23 +18,25 @@ const ImageForPages = () => {
 
   return (
     <div
-      className="w-100  top-75  position-relative"
+      className="w-100 row top-75  position-relative rounded-5"
       onMouseEnter={() => setIsShown(true)}
       onMouseLeave={() => setIsShown(false)}
     >
       <div
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}
+        className={`col ${parent.cover ? "":"h-100 border"}`}
       >
+        <Card className="rounded-5">
         {parent.cover ? (
-          <Card>
+          
             <CardMedia
               sx={{ height: "50vh" }}
-              className="rounded-5 "
+              className=" "
               image={parent.cover}
               title="Cover"
             />
-          </Card>
+         
         ) : null}
         {isShown ? (
           <IconButton
@@ -44,19 +46,24 @@ const ImageForPages = () => {
             <h6>Set Cover</h6>
           </IconButton>
         ) : null}
+         </Card>
+        
       </div>
       <div
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}
+        className="col position-absolute d-flex justify-content-center  align-items-end h-100 mt-5 ms-0 "
       >
+
         {parent.avatar ? (
           <div>
-            <Avatar src={parent.avatar} />
+            <Avatar src={parent.avatar} sx={{maxHeight:120,maxWidth:120}}  className="bg-white h-100 w-100  "/>
           </div>
         ) : null}
         {isShown ? (
           <IconButton
             onClick={() => dispatch(changeuploadcover({ avatar: "true" }))}
+            className=" "
           >
             <EditIcon />
             <h6>set icon</h6>

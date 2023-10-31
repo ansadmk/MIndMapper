@@ -113,7 +113,7 @@ const CreatePage = () => {
         <div
           className={`d-flex gap-5 flex-column ${
             offsetstate
-              ? "justify-content-center align-items-center me-5 "
+              ? "justify-content-center align-items-center  "
               : "justify-content-center align-items-center"
           } h-100`}
         >
