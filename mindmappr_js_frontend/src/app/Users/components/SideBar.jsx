@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Button, Offcanvas } from "react-bootstrap";
+import {  Offcanvas } from "react-bootstrap";
+
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -24,7 +25,7 @@ import {
   PageState,
 } from "@/app/redux/slice";
 import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
-import { Avatar, Badge, Chip, Stack } from "@mui/material";
+import { Avatar, Badge, Button, Chip, Popover, Stack } from "@mui/material";
 import InboxIcon from '@mui/icons-material/Inbox';
 import FindInPageIcon from '@mui/icons-material/FindInPage';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -33,6 +34,22 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 
 const NavBar = () => {
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handlepop = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClo = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+
+
   const renderpage = useSelector(changemainPageListRender);
   const dispatch = useDispatch();
   const user = useSelector(getDetails);
@@ -124,7 +141,28 @@ const NavBar = () => {
           </div>
           <div className="mt-5 h-75">
             <ul className="d-flex flex-column gap-4 h-75 align-items-center ">
-            <li><FindInPageIcon fontSize="large"/></li>
+            <li>
+            <Button aria-describedby={id} variant="contained" onClick={handlepop}>
+            <FindInPageIcon fontSize="large"/>
+        
+      </Button>
+<Popover 
+ id={id}
+ open={open}
+ anchorEl={anchorEl}
+ onClose={handleClo}
+  anchorOrigin={{
+    vertical: 'top',
+    horizontal: 'right',
+  }}
+  transformOrigin={{
+    vertical: 'top',
+    horizontal: 'left',
+  }}
+>
+  The content of the Popover.
+</Popover>
+</li>
               <li><Badge badgeContent={4} color="secondary">
                   <InboxIcon color="action" fontSize="large" />
                   </Badge></li>
