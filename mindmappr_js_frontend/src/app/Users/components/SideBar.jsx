@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import {  Offcanvas } from "react-bootstrap";
+import { Button, Offcanvas } from "react-bootstrap";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -25,16 +25,14 @@ import {
   PageState,
 } from "@/app/redux/slice";
 import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
-import { Avatar, Badge, Button, Chip, Popover, Stack } from "@mui/material";
-import InboxIcon from '@mui/icons-material/Inbox';
-import FindInPageIcon from '@mui/icons-material/FindInPage';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-
-
+import { Avatar, Badge,  Chip, Popover, Stack } from "@mui/material";
+import InboxIcon from "@mui/icons-material/Inbox";
+import FindInPageIcon from "@mui/icons-material/FindInPage";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import Asynchronous from "./searchBar";
 
 
 const NavBar = () => {
-
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handlepop = (event) => {
@@ -46,9 +44,7 @@ const NavBar = () => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
-
-
+  const id = open ? "simple-popover" : undefined;
 
   const renderpage = useSelector(changemainPageListRender);
   const dispatch = useDispatch();
@@ -56,9 +52,6 @@ const NavBar = () => {
 
   const pages = useSelector(fetchpageres);
   const offsetstate = useSelector(offset);
- 
- 
-  
 
   const handlePageCreation = () => dispatch(changeShowPageForm(true));
 
@@ -100,11 +93,14 @@ const NavBar = () => {
         backdrop={false}
         className="w-25 "
       >
-        <Offcanvas.Header closeButton >
+        <Offcanvas.Header closeButton>
           <Offcanvas.Title></Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body >
-          <div className="d-flex link justify-content-start "  onClick={() => handledis()}>
+        <Offcanvas.Body>
+          <div
+            className="d-flex link justify-content-start "
+            onClick={() => handledis()}
+          >
             {data?.user ? (
               <>
                 <img
@@ -115,11 +111,16 @@ const NavBar = () => {
                 <div className="text-center mt-4">hello {data?.user?.name}</div>
               </>
             ) : (
-              <Stack direction="row" >
-               
+              <Stack direction="row">
                 {user?.data?.image ? (
                   <Chip
-                    avatar={<Avatar alt="Natacha" src={user?.data?.image} className="fs-1"  />}
+                    avatar={
+                      <Avatar
+                        alt="Natacha"
+                        src={user?.data?.image}
+                        className="fs-1"
+                      />
+                    }
                     label={user?.data?.username}
                     variant="outlined"
                     size="100"
@@ -141,35 +142,40 @@ const NavBar = () => {
           </div>
           <div className="mt-5 h-75">
             <ul className="d-flex flex-column gap-4 h-75 align-items-center ">
-            <li>
-            <Button aria-describedby={id} variant="contained" onClick={handlepop}>
-            <FindInPageIcon fontSize="large"/>
-        
-      </Button>
-<Popover 
- id={id}
- open={open}
- anchorEl={anchorEl}
- onClose={handleClo}
-  anchorOrigin={{
-    vertical: 'top',
-    horizontal: 'right',
-  }}
-  transformOrigin={{
-    vertical: 'top',
-    horizontal: 'left',
-  }}
->
-  The content of the Popover.
-</Popover>
-</li>
-              <li><Badge badgeContent={4} color="secondary">
+              <li>
+                <Button
+                  aria-describedby={id}
+                  variant="contained"
+                  onClick={handlepop}
+                >
+                  <FindInPageIcon fontSize="large" />
+                </Button>
+                <Popover
+                  id={id}
+                  open={open}
+                  anchorEl={anchorEl}
+                  onClose={handleClo}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                >
+                  <Asynchronous />
+                </Popover>
+              </li>
+              <li>
+                <Badge badgeContent={4} color="secondary">
                   <InboxIcon color="action" fontSize="large" />
-                  </Badge></li>
-              
+                </Badge>
+              </li>
+
               <li>
                 <Button variant="" onClick={() => handlePageCreation()}>
-                <AddCircleIcon fontSize="large"/>
+                  <AddCircleIcon fontSize="large" />
                 </Button>
               </li>
               <li className="h-100">
@@ -181,10 +187,15 @@ const NavBar = () => {
                         variant=""
                         className="fs-3 border-0"
                         onClick={() => {
-                          dispatch(PageState(true))
+                          dispatch(PageState(true));
                           dispatch(changeCurrentPage(data));
-                          dispatch(changeBreadCrumb({type:'clear'}))
-                          dispatch(changeBreadCrumb({type:'push',data:{role:"main",content:data}}))
+                          dispatch(changeBreadCrumb({ type: "clear" }));
+                          dispatch(
+                            changeBreadCrumb({
+                              type: "push",
+                              data: { role: "main", content: data },
+                            })
+                          );
                           dispatch(changeShowPageForm(false));
                           dispatch(changeEditable("false"));
                           dispatch(changesubpageRender("false"));
