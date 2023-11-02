@@ -29,7 +29,8 @@ const Subpagescomp = ({value}) => {
     dispatch(changeBreadCrumb({type:'push',data:{role:"sub",content:data}}))
     dispatch(changeShowPageForm(false));
     dispatch(changeEditable("false"));
-    dispatch(changesubpageRender("false"));
+    
+    dispatch(changeMainPageListRender()); 
   };
   const handleDelete = (data) => {
     dispatch(deletePage({ pageid: data._id, content: data.content }));
