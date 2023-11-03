@@ -111,7 +111,7 @@ import { setprofile } from "@/app/redux/Axioses";
 const Subpagescomp = () => {
 const [state,setState]=useState(null)
 const [show,setShow]=useState(true)
-
+const reff=useRef(null)
 const dispatch = useDispatch();
 
 const parent=useSelector(currentPage)
@@ -144,14 +144,19 @@ console.log(parent.subpages);
     
   };
 
- 
+  
 
   useEffect(() => {
     const init = async () => {
       await initializeEditor();
     };
     if(state==null && parent.subpages){
-      init();}
+      init();
+       
+    }
+   
+      
+    
       
       
     
