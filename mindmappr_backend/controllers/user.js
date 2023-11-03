@@ -133,7 +133,8 @@ module.exports = {
     }
   },
   setProfile:async(req,res)=>{
-    const {Image,name,pageId,content,prev,sub}=req.body
+    const {Image,name,pageId,content,prev,sub,test}=req.body
+    console.log(test,pageId);
     if(Image || name){
   await userSchema.updateOne({_id:res.token.id}, { $set:{ image: Image ,username:name}})
     res.json({
@@ -149,6 +150,9 @@ module.exports = {
       }  )}
       if(sub){
         await pageSchema.updateOne({_id:pageId}, { $set:{ content: content}})
+      }
+      if(test && pageId){
+        await pageSchema.updateOne({_id:pageId}, { $set:{ subpages: test}})
       }
     },
     deletePage:async(req,res)=>{
@@ -176,7 +180,7 @@ module.exports = {
       fetchSpecpages:async(req,res)=>{
           try {
             const {id}=req.params
-            console.log(id,"urhureuhgue");
+            
             const pages = await pageSchema.findOne({_id:id});
             res.json({
               status:"success",

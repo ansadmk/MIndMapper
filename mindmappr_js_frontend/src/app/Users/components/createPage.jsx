@@ -40,7 +40,7 @@ const CreatePage = () => {
   
 
   const page=useSelector(getSpecPage)
-  console.log(page);
+  
   const state=useSelector(Pagestate)
 
   const edit = useSelector(editable);
@@ -78,7 +78,7 @@ const CreatePage = () => {
 
     
     dispatch(changeShowPageForm(false));
-    dispatch(changeMainPageListRender());
+    dispatch(changeMainPageListRender("true"));
   };
   function handlenext(e) {
     e.preventDefault();

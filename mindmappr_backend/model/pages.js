@@ -8,6 +8,7 @@ const pageSchema=mongoose.Schema({
     role:String,
     avatar:String,
     cover:String,
+    subpages:Object,
     settings:Object
 
 })

@@ -101,21 +101,27 @@ import { useEffect, useRef, useState } from "react";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import Table from "@editorjs/table";
+import { useDispatch, useSelector } from "react-redux";
+import { currentPage } from "@/app/redux/slice";
+import { setprofile } from "@/app/redux/Axioses";
 
 
 
 
 const Subpagescomp = () => {
+const [state,setState]=useState(null)
+const [show,setShow]=useState(true)
+
+const dispatch = useDispatch();
+
+const parent=useSelector(currentPage)
+console.log(parent.subpages);
 
 
-
-
-  const [isMounted, setIsMounted] = useState(false);
-  const ref = useRef();
 
   const initializeEditor = async () => {
    
-    if (!ref.current) {
+   
       const editor = new EditorJS({
         holder: "editorjs",
         tools: {
@@ -124,47 +130,50 @@ const Subpagescomp = () => {
           
           
         },
+        autofocus:true,
+        data:parent.subpages,
+        onReady:()=>setState(editor),
+        onChange:async ()=>{
+          let data=await editor.saver.save()
+          dispatch(setprofile({pageid:parent._id,test:data}))
+        }
        
       });
-      ref.current = editor;
-    }
+     
+     
+    
   };
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsMounted(true);
-    }
-  }, []);
+ 
 
   useEffect(() => {
     const init = async () => {
       await initializeEditor();
     };
-    if (isMounted) {
-      init();
+    if(state==null && parent.subpages){
+      init();}
+      
+      
+    
+  });
 
-      return () => {
-        if (ref.current) {
-          ref.current.destroy();
-        }
-      };
-    }
-  }, [isMounted]);
-
-  const save = () => {
-    if (ref.current) {
-      ref.current.save().then((outputData) => {
-        console.log("Article data: ", outputData);
+  const save = async () => {
+    if (state) {
+      state.save().then(async (outputData) => {
+       dispatch(setprofile({pageid:parent._id,test:outputData}))
+       
       });
     }
   };
+ 
 
   return (
     <>
       <div className="container w-100">
-        <div id="editorjs" className="prose max-w-full min-h-screen"></div>
+       {show ? <div id="editorjs" className="prose max-w-full min-h-screen"></div>: <div>{}</div>}
       </div>
       <button onClick={save}>Save</button>
+      <button onClick={()=>setShow(true)}>Save</button>
     </>
   );
 } 
