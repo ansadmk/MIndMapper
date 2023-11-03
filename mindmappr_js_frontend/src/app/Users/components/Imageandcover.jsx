@@ -18,16 +18,17 @@ const ImageForPages = () => {
 
   return (
     <div
-      className="w-100 row top-75  position-relative rounded-5"
+      className="w-75 row position-relative mt-auto translate-middle start-50 end-50 top-50 mb-5 mt-0 rounded-5"
       onMouseEnter={() => setIsShown(true)}
       onMouseLeave={() => setIsShown(false)}
+
     >
       <div
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}
-        className={`col ${parent.cover ? "":"h-100 border"}`}
+        className={`col  ${parent.cover ? "":"h-100 "}`}
       >
-        <Card className="rounded-5">
+        <Card className="rounded-5 w-75">
         {isShown ? (
           <IconButton
             onClick={() => dispatch(changeuploadcover({ cover: "true" }))}
@@ -41,7 +42,7 @@ const ImageForPages = () => {
           
             <CardMedia
               sx={{ height: "50vh" }}
-              className=" "
+              className=" img-fluid w-100"
               image={parent.cover}
               title="Cover"
             />
@@ -54,7 +55,7 @@ const ImageForPages = () => {
       <div
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}
-        className="col position-absolute d-flex justify-content-center  align-items-end h-100 mt-5 ms-0 "
+        className="col position-absolute d-flex justify-content-start  align-items-end h-100 mt-5 ms-5 w-75 "
       >
 
         {parent.avatar ? (

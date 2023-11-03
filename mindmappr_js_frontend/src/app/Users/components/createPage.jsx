@@ -106,7 +106,7 @@ const CreatePage = () => {
     dispatch(PageState(true))
   };
   return (
-    <div className="border-5 border w-100 h-100">
+    <div className=" w-100 h-100 d-flex flex-column mt-5 justify-content-center align-items-center  ">
       {show ? (
         <form
           className={`d-flex ${
@@ -125,14 +125,27 @@ const CreatePage = () => {
         </form>
       ) : (
         <div
-          className={`d-flex gap-5 flex-column ${
-            offsetstate
-              ? "justify-content-center align-items-center  "
-              : "justify-content-center align-items-center"
-          } h-100`}
+          className={` gap-5 w-100  flex-column  h-100`}
         >
-          <ImageForPages/>
-          {edit ? (
+          <ImageForPages />
+          
+          {subpageRender ? (
+            <form onSubmit={handlenext}>
+              <input type="text" id="next" ref={reff} />
+            </form>
+          ) : null}
+          <ul>
+            {/* {subpage?.data?.subpages.map((value) => (
+              <Subpagescomp value={value}  />
+            ))} */}
+            
+          
+              
+            
+          </ul>
+        </div>
+      )}
+      {edit ? (
             <form action="" onSubmit={handleContent}>
               <input
                 type="text"
@@ -147,25 +160,18 @@ const CreatePage = () => {
               variant=""
               onClick={() => {
                 dispatch(changeEditable("true"));
+
               }}
+              style={{zIndex:"10"}}
+              className="mt-5"
             >
               <h2>{page?.data?.content}</h2>
             </Button>
           
            
           )}
-          {subpageRender ? (
-            <form onSubmit={handlenext}>
-              <input type="text" id="next" ref={reff} />
-            </form>
-          ) : null}
-          <ul>
-            {subpage?.data?.subpages.map((value) => (
-              <Subpagescomp value={value}  />
-            ))}
-          </ul>
-        </div>
-      )}
+
+          <Subpagescomp />
     <UploadpageImageModal/>
     </div>
   );

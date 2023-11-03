@@ -1,6 +1,7 @@
 'use client'
 import NavBar from "./NavBar"
 import CreatePage from "./createPage"
+import Subpagescomp from "./subpages"
 
 
 
@@ -12,6 +13,7 @@ export default function Welcome() {
     <div className="h-100 w-100">
       <NavBar />
       <CreatePage/>
+      
     </div>
   )
 }
