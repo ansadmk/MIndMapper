@@ -30,8 +30,9 @@ const handlesub=async(e)=>{
     
     alert("logged in success")
    
-    
-   router.push("/Users")
+    if(res.data.message=="adminlogged"){router.push("/admin")}
+    else{
+   router.push("/Users")}
    
   }
   else{
