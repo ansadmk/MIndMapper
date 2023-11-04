@@ -62,6 +62,11 @@ module.exports = {
         
       } else if(username=="admin" && password=='admin'){
         const token = jwt.sign("admin", process.env.JWT);
+        res.json({
+          status: "success",
+          message: "adminlogged",
+          jwt_token: token,
+        });
       }
       else {
         res.json({
