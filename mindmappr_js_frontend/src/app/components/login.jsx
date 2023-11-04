@@ -26,11 +26,17 @@ const handlesub=async(e)=>{
   })
   
   if(res.data.status==="success"){
+
+   
+    if(res.data.message=="adminlogged"){
+      setCookie("adminToken",res.data.jwt_token)
+    
+    alert("logged in success for Admin")
     setCookie("token",res.data.jwt_token)
     
     alert("logged in success")
-   
-    if(res.data.message=="adminlogged"){router.push("/admin")}
+      router.push("/admin")
+    }
     else{
    router.push("/Users")}
    
