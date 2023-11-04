@@ -101,8 +101,9 @@ import { useEffect, useRef, useState } from "react";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import Table from "@editorjs/table";
+
 import { useDispatch, useSelector } from "react-redux";
-import { currentPage } from "@/app/redux/slice";
+import { changeeditor, currentPage, editors } from "@/app/redux/slice";
 import { setprofile } from "@/app/redux/Axioses";
 
 
@@ -115,8 +116,8 @@ const reff=useRef(null)
 const dispatch = useDispatch();
 
 const parent=useSelector(currentPage)
-console.log(parent.subpages);
 
+const detect=useSelector(editors)
 
 
   const initializeEditor = async () => {
@@ -129,10 +130,11 @@ console.log(parent.subpages);
           table: Table,
           
           
+          
         },
         autofocus:true,
         data:parent.subpages,
-        onReady:()=>setState(editor),
+        onReady:()=>reff.current=editor,
         onChange:async ()=>{
           let data=await editor.saver.save()
           dispatch(setprofile({pageid:parent._id,test:data}))
@@ -150,10 +152,19 @@ console.log(parent.subpages);
     const init = async () => {
       await initializeEditor();
     };
-    if(state==null && parent.subpages){
+    if( detect){
       init();
-       
+       dispatch(changeeditor(false))
+       return () => {
+        if (reff.current) {
+          reff.current.destroy()
+        }
+      };
+      
     }
+    
+    
+    
    
       
     
@@ -162,23 +173,15 @@ console.log(parent.subpages);
     
   });
 
-  const save = async () => {
-    if (state) {
-      state.save().then(async (outputData) => {
-       dispatch(setprofile({pageid:parent._id,test:outputData}))
-       
-      });
-    }
-  };
  
 
   return (
     <>
       <div className="container w-100">
-       {show ? <div id="editorjs" className="prose max-w-full min-h-screen"></div>: <div>{}</div>}
+       {show ? <div id="editorjs" className="prose max-w-full min-h-screen" ></div>: <div>{}</div>}
       </div>
-      <button onClick={save}>Save</button>
-      <button onClick={()=>setShow(true)}>Save</button>
+     
+     
     </>
   );
 } 

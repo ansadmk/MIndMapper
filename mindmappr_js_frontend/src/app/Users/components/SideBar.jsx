@@ -23,6 +23,7 @@ import {
   changesubpageRender,
   changeBreadCrumb,
   PageState,
+  changeeditor,
 } from "@/app/redux/slice";
 import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
 import { Avatar, Badge,  Chip, Popover, Stack } from "@mui/material";
@@ -190,6 +191,7 @@ const NavBar = () => {
                           dispatch(PageState(true));
                           dispatch(changeCurrentPage(data));
                           dispatch(changeBreadCrumb({ type: "clear" }));
+                          dispatch(changeeditor(true))
                           dispatch(
                             changeBreadCrumb({
                               type: "push",

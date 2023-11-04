@@ -114,6 +114,7 @@ const slice1 = createSlice({
     breadCrumb: [],
     Pagestate: false,
     uploadcover: {avatar:false,cover:false},
+    editor:false
   },
   reducers: {
     changeProfileStats: (state) => {
@@ -130,6 +131,9 @@ const slice1 = createSlice({
     },
     changeCurrentPage: (state, action) => {
       state.currentPage = action.payload;
+    },
+    changeeditor: (state, action) => {
+      state.editor = action.payload;
     },
     changeEditable: (state, action) => {
           
@@ -207,6 +211,8 @@ export const fetchpageres = (s) => s.Axios.FetchPageres;
 export const ProfileStats = (s) => s.profileStats.profileStats;
 export const showPageForm = (s) => s.profileStats.showPageForm;
 export const changeSubpageRender = (s) => s.profileStats.subpagerender;
+export const editors = (s) => s.profileStats.editor;
+
 export const {
   PageState,
   changeBreadCrumb,
@@ -218,6 +224,7 @@ export const {
   changeEditable,
   changesubpageRender,
   changeuploadcover,
+  changeeditor
 } = slice1.actions;
 export const Modalslice = slice1.reducer;
 export default slice.reducer;
