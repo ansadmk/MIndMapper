@@ -32,12 +32,13 @@ const handlesub=async(e)=>{
       setCookie("adminToken",res.data.jwt_token)
     
     alert("logged in success for Admin")
-    setCookie("token",res.data.jwt_token)
     
    
       router.push("/admin")
     }
     else{
+    setCookie("token",res.data.jwt_token)
+
       alert("logged in success")
    router.push("/Users")}
    
