@@ -7,7 +7,7 @@ const userSchema=mongoose.Schema({
     fullName:String,
     createdAt:Date,
     accountinfo:Object,
-    notify:Array
+    notify:[]
     
 
 })

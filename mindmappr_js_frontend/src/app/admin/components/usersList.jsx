@@ -33,7 +33,7 @@ const usersList = () => {
   },[])
   
   return (
-    <div className='d-flex align-items-center  h-100'>
+    <div className='d-flex align-items-center  h-75'>
     <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{users?.data?.map(value=>
     <Item
       sx={{

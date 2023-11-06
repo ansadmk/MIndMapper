@@ -26,7 +26,7 @@ import {
   changeeditor,
 } from "@/app/redux/slice";
 import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
-import { Avatar, Badge,  Chip, Popover, Stack } from "@mui/material";
+import { Avatar, Badge,  Chip, IconButton, Popover, Stack } from "@mui/material";
 import InboxIcon from "@mui/icons-material/Inbox";
 import FindInPageIcon from "@mui/icons-material/FindInPage";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -35,17 +35,26 @@ import Asynchronous from "./searchBar";
 
 const NavBar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl2, setAnchorEl2] = React.useState(null);
 
   const handlepop = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
+  const handlepop2 = (event) => {
+    setAnchorEl2(event.currentTarget);
+  };
   const handleClo = () => {
     setAnchorEl(null);
+  };
+  const handleClo2 = () => {
+    setAnchorEl2(null);
   };
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+  const open2 = Boolean(anchorEl2);
+  const id2 = open ? "simple-popover" : undefined;
+
 
   const renderpage = useSelector(changemainPageListRender);
   const dispatch = useDispatch();
@@ -114,29 +123,25 @@ const NavBar = () => {
             ) : (
               <Stack direction="row">
                 {user?.data?.image ? (
-                  <Chip
-                    avatar={
-                      <Avatar
+                  <div className="d-flex gap-2">
+                    <Avatar
                         alt="Natacha"
                         src={user?.data?.image}
                         className="fs-1"
                       />
-                    }
-                    label={user?.data?.username}
-                    variant="outlined"
-                    size="100"
-                    className="p-2 d-flex gap-3"
-                  />
+                      <h1>{user?.data?.username}</h1>
+                  </div>
+                      
+                     
                 ) : (
-                  <Chip
-                    avatar={
+                  
+                  <div className="d-flex gap-2">
                       <Avatar>
                         {user?.data?.username.charAt(0).toUpperCase()}
                       </Avatar>
-                    }
-                    label={user?.data?.username}
-                    size="100"
-                  />
+                      <h1>{user?.data?.username}</h1>
+                      </div>
+                   
                 )}
               </Stack>
             )}
@@ -169,9 +174,32 @@ const NavBar = () => {
                 </Popover>
               </li>
               <li>
+               <IconButton
+               aria-describedby={id2}
+               variant="contained"
+               onClick={handlepop2}
+               >
                 <Badge badgeContent={4} color="secondary">
                   <InboxIcon color="action" fontSize="large" />
                 </Badge>
+                </IconButton>
+                <Popover
+                  id={id2}
+                  open={open2}
+                  anchorEl={anchorEl2}
+                  onClose={handleClo2}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  className="h-25"
+                >
+                    {user?.data ? user?.data?.notify.map((data)=><div>{data.msg}</div>):<h1>Nothing to show here...</h1>}
+                </Popover>
               </li>
 
               <li>

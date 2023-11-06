@@ -15,7 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { useState } from 'react';
 import Image from 'next/image';
 import { signIn, signOut, useSession } from "next-auth/react";
-import { deleteCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { getUsersList } from '@/app/redux/Admin/AdminAxioses';
@@ -27,6 +27,7 @@ function adminPanel() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { data } = useSession();
+  const cookie=getCookie('adminToken')
   const router=useRouter()
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -54,6 +55,7 @@ function adminPanel() {
 
   return (
     <AppBar position="static" color=''>
+      {cookie ? null : router.push("/")}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
         <Image src="/icon..svg" alt="me" width="32" height="32" className='img-fluid mb-2'/>
