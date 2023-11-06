@@ -97,7 +97,7 @@ const NavBar = () => {
         <Offcanvas.Header closeButton>
           <Offcanvas.Title></Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body className="w-50">
           <div
             className="d-flex link justify-content-start "
             onClick={() => handledis()}

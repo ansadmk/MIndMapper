@@ -14,14 +14,20 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useState } from 'react';
 import Image from 'next/image';
+import { signIn, signOut, useSession } from "next-auth/react";
+import { deleteCookie } from 'cookies-next';
+import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { getUsersList } from '@/app/redux/Admin/AdminAxioses';
 
 const pages = ['Users', 'Anounnce'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Anounnce', 'Logout'];
 
 function adminPanel() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-
+  const { data } = useSession();
+  const router=useRouter()
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -36,6 +42,15 @@ function adminPanel() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const handleout = () => {
+    data ? signOut() : deleteCookie("adminToken");
+    router.push("/");
+    
+  };
+  const push=()=>{
+    router.push("/admin/announce")
+  }
+  
 
   return (
     <AppBar position="static" color=''>
@@ -91,7 +106,8 @@ function adminPanel() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" >{page}</Typography>
+
+                  <Typography textAlign="center"  >{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -121,6 +137,7 @@ function adminPanel() {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'black', display: 'block' }}
+                
               >
                 {page}
               </Button>
@@ -151,7 +168,7 @@ function adminPanel() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center"onClick={setting=="Logout"?()=>handleout():(setting=="Anounnce"?()=>push():null)}>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>

@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { Form , Alert} from 'react-bootstrap'
+import { Form , Alert, Button} from 'react-bootstrap'
 import Sign from './sign'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
@@ -42,13 +42,13 @@ const register = () => {
 
   }
   return (
-    <form className='p-5 d-flex flex-column gap-2' onSubmit={handleSub} >
-        <input type="text" placeholder="username" id="username" className='mb-2' />
-        <input type="email" placeholder="email" id="email" className='mb-2' />
-        <input type="password" placeholder='password' id='password' />
-        <input type="password" placeholder="confirm" id="confirm" className='mt-2' />
-       <input className='w-100 m-auto mt-4' type='submit' value="submit"/>
-       <Sign/>
+    // <form className='p-5 d-flex flex-column gap-2' onSubmit={handleSub} >
+    //     <input type="text" placeholder="username" id="username" className='mb-2' />
+    //     <input type="email" placeholder="email" id="email" className='mb-2' />
+    //     <input type="password" placeholder='password' id='password' />
+    //     <input type="password" placeholder="confirm" id="confirm" className='mt-2' />
+    //    <input className='w-100 m-auto mt-4' type='submit' value="submit"/>
+      
        <Box
       component="form"
       sx={{
@@ -58,13 +58,13 @@ const register = () => {
       autoComplete="off"
       onSubmit={handleSub}
     >
-      <div>
+      
         
       <TextField
           id="username"
           label="Username"
           placeholder="Enter your username here"
-          multiline
+         
           variant="filled"
           type='text'
         />
@@ -72,7 +72,7 @@ const register = () => {
           id="email"
           label="Email"
           placeholder="Enter your email here "
-          multiline
+          
           variant="filled"
           type="email"
         />
@@ -80,7 +80,7 @@ const register = () => {
           id="password"
           label="Password"
           placeholder="Enter your password here"
-          multiline
+         
           variant="filled"
           type="password"
         />
@@ -88,13 +88,15 @@ const register = () => {
           id="confirm"
           label="Confirm Password"
           placeholder="Confirm your password here"
-          multiline
+          
           variant="filled"
           type="password"
         />
-      </div>
+        <Sign/>
+       <Button type="submit">submit</Button>
     </Box>
-    </form>
+    
+   
   )
 }
 

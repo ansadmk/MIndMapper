@@ -26,7 +26,12 @@ const usersList = () => {
   useEffect(()=>{
     function dis(){dispatch(getUsersList())}
     dis()
+    if (!window.location.hash) {
+      window.location = window.location + "#loaded";
+      location.reload(false);
+    }
   },[])
+  
   return (
     <div className='d-flex align-items-center  h-100'>
     <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{users?.data?.map(value=>

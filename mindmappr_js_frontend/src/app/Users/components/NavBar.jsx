@@ -23,7 +23,7 @@ const NavBar = () => {
         dispatch(changeBreadCrumb({type:'select',data:index}))
   }
   return (
-    <div className='d-flex justify-content-end w-100 p-0 position-absolute top-0 mt-3'>
+    <div className='d-flex justify-content-end w-100 '>
       <div  className='me-5 d-flex justify-content-end w-100'>
         <div className='d-flex'>
          {
