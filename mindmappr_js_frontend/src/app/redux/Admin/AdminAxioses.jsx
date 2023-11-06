@@ -13,8 +13,8 @@ export const getUsersList = createAsyncThunk("redux/getUsersList", async () => {
   });
   return res.data;
 });
-export const notify = createAsyncThunk("redux/notify", async (msg) => {
-  const res = await axios.post("http://127.0.0.1:4000/api/admin/notify",{msg}, {
+export const notify = createAsyncThunk("redux/notify", async ({msg,sub,type,to}) => {
+  const res = await axios.post("http://127.0.0.1:4000/api/admin/notify",{msg,sub,type,to}, {
     headers: {
       Authorization: `Bearer ${cookie}`,
     },

@@ -113,3 +113,11 @@ export const sendUrl = createAsyncThunk("redux/coverandAvatar", async ({avatarUr
   );
   return response
 });
+export const getNoti = createAsyncThunk("redux/getNoti", async () => {
+  const respo = await axios.get("http://127.0.0.1:4000/api/user/getUsersNoti", {
+    headers: {
+      Authorization: `Bearer ${cookie}`,
+    },
+  });
+  return respo.data;
+});

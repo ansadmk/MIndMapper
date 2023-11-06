@@ -24,19 +24,19 @@ import {
   changeBreadCrumb,
   PageState,
   changeeditor,
+  Noti,
 } from "@/app/redux/slice";
-import { FetchPages, FetchUsers } from "@/app/redux/Axioses";
-import { Avatar, Badge,  Chip, IconButton, Popover, Stack } from "@mui/material";
+import { FetchPages, FetchUsers, getNoti } from "@/app/redux/Axioses";
+import { Avatar, Badge, Chip, Divider, IconButton, List, ListItem, ListItemAvatar, Popover, Stack ,ListItemText, Typography} from "@mui/material";
 import InboxIcon from "@mui/icons-material/Inbox";
 import FindInPageIcon from "@mui/icons-material/FindInPage";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Asynchronous from "./searchBar";
 
-
 const NavBar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorEl2, setAnchorEl2] = React.useState(null);
-
+  const Notify=useSelector(Noti)
   const handlepop = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -55,7 +55,6 @@ const NavBar = () => {
   const open2 = Boolean(anchorEl2);
   const id2 = open ? "simple-popover" : undefined;
 
-
   const renderpage = useSelector(changemainPageListRender);
   const dispatch = useDispatch();
   const user = useSelector(getDetails);
@@ -68,6 +67,7 @@ const NavBar = () => {
   useEffect(() => {
     dispatch(FetchUsers());
     dispatch(FetchPages());
+    dispatch(getNoti())
     if (!window.location.hash) {
       window.location = window.location + "#loaded";
       location.reload(false);
@@ -76,6 +76,7 @@ const NavBar = () => {
 
   useEffect(() => {
     if (renderpage) {
+      dispatch(getNoti())
       dispatch(FetchUsers());
       dispatch(FetchPages());
       dispatch(changeMainPageListRender());
@@ -125,23 +126,19 @@ const NavBar = () => {
                 {user?.data?.image ? (
                   <div className="d-flex gap-2">
                     <Avatar
-                        alt="Natacha"
-                        src={user?.data?.image}
-                        className="fs-1"
-                      />
-                      <h1>{user?.data?.username}</h1>
+                      alt="Natacha"
+                      src={user?.data?.image}
+                      className="fs-1"
+                    />
+                    <h1>{user?.data?.username}</h1>
                   </div>
-                      
-                     
                 ) : (
-                  
                   <div className="d-flex gap-2">
-                      <Avatar>
-                        {user?.data?.username.charAt(0).toUpperCase()}
-                      </Avatar>
-                      <h1>{user?.data?.username}</h1>
-                      </div>
-                   
+                    <Avatar>
+                      {user?.data?.username.charAt(0).toUpperCase()}
+                    </Avatar>
+                    <h1>{user?.data?.username}</h1>
+                  </div>
                 )}
               </Stack>
             )}
@@ -174,14 +171,14 @@ const NavBar = () => {
                 </Popover>
               </li>
               <li>
-               <IconButton
-               aria-describedby={id2}
-               variant="contained"
-               onClick={handlepop2}
-               >
-                <Badge badgeContent={4} color="secondary">
-                  <InboxIcon color="action" fontSize="large" />
-                </Badge>
+                <IconButton
+                  aria-describedby={id2}
+                  variant="contained"
+                  onClick={handlepop2}
+                >
+                  <Badge badgeContent={Notify?.data?.length} color="secondary">
+                    <InboxIcon color="action" fontSize="large" />
+                  </Badge>
                 </IconButton>
                 <Popover
                   id={id2}
@@ -198,7 +195,37 @@ const NavBar = () => {
                   }}
                   className="h-25"
                 >
-                    {user?.data ? user?.data?.notify.map((data)=><div>{data.msg}</div>):<h1>Nothing to show here...</h1>}
+                  { Notify?.data ? (
+                    Notify?.data?.map((data) => (
+          
+                      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>           
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        </ListItemAvatar>
+        <ListItemText
+          primary={data.sub}
+          secondary={
+            <React.Fragment>
+              <Typography
+                sx={{ display: 'inline' }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+              >
+                {data.msg}
+              </Typography>
+            
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant="inset" component="li" />
+      </List>
+                   ))
+                  ) : (
+                    <h1>Nothing to show here...</h1>
+                  )}
                 </Popover>
               </li>
 
@@ -219,7 +246,7 @@ const NavBar = () => {
                           dispatch(PageState(true));
                           dispatch(changeCurrentPage(data));
                           dispatch(changeBreadCrumb({ type: "clear" }));
-                          dispatch(changeeditor(true))
+                          dispatch(changeeditor(true));
                           dispatch(
                             changeBreadCrumb({
                               type: "push",

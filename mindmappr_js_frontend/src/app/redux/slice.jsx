@@ -9,6 +9,7 @@ import {
   deletePage,
   sendUrl,
   FetchSpecificPage,
+  getNoti,
 } from "./Axioses";
 
 
@@ -29,6 +30,7 @@ const slice = createSlice({
     deletePagestatus: "",
     uploadurlstatus: "",
     uploadurl: "",
+    Noti:''
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -98,7 +100,11 @@ const slice = createSlice({
       })
       .addCase(sendUrl.rejected, (state) => {
         state.uploadurlstatus = "failed";
-      });
+      })
+      .addCase(getNoti.fulfilled, (state, action) => {
+        
+        state.Noti = action.payload;
+      })
   },
 });
 const slice1 = createSlice({
@@ -187,6 +193,7 @@ const slice1 = createSlice({
     },
   },
 });
+export const Noti=(s)=>s.Axios.Noti
 export const modalupload = (s) => s.profileStats.uploadcover
 export const sendurl = (s) => s.Axios.uploadurl;
 export const getSpecPage = (s) => s.Axios.FetchSpecPageres;

@@ -1,5 +1,6 @@
 require("dotenv").config();
 const userSchema = require("../model/user");
+const notiSchema = require("../model/notification");
 const pageSchema = require("../model/pages");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -196,7 +197,27 @@ module.exports = {
             console.log(error.message);
           }
              
-            }
-      
+            },
+      getNoti:async(req,res)=>{
+           const common=await notiSchema.find({type:"public"})
+           const private=await notiSchema.find({to:res.token.id})
+           const all=common.concat(private)
+           console.log(common);
+           if (all) {
+            res.json({
+              status:"success",
+                message:"successfully fetched",
+                data:all
+             })
+             
+           } else if (common) {
+            res.json({
+              status:"success",
+                message:"successfully fetched",
+                data:common
+             })
+           } 
+           
+      }
   
 };

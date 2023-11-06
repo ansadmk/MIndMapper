@@ -2,7 +2,7 @@ const express=require('express')
 const user = require('../controllers/user')
 const auth = require('../middlewares/userAuth')
 const router=express.Router()
-const {register,login,userDetails,createPages,fetchpages,setProfile,setCoverAvatar,deletePage,fetchSpecpages}=user
+const {register,login,userDetails,createPages,fetchpages,setProfile,setCoverAvatar,deletePage,fetchSpecpages,getNoti}=user
 router.post('/register',register)
 router.post('/login',login)
 router.get('/userDetails',auth,userDetails)
@@ -12,4 +12,5 @@ router.get('/getPages/:id',auth,fetchSpecpages)
 router.patch('/setprofile',auth,setProfile)
 router.delete('/deletepage/:id/:content',auth,deletePage)
 router.put('/coveravatar',auth,setCoverAvatar)
+router.get('/getUsersNoti',auth,getNoti)
 module.exports=router
