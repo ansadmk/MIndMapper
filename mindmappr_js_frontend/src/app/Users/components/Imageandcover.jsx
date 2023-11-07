@@ -17,8 +17,9 @@ const ImageForPages = () => {
   const [isShown, setIsShown] = useState(false);
 
   return (
+    
     <div
-      className="w-75 row position-relative mt-auto translate-middle start-50 end-50 top-50 mb-5 mt-0 rounded-5"
+      className="w-75 h-100 row position-relative mt-auto translate-middle start-50 end-50 top-50 mb-5 mt-0 rounded-5"
       onMouseEnter={() => setIsShown(true)}
       onMouseLeave={() => setIsShown(false)}
 

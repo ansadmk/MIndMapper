@@ -86,7 +86,7 @@ const NavBar = () => {
       window.location = window.location + "#loaded";
       location.reload(false);
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (renderpage) {
@@ -265,6 +265,7 @@ const NavBar = () => {
                         variant=""
                         className="fs-3 border-0"
                         onClick={() => {
+                          dispatch(changeShowPageForm(false));
                           dispatch(PageState(true));
                           dispatch(changeCurrentPage(data));
                           dispatch(changeBreadCrumb({ type: "clear" }));
@@ -275,7 +276,7 @@ const NavBar = () => {
                               data: { role: "main", content: data },
                             })
                           );
-                          dispatch(changeShowPageForm(false));
+                         
                           dispatch(changeEditable("false"));
                           dispatch(changesubpageRender("false"));
                         }}

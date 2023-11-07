@@ -54,7 +54,7 @@ const register = () => {
       sx={{
         '& .MuiTextField-root': { m: 1, width: '25ch' },
       }}
-      
+      className='p-5 d-flex flex-column gap-2'
       autoComplete="off"
       onSubmit={handleSub}
     >

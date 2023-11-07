@@ -127,7 +127,7 @@ const CreatePage = () => {
         <div
           className={` gap-5 w-100  flex-column  h-100`}
         >
-          <ImageForPages />
+         {parent? <ImageForPages />:null}
           
           {subpageRender ? (
             <form onSubmit={handlenext}>

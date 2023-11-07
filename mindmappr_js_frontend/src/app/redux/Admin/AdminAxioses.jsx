@@ -29,3 +29,11 @@ export const getnotify = createAsyncThunk("redux/getnotify", async () => {
   });
   return res.data;
 });
+export const deletenotify = createAsyncThunk("redux/deletenotify", async (id) => {
+  const res = await axios.delete(`http://127.0.0.1:4000/api/admin/deleteNoti/${id}`,{
+    headers: {
+      Authorization: `Bearer ${cookie}`,
+    },
+  });
+  return res.data;
+});

@@ -5,7 +5,7 @@ const auth = require('../middlewares/userAuth')
 router.get('/getUserList',auth,getUsers)
 router.post('/notify',auth,notify)
 router.get('/getNoti',auth,getNoti)
-router.delete('/deleteNoti',auth,deleteNoti)
+router.delete('/deleteNoti/:id',auth,deleteNoti)
 
 
 module.exports=router

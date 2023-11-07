@@ -101,9 +101,9 @@ import { useEffect, useRef, useState } from "react";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import Table from "@editorjs/table";
-
+import List from '@editorjs/list';
 import { useDispatch, useSelector } from "react-redux";
-import { changeeditor, currentPage, editors } from "@/app/redux/slice";
+import { changeeditor, currentPage, editors, showPageForm } from "@/app/redux/slice";
 import { setprofile } from "@/app/redux/Axioses";
 
 
@@ -114,7 +114,7 @@ const [state,setState]=useState(null)
 const [show,setShow]=useState(true)
 const reff=useRef(null)
 const dispatch = useDispatch();
-
+const showform = useSelector(showPageForm);
 const parent=useSelector(currentPage)
 
 const detect=useSelector(editors)
@@ -128,11 +128,12 @@ const detect=useSelector(editors)
         tools: {
           header: Header,
           table: Table,
-          
+          list: List 
           
           
         },
-        autofocus:true,
+        placeholder:"TYPE HERE",
+      
         data:parent.subpages,
         onReady:()=>reff.current=editor,
         onChange:async ()=>{
@@ -178,7 +179,7 @@ const detect=useSelector(editors)
   return (
     <>
       <div className="container w-100">
-       {show ? <div id="editorjs" className="prose max-w-full min-h-screen" ></div>: <div>{}</div>}
+       {showform ? null: <div id="editorjs" className="prose max-w-full min-h-screen" ></div>}
       </div>
      
      

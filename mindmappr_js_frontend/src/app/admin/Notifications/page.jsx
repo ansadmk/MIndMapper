@@ -1,5 +1,5 @@
 'use client'
-import { getUsersList, getnotify } from '@/app/redux/Admin/AdminAxioses';
+import { deletenotify, getUsersList, getnotify } from '@/app/redux/Admin/AdminAxioses';
 import { getNotiAdmin, getUsersForAdmin } from '@/app/redux/Admin/adminSlice';
 import styled from '@emotion/styled';
 import { Avatar, Box, Button, Divider, List, ListItem, ListItemAvatar, ListItemText, Paper, Typography } from '@mui/material'
@@ -23,9 +23,13 @@ const page = () => {
     useEffect(()=>{
         dispatch(getnotify())
         dispatch(getUsersList())
-    },[])
+    },[dispatch])
     const noti=useSelector(getNotiAdmin)
-    console.log(noti);
+  const handleDelete=(id)=>{
+    dispatch(deletenotify(id))
+    dispatch(getnotify())
+    dispatch(getUsersList())
+  }
   return (
     <div className='d-flex align-items-center  h-75'>
     <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{noti?.data?.map(value=>
@@ -67,7 +71,7 @@ const page = () => {
     
      <Divider variant="inset" component="li" />
    </List>
-   <div className='d-flex align-items-center'><div> <Button >Delete</Button></div></div>
+   <div className='d-flex align-items-center'><div> <Button onClick={()=>handleDelete(value._id)}>Delete</Button></div></div>
   
 
    </div>

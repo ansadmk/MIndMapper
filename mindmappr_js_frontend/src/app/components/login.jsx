@@ -9,6 +9,7 @@ import { setCookie } from 'cookies-next';
 import { useDispatch } from 'react-redux'
 import { FetchPages, FetchUsers } from '../redux/Axioses'
 import { changeMainPageListRender } from '../redux/slice'
+import { Box, TextField } from '@mui/material'
 
 const login = () => {
 const router =useRouter()
@@ -48,14 +49,44 @@ const handlesub=async(e)=>{
   }
 }
   return (
-    <form className='p-5 d-flex flex-column gap-2' onSubmit={handlesub} >
-        <input type="text" placeholder="username" id="username" className='mb-2' />
-        <input type="password" placeholder='password' id='password' />
-       <Button variant='secondary' className='w-100 m-auto mt-4' type='submit'>Continue</Button>
-      <Sign/>
+    // <form className='p-5 d-flex flex-column gap-2' onSubmit={handlesub} >
+    //     <input type="text" placeholder="username" id="username" className='mb-2' />
+    //     <input type="password" placeholder='password' id='password' />
+    //    <Button variant='secondary' className='w-100 m-auto mt-4' type='submit'>Continue</Button>
+    //   <Sign/>
       
 
-    </form>
+    // </form>
+      <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      className='p-5 d-flex flex-column gap-2'
+      autoComplete="off"
+      onSubmit={handlesub}
+    >
+      
+        
+      <TextField
+          id="username"
+          label="Username"
+          placeholder="Enter your username here"
+         
+          variant="filled"
+          type='text'
+        />
+        <TextField
+          id="password"
+          label="Password"
+          placeholder="Enter your password here"
+         
+          variant="filled"
+          type="password"
+        />
+       <Button type="submit">submit</Button>
+        <Sign/>
+        </Box>
   )
 }
 
