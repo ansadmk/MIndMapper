@@ -1,64 +1,70 @@
-"use client"
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import { useState } from 'react';
-import Image from 'next/image';
+"use client";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import { useState } from "react";
+import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { deleteCookie, getCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation';
-import { useDispatch } from 'react-redux';
-import { getUsersList } from '@/app/redux/Admin/AdminAxioses';
+import { deleteCookie, getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
+import { MenuItem } from "@mui/material";
 
-const pages = ['Users', 'Anounnce'];
-const settings = ['Anounnce', 'Logout'];
+const pages = ["Users", "Anounnce", "Logout",'Notifications'];
 
 function adminPanel() {
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
+
   const { data } = useSession();
-  const cookie=getCookie('adminToken')
-  const router=useRouter()
+  const cookie = getCookie("adminToken");
+  const router = useRouter();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
   const handleout = () => {
     data ? signOut() : deleteCookie("adminToken");
     router.push("/");
-    
   };
-  const push=()=>{
-    router.push("/admin/announce")
-  }
-  
+
+  const bar = (setting, s) => {
+    if (s != 1) {
+      handleCloseNavMenu();
+    }
+    setting == "Logout"
+      ? handleout()
+      : setting == "Anounnce"
+      ? router.push("/admin/announce")
+      : setting == "Users"
+      ? router.push("/admin")
+      : null;
+
+      if (setting=="Notifications") {
+        router.push('/admin/Notifications')
+      }
+  };
 
   return (
-    <AppBar position="static" color=''>
+    <AppBar position="static" color="">
       {cookie ? null : router.push("/")}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <Image src="/icon..svg" alt="me" width="32" height="32" className='img-fluid mb-2'/>
+          <Image
+            src="/icon..svg"
+            alt="me"
+            width="32"
+            height="32"
+            className="img-fluid mb-2"
+          />
           <Typography
             variant="h6"
             noWrap
@@ -66,18 +72,18 @@ function adminPanel() {
             href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
-           MindMapper <i> AdminPanel</i>
+            MindMapper <i> AdminPanel</i>
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -92,29 +98,30 @@ function adminPanel() {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-
-                  <Typography textAlign="center"  >{page}</Typography>
+                  <Typography textAlign="center" onClick={() => bar(page, 1)}>
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          
+
           <Typography
             variant="h5"
             noWrap
@@ -122,58 +129,27 @@ function adminPanel() {
             href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
-              MindMapper <i> AdminPanel</i>
+            MindMapper <i> AdminPanel</i>
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
-                
+                onClick={() => bar(page)}
+                sx={{ my: 2, color: "black", display: "block" }}
               >
                 {page}
               </Button>
             ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center"onClick={setting=="Logout"?()=>handleout():(setting=="Anounnce"?()=>push():null)}>{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
         </Toolbar>
       </Container>

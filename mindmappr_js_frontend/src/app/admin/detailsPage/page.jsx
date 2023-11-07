@@ -15,27 +15,32 @@ const page = () => {
     e.preventDefault()
     const msg=e.target.val.value
     const sub=e.target.sub.value
-     dispatch(notify({msg:msg,sub:sub,type:true,to:user._id}))
+     dispatch(notify({msg:msg,sub:sub,type:true,to:user.value._id}))
      router.push('/admin')
   }
   return (
     <div className='d-flex h-75 justify-content-center align-items-center'>
-      {user.username?null:router.push('/admin')}
+      {user.value ?null:router.push('/admin')}
     <Card sx={{ maxWidth: 345 }}>
     <CardMedia
       sx={{ height: 140 }}
-      image={user?.image}
+      image={user?.value?.image}
       title="image"
     />
     <CardContent>
       <Typography gutterBottom variant="h5" component="div">
-        {user?.username}
+        {user?.value?.username}
       </Typography>
-      <Typography variant="body2" color="text.secondary">
-     pages.....
-      </Typography>
+      <h1 className='border-bottom border-5'>pages</h1>
+      <ol>
+      
+     {
+      user?.page?.map(value=><li>{value.content}</li>)
+     }
+      
+      </ol>
       <div className='h-75 d-flex justify-content-center align-items-center flex-column gap-0 '>
-      <h1>Notify User</h1>
+      <h1 className='border-bottom border-5'>Notify User</h1>
         <Box
       component="form"
       noValidate

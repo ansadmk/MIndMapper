@@ -1,6 +1,6 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
-import { getUsersList, notify } from "./AdminAxioses";
+import { getUsersList, getnotify, notify } from "./AdminAxioses";
 
 
 const AdminSlice = createSlice({
@@ -8,7 +8,8 @@ const AdminSlice = createSlice({
   initialState: {
     status: "standby",
     userDetails: {},
-    notiRes:''
+    notiRes:'',
+    getNoti:[]
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -27,6 +28,10 @@ const AdminSlice = createSlice({
         
         state.notiRes = action.payload;
       })
+      .addCase(getnotify.fulfilled, (state, action) => {
+        
+        state.getNoti = action.payload;
+      })
       
   },
 });
@@ -40,7 +45,7 @@ const slice1 = createSlice({
   },
 });
 
-
+export const getNotiAdmin=(s)=>s.AdminAxios.getNoti
 export const getUsersForAdmin=(s)=>s.AdminAxios.userDetails
 export const notifyForAdmin=(s)=>s.AdminAxios.notiRes
 export const currentUser=(s)=>s.adminSlice.currentUser

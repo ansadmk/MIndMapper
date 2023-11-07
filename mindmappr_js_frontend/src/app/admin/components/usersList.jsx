@@ -30,6 +30,7 @@ const usersList = () => {
     dis()
     if (!window.location.hash) {
       window.location = window.location + "#loaded";
+      console.log(window.location.hash);
       location.reload(false);
     }
   },[])
@@ -50,7 +51,7 @@ const usersList = () => {
       <Stack spacing={2} direction="row" alignItems="center">
         <Avatar src={value.image} alt='' />
         <Typography noWrap  >{value.username}</Typography>
-        <Button onClick={()=>changeuser(value)}>View & Notify</Button>
+        <Button onClick={()=>changeuser({value:value,page:users?.pages.filter((val)=>val.owner==value._id)})}>View & Notify</Button>
       </Stack>
     </Item>
     

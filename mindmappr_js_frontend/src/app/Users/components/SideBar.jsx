@@ -27,16 +27,30 @@ import {
   Noti,
 } from "@/app/redux/slice";
 import { FetchPages, FetchUsers, getNoti } from "@/app/redux/Axioses";
-import { Avatar, Badge, Chip, Divider, IconButton, List, ListItem, ListItemAvatar, Popover, Stack ,ListItemText, Typography} from "@mui/material";
+import {
+  Avatar,
+  Badge,
+  Chip,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemAvatar,
+  Popover,
+  Stack,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import InboxIcon from "@mui/icons-material/Inbox";
 import FindInPageIcon from "@mui/icons-material/FindInPage";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Asynchronous from "./searchBar";
+import moment from "moment";
 
 const NavBar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorEl2, setAnchorEl2] = React.useState(null);
-  const Notify=useSelector(Noti)
+  const Notify = useSelector(Noti);
   const handlepop = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -67,7 +81,7 @@ const NavBar = () => {
   useEffect(() => {
     dispatch(FetchUsers());
     dispatch(FetchPages());
-    dispatch(getNoti())
+    dispatch(getNoti());
     if (!window.location.hash) {
       window.location = window.location + "#loaded";
       location.reload(false);
@@ -76,7 +90,7 @@ const NavBar = () => {
 
   useEffect(() => {
     if (renderpage) {
-      dispatch(getNoti())
+      dispatch(getNoti());
       dispatch(FetchUsers());
       dispatch(FetchPages());
       dispatch(changeMainPageListRender());
@@ -195,34 +209,42 @@ const NavBar = () => {
                   }}
                   className="h-25"
                 >
-                  { Notify?.data ? (
+                  {Notify?.data ? (
                     Notify?.data?.map((data) => (
-          
-                      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>           
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary={data.sub}
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                {data.msg}
-              </Typography>
-            
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      </List>
-                   ))
+                      <List
+                        sx={{
+                          width: "100%",
+                          maxWidth: 360,
+                          bgcolor: "background.paper",
+                        }}
+                      >
+                        <ListItem alignItems="flex-start">
+                          <ListItemAvatar>
+                            <Avatar
+                              alt="Remy Sharp"
+                              src="/static/images/avatar/1.jpg"
+                            />
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={data.sub}
+                            secondary={
+                              <React.Fragment>
+                                <Typography
+                                  sx={{ display: "inline" }}
+                                  component="span"
+                                  variant="body2"
+                                  color="text.primary"
+                                >
+                                  {data.msg}
+                                 {' '}{' '} {moment(data.time).fromNow()}
+                                </Typography>
+                              </React.Fragment>
+                            }
+                          />
+                        </ListItem>
+                        <Divider variant="inset" component="li" />
+                      </List>
+                    ))
                   ) : (
                     <h1>Nothing to show here...</h1>
                   )}
