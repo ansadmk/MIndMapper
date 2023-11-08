@@ -134,7 +134,7 @@ const CreatePage = () => {
       ) : (
         <div className="row flex-column">
           <div
-            className={` col-6 gap-5 w-100 d-flex justify-content-center   h-100`}
+            className={` col-6  w-100 d-flex justify-content-center   h-100`}
           >
             {parent ? <ImageForPages /> : null}
           </div>
@@ -155,15 +155,15 @@ const CreatePage = () => {
                   dispatch(changeEditable("true"));
                 }}
                 style={{ zIndex: "10" }}
-                className="mt-5"
+                className=""
               >
                 <h2>{page?.data?.content}</h2>
               </Button>
             )}
-            {parent ?<IconButton className='w-25 container d-flex justify-content-center' onClick={()=> dispatch(changesubpageRender("true"))}><NoteAddIcon/></IconButton>  : null}
+            {parent ?<IconButton className='container m-auto w-25' onClick={()=> dispatch(changesubpageRender("true"))}><NoteAddIcon/></IconButton>  : null}
             
             {show ? null : (
-              <div className="mt-5 d-flex justify-content-center">
+              <div className=" d-flex justify-content-center">
                 {subpageRender ? (
                   <form onSubmit={handlenext}>
                     <input type="text" id="next" ref={reff} />
@@ -177,7 +177,7 @@ const CreatePage = () => {
               </div>
             )}
 
-            <Subpagescomp />
+            <div ><Subpagescomp /></div>
             <UploadpageImageModal />
           </div>
         </div>
