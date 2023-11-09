@@ -154,7 +154,7 @@ export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = useState(true);
   const pages = useSelector(fetchpageres);
-  const user = useSelector(getDetails);
+  const user = useSelector(getDetails);                                                                                                        
   const handlePageCreation = () => dispatch(changeShowPageForm(true));
   const dispatch = useDispatch();
   const renderpage = useSelector(changemainPageListRender);
