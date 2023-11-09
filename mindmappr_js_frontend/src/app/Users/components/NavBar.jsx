@@ -20,6 +20,7 @@ const NavBar = () => {
 
   const handle = () => {
     dispatch(deletePage({ pageid: page._id, content: page.content }));
+    
     dispatch(changeMainPageListRender());
   };
   const handleCrumb = (d, index) => {
