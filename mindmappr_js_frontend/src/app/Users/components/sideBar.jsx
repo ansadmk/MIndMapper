@@ -55,7 +55,7 @@ import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import NavBar from "./NavBar";
-
+import SignpostIcon from '@mui/icons-material/Signpost';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -84,7 +84,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
+ 
   ...theme.mixins.toolbar,
 }));
 
@@ -393,14 +393,35 @@ export default function MiniDrawer() {
             </ListItemButton>
             
           </ListItem>
-          <Button variant="" onClick={() => handlePageCreation()}>
+          <ListItem disablePadding sx={{ display: "block" }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+             onClick={()=>router.push('/Users/posts')}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <SignpostIcon fontSize="large" />
+              </ListItemIcon>
+
+              <ListItemText primary={"MindMappers"} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
             
-          </Button>
+          </ListItem>
         </List>
         <Divider />
 
         {open ? (
-          <Box sx={{ flexGrow: 1, overflow: "hidden", px: 3 }}>
+          <Box sx={{ flexGrow: 1, overflow: "hidden", px: 3 }} className="overflow-auto" >
+            
             {pages?.data?.mainpages?.map((data) => (
               <Item
                 sx={{
@@ -434,7 +455,7 @@ export default function MiniDrawer() {
                   <Typography noWrap>{data.content}</Typography>
                 </Stack>
               </Item>
-            ))}{" "}
+            ))}
           </Box>
         ) : null}
       </Drawer>

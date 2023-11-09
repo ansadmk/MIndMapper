@@ -9,6 +9,8 @@ const pageSchema=mongoose.Schema({
     avatar:String,
     cover:String,
     subpages:Object,
+    public:Boolean,
+    permitted:[],
     settings:Object
 
 })
