@@ -15,7 +15,10 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllPages } from '@/app/redux/Axioses';
+import { allPages } from '@/app/redux/slice';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -28,16 +31,24 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+
 export default function page() {
   const [expanded, setExpanded] = useState(false);
-
+  const dispatch=useDispatch()
+  useEffect(()=>{
+    dispatch(getAllPages())
+  },[dispatch])
+  const pages=useSelector(allPages)
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+
   return (
     <div className=' d-flex h-100 justify-content-center align-items-center m-auto w-100 container'>
       <div>
+        {pages?.data?.map( value=>(
+          value.public ?
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
@@ -111,7 +122,7 @@ export default function page() {
           </Typography>
         </CardContent>
       </Collapse>
-    </Card>
+    </Card>:null))}
     </div>
     </div>
   );
