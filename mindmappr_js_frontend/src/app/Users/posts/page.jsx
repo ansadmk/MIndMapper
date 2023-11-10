@@ -17,8 +17,11 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPages } from '@/app/redux/Axioses';
+import { FetchUsers, getAllPages } from '@/app/redux/Axioses';
 import { allPages } from '@/app/redux/slice';
+import moment from 'moment';
+import usersList from '@/app/admin/components/usersList';
+import { getUsersForAdmin } from '@/app/redux/Admin/adminSlice';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -35,9 +38,13 @@ const ExpandMore = styled((props) => {
 export default function page() {
   const [expanded, setExpanded] = useState(false);
   const dispatch=useDispatch()
+  
   useEffect(()=>{
     dispatch(getAllPages())
+    dispatch(FetchUsers());
+    dispatch(getUsersList())
   },[dispatch])
+    const users=useSelector(getUsersForAdmin) 
   const pages=useSelector(allPages)
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -48,12 +55,13 @@ export default function page() {
     <div className=' d-flex h-100 justify-content-center align-items-center m-auto w-100 container'>
       <div>
         {pages?.data?.map( value=>(
-          value.public ?
+          value.public && value.role=="main"?
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
+          value.avatar?<Avatar src={users?.}/>:
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+            {value.content.charAt(0)}
           </Avatar>
         }
         action={
@@ -61,8 +69,8 @@ export default function page() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={value.content}
+        subheader={moment(value.createdAt).fromNow()}
       />
       <CardMedia
         component="img"
