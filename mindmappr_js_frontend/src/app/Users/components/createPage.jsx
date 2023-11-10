@@ -169,7 +169,7 @@ const CreatePage = () => {
                     <input type="text" id="next" ref={reff} />
                   </form>
                 ) : null}
-                <ul>
+                <ul className="w-75 ms-5">
                   {subpage?.data?.subpages.map((value) => (
                     <SubpagescomP value={value} />
                   ))}

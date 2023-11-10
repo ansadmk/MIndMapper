@@ -62,7 +62,7 @@ const Subpagescomp = () => {
     <>
       <div className="container d-flex justify-content-center w-100">
         {showform ? null : (
-          <div id="editorjs" className="prose max-w-full min-h-screen"></div>
+          <div id="editorjs" className="prose max-w-full min-h-screen w-100"></div>
         )}
       </div>
     </>

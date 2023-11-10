@@ -11,7 +11,8 @@ const pageSchema=mongoose.Schema({
     subpages:Object,
     public:Boolean,
     permitted:[],
-    settings:Object
+    ansester:mongoose.Schema.ObjectId,
+    
 
 })
 

@@ -1,5 +1,5 @@
 "use client";
-import { deletePage } from "@/app/redux/Axioses";
+import { deletePage, setPublic } from "@/app/redux/Axioses";
 import {
   Breadcrumb,
   changeBreadCrumb,
@@ -27,6 +27,12 @@ const NavBar = () => {
     dispatch(changeCurrentPage(d));
     dispatch(changeBreadCrumb({ type: "select", data: index }));
   };
+  const handlePublic=()=>{
+    dispatch(setPublic({id:page.ansester}))
+  }
+  const handleUnPublic=()=>{
+    dispatch(setPublic({id:page.ansester,unpub:true}))
+  }
   return (
     <div className="d-flex justify-content-end w-100 ">
       <div className="me-5 d-flex justify-content-end w-100">
@@ -40,10 +46,15 @@ const NavBar = () => {
               {data?.content?.content} /
             </Button>
           ))}
+
         </div>
         <Button variant="" onClick={() => handle()}>
           <DeleteForeverIcon />
         </Button>
+      </div>
+      {page?.public ? <Button onClick={()=>handleUnPublic()}>unpublish</Button>:<Button  onClick={()=>handlePublic()}>publish</Button>}
+      <div>
+
       </div>
     </div>
   );

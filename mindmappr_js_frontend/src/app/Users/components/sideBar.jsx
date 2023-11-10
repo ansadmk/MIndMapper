@@ -132,6 +132,8 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function MiniDrawer() {
+const dispatch = useDispatch();
+const r=10
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl2, setAnchorEl2] = useState(null);
   const Notify = useSelector(Noti);
@@ -154,9 +156,8 @@ export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = useState(true);
   const pages = useSelector(fetchpageres);
-  const user = useSelector(getDetails);                                                                                                        
   const handlePageCreation = () => dispatch(changeShowPageForm(true));
-  const dispatch = useDispatch();
+  const user = useSelector(getDetails);                                                                                                        r
   const renderpage = useSelector(changemainPageListRender);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -173,7 +174,7 @@ export default function MiniDrawer() {
       window.location = window.location + "#loaded";
       location.reload(false);
     }
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (renderpage) {
@@ -452,7 +453,8 @@ export default function MiniDrawer() {
                   }}
                 >
                   <Avatar src={data.avatar} alt="" />
-                  <Typography noWrap>{data.content}</Typography>
+                  <Typography noWrap className="w-25">{data.content}</Typography>
+                  
                 </Stack>
               </Item>
             ))}

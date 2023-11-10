@@ -10,6 +10,7 @@ import {
   sendUrl,
   FetchSpecificPage,
   getNoti,
+  getAllPages,
 } from "./Axioses";
 
 
@@ -30,7 +31,8 @@ const slice = createSlice({
     deletePagestatus: "",
     uploadurlstatus: "",
     uploadurl: "",
-    Noti:''
+    Noti:'',
+    allPages:''
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -104,6 +106,10 @@ const slice = createSlice({
       .addCase(getNoti.fulfilled, (state, action) => {
         
         state.Noti = action.payload;
+      })
+      .addCase(getAllPages.fulfilled, (state, action) => {
+        
+        state.allPages = action.payload;
       })
   },
 });
@@ -219,7 +225,7 @@ export const ProfileStats = (s) => s.profileStats.profileStats;
 export const showPageForm = (s) => s.profileStats.showPageForm;
 export const changeSubpageRender = (s) => s.profileStats.subpagerender;
 export const editors = (s) => s.profileStats.editor;
-
+export const allPages = (s) => s.Axios.allPages;
 export const {
   PageState,
   changeBreadCrumb,

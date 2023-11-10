@@ -121,3 +121,20 @@ export const getNoti = createAsyncThunk("redux/getNoti", async () => {
   });
   return respo.data;
 });
+export const getAllPages = createAsyncThunk("redux/getAllPages", async () => {
+  const respo = await axios.get("http://127.0.0.1:4000/api/user/getAllPages", {
+    headers: {
+      Authorization: `Bearer ${cookie}`,
+    },
+  });
+  return respo.data;
+});
+export const setPublic = createAsyncThunk("redux/setPublic", async ({id,unpub}) => {
+  console.log(id,unpub);
+  const respo = await axios.put("http://127.0.0.1:4000/api/user/setPublic",{id,unpub} ,{
+    headers: {
+      Authorization: `Bearer ${cookie}`,
+    },
+  });
+  return respo.data;
+});

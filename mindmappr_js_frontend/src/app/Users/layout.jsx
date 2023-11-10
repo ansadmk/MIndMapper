@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google'
 import 'bootstrap/dist/css/bootstrap.css'
 import SessionProvider from "../Users/components/sessionProvider"
 import { getServerSession } from 'next-auth'
-import SideBar from './components/SideBar'
 import StoreProvider from '../redux/StoreProvider'
 
 
@@ -27,7 +26,6 @@ export default async function RootLayout({
       
       <body className={inter.className} >
        
-      {/* <SideBar/> */}
       <SessionProvider session={session}>{children}</SessionProvider>
      
        
