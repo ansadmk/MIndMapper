@@ -26,9 +26,9 @@ export default async function RootLayout({
     <html lang="en">
       
       <body className={inter.className} >
-       
+      <SessionProvider session={session}> 
       <ResponsiveAppBar/>
-      <SessionProvider session={session}>{children}</SessionProvider>
+      {children}</SessionProvider>
      
        
         </body>

@@ -53,7 +53,7 @@ function ResponsiveAppBar() {
   }, []);
 
   return (
-    <AppBar position="static" color="" >
+    <AppBar position="sticky" color="" >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -61,7 +61,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
