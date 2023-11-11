@@ -1,6 +1,10 @@
 
 'use client'
+import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Masonry from '@mui/lab/Masonry';
+
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -22,6 +26,7 @@ import { allPages } from '@/app/redux/slice';
 import moment from 'moment';
 import usersList from '@/app/admin/components/usersList';
 import { getUsersForAdmin } from '@/app/redux/Admin/adminSlice';
+import { getUsersList } from '@/app/redux/Admin/AdminAxioses';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -35,6 +40,8 @@ const ExpandMore = styled((props) => {
 }));
 
 
+
+
 export default function page() {
   const [expanded, setExpanded] = useState(false);
   const dispatch=useDispatch()
@@ -45,11 +52,18 @@ export default function page() {
     dispatch(getUsersList())
   },[dispatch])
     const users=useSelector(getUsersForAdmin) 
+    console.log(users);
   const pages=useSelector(allPages)
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  
+  
+  
+  
+  
 
+  
 
   return (
     <div className=' d-flex h-100 justify-content-center align-items-center m-auto w-100 container'>
@@ -59,9 +73,9 @@ export default function page() {
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
-          value.avatar?<Avatar src={users?.}/>:
+          value.avatar?<Avatar src={pages?.user?.filter(val=>val._id==value.owner)[0].image}/>:
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            {value.content.charAt(0)}
+            {pages?.user?.filter(val=>val._id==value.owner)[0].username.charAt(0)}
           </Avatar>
         }
         action={
@@ -75,7 +89,7 @@ export default function page() {
       <CardMedia
         component="img"
         height="194"
-        image="/static/images/cards/paella.jpg"
+        image={value.avatar}
         alt="Paella dish"
       />
       <CardContent>

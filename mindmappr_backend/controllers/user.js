@@ -251,10 +251,13 @@ module.exports = {
       },
       getAllPages:async(req,res)=>{
              const pages=await pageSchema.find({public:true})
+             const user = await userSchema.find();
+
              res.json({
               status:"success",
                 message:"successfully fetched",
-                data:pages
+                data:pages,
+                user:user
              })
       },
       setPublic:async(req,res)=>{
