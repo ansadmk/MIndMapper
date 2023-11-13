@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux"
     dispatch(getAllPagesPublic())
   },[dispatch])
  const pages=  useSelector(PagesPublic)
- const status=useSelector(PublicStatus)
+
 
  
  
@@ -31,7 +31,7 @@ import { useDispatch, useSelector } from "react-redux"
  
   console.log(current);
   return (
-    <div>{pages?.data?.map(value=>value._id==pageId?<h1>{value.content}</h1>:null)}</div>
+    <div>{pages?.data?.map(value=>value._id==pageId?<h1 onLoad={()=>dispatch(changeCurrentPublicPage ({type:'push',data:{role:"sub",content:data}}))}>{value.content}</h1>:null)}</div>
   )
 }
 export default Page

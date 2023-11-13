@@ -230,7 +230,7 @@ const slice1 = createSlice({
   },
 });
 export const PublicStatus = (s) => s.Axios.PublicStatus;
-
+export const PublicBreadCrumb = (s) => s.profileStats.PublicBreadCrumb
 
 export const PagesPublic = (s) => s.Axios.PagesPublic;
 export const Noti=(s)=>s.Axios.Noti

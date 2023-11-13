@@ -2,6 +2,7 @@
 import { deletePage, setPublic } from "@/app/redux/Axioses";
 import {
   Breadcrumb,
+  PublicBreadCrumb,
   changeBreadCrumb,
   changeCurrentPage,
   changeMainPageListRender,
@@ -16,7 +17,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 const NavBar = () => {
   const dispatch = useDispatch();
   const page = useSelector(currentPage);
-  const crumb = useSelector(Breadcrumb);
+  const crumb = useSelector(PublicBreadCrumb);
 
   
   const handleCrumb = (d, index) => {
