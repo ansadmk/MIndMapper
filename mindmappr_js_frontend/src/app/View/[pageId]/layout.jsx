@@ -1,9 +1,10 @@
 "use client "
 import { Inter } from 'next/font/google'
 import 'bootstrap/dist/css/bootstrap.css'
-import SessionProvider from "./components/sessionProvider"
+
 import { getServerSession } from 'next-auth'
-import StoreProvider from '../redux/StoreProvider'
+import StoreProvider from '../../redux/StoreProvider'
+import Navbar from './Navbar'
 
 
 
@@ -25,8 +26,8 @@ export default async function RootLayout({
     <html lang="en">
       
       <body className={inter.className} >
-       
-      <SessionProvider session={session}>{children}</SessionProvider>
+      <Navbar/>
+     {children}
      
        
         </body>

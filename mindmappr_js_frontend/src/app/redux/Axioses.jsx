@@ -138,3 +138,7 @@ export const setPublic = createAsyncThunk("redux/setPublic", async ({id,unpub}) 
   });
   return respo.data;
 });
+export const getAllPagesPublic = createAsyncThunk("redux/getAllPagesPublic", async () => {
+  const respo = await axios.get("http://127.0.0.1:4000/api/user/getAllPagesPublic");
+  return respo.data;
+});

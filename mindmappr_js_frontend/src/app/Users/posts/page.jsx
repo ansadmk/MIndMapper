@@ -27,6 +27,7 @@ import moment from 'moment';
 import usersList from '@/app/admin/components/usersList';
 import { getUsersForAdmin } from '@/app/redux/Admin/adminSlice';
 import { getUsersList } from '@/app/redux/Admin/AdminAxioses';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -35,7 +36,7 @@ import { getUsersList } from '@/app/redux/Admin/AdminAxioses';
 
 export default function page() {
   const dispatch=useDispatch()
-  
+  const router=useRouter()
   useEffect(()=>{
     dispatch(getAllPages())
     dispatch(FetchUsers());
@@ -59,7 +60,7 @@ export default function page() {
       <div className='row gap-3'>
         {pages?.data?.map( value=>(
           value.public && value.role=="main"?
-    <Card sx={{ maxWidth: 345 }} className='col w-100 '>
+    <Card sx={{ maxWidth: 345 }} className='col w-100 '  >
       <CardHeader
         avatar={
           value.avatar?<Avatar src={pages?.user?.filter(val=>val._id==value.owner)[0].image}/>:
@@ -80,6 +81,7 @@ export default function page() {
         height="194"
         image={value.avatar}
         alt=""
+        onClick={()=>router.push(`/View/${value._id}`)}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">

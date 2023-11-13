@@ -11,6 +11,7 @@ import {
   FetchSpecificPage,
   getNoti,
   getAllPages,
+  getAllPagesPublic,
 } from "./Axioses";
 
 
@@ -32,7 +33,9 @@ const slice = createSlice({
     uploadurlstatus: "",
     uploadurl: "",
     Noti:'',
-    allPages:''
+    allPages:'',
+    PagesPublic:[],
+    PublicStatus:false
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -111,6 +114,11 @@ const slice = createSlice({
         
         state.allPages = action.payload;
       })
+      .addCase(getAllPagesPublic.fulfilled, (state, action) => {
+        state.PublicStatus=true
+        state.PagesPublic = action.payload;
+      })
+      
   },
 });
 const slice1 = createSlice({
@@ -127,8 +135,10 @@ const slice1 = createSlice({
     Pagestate: false,
     uploadcover: {avatar:false,cover:false},
     editor:false,
-    CurrentPublicPage:[]
-
+    CurrentPublicPage:[],
+    PublicBreadCrumb:[],
+    
+     
   },
   reducers: {
     changeProfileStats: (state) => {
@@ -200,11 +210,29 @@ const slice1 = createSlice({
       }
     },
     changeCurrentPublicPage:(state,action)=>{
+      console.log(action.payload);
       state.CurrentPublicPage=action.payload
-    }
-
+    },
+    changePublicBreadCrumb: (state, action) => {
+      const { data, type } = action.payload;
+      if (type == "push") {
+        state.breadCrumb.push(data);
+      } else if (type == "clear") {
+        state.breadCrumb = [];
+      } else if (type == "select") {
+        state.breadCrumb.splice(data + 1);
+      }
+      // else if(action.payload.type=="pop"){
+      //   state.breadCrumb.splice(a)
+      // }
+    },
+   
   },
 });
+export const PublicStatus = (s) => s.Axios.PublicStatus;
+
+
+export const PagesPublic = (s) => s.Axios.PagesPublic;
 export const Noti=(s)=>s.Axios.Noti
 export const modalupload = (s) => s.profileStats.uploadcover
 export const sendurl = (s) => s.Axios.uploadurl;

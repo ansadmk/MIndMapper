@@ -271,6 +271,16 @@ module.exports = {
           status:"success",
             message:"successfully Done"
          })
-      }
+      },
+      getAllPagesPublic:async(req,res)=>{
+        const pages=await pageSchema.find({public:true})
+        
+
+        res.json({
+         status:"success",
+           message:"successfully fetched",
+           data:pages
+        })
+ },
   
 };

@@ -3,7 +3,7 @@ const user = require('../controllers/user')
 const auth = require('../middlewares/userAuth')
 const handle = require('../middlewares/ErrorHandler')
 const router=express.Router()
-const {register,login,userDetails,createPages,fetchpages,setProfile,setCoverAvatar,deletePage,fetchSpecpages,getNoti,getAllPages,setPublic}=user
+const {register,login,userDetails,createPages,fetchpages,setProfile,setCoverAvatar,deletePage,fetchSpecpages,getNoti,getAllPages,setPublic,getAllPagesPublic}=user
 
 router.post('/register',handle(register))
 router.post('/login',handle(login))
@@ -16,5 +16,6 @@ router.delete('/deletepage/:id/:content',auth,handle(deletePage))
 router.put('/coveravatar',auth,handle(setCoverAvatar))
 router.get('/getUsersNoti',auth,handle(getNoti))
 router.get('/getAllPages',auth,handle(getAllPages))
+router.get('/getAllPagesPublic',handle(getAllPagesPublic))
 router.put('/setPublic',auth,handle(setPublic))
 module.exports=router
