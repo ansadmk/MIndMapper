@@ -21,7 +21,7 @@ const page = () => {
   return (
     <div className='d-flex h-75 justify-content-center align-items-center'>
       {user.value ?null:router.push('/admin')}
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} className='w-100'>
     <CardMedia
       sx={{ height: 140 }}
       image={user?.value?.image}

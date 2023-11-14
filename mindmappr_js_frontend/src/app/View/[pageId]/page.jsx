@@ -27,6 +27,7 @@ import { Avatar} from "@mui/material"
      dispatch(getAllPagesPublic())
   },[dispatch])
  const pages=  useSelector(PagesPublic)
+ console.log(pages);
  const [state,setState]=useState(true)
  const [values,setValues]=useState('')
  const handlesub = async (value) => {
@@ -69,28 +70,28 @@ const initializeEditor = async (value) => {
  
   console.log(current);
   return (
-    <div className="w-100 d-flex justify-content-center align-items-center h-100  ">{pages?.data?.map(value=>value._id==pageId?<Card className="w-75">
-      <CardMedia
-        sx={{ height: 500 }}
-        image={value.cover}
-        title="green iguana"
+    <div className="w-100 d-flex justify-content-center align-items-center h-100  ">{pages?.data?.map(value=>value._id==pageId?<div >
+      <img
+        className="w-50 h-50 rounded-5 img-fluid"
+        src={value.cover}
+       
       />
-      <CardContent>
+    
         <Avatar src={value.avatar}/>
         <Typography gutterBottom variant="h5" component="div">
          {value.content}
         </Typography>
         {pages?.data?.map(value=>value.ansester==pageId && value.role=="sub"? <Button>{value.content}</Button>:null  )}
-        <div id="editorjs" className="prose max-w-full min-h-screen w-100"></div>
+        <div id="editorjs" className="prose max-w-full min-h-screen w-100 " style={{maxHeight:100}}></div>
         
-      </CardContent>
       
-      <CardActions disableSpacing>
+      
+      
       
         <Button onClick={()=>handlesub(value)}>Show more</Button>
-      </CardActions>
       
-    </Card>:null)}</div>
+      
+    </div>:null)}</div>
   )
 }
 export default Page
