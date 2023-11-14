@@ -98,7 +98,7 @@ const CreatePage = () => {
           parent: parent._id,
           role: "sub",
           content: content,
-          public:true
+          public1:"true"
         })
       );
     }else{
@@ -175,14 +175,16 @@ const CreatePage = () => {
             {parent ?<IconButton className='container m-auto w-25' onClick={()=> dispatch(changesubpageRender("true"))}><NoteAddIcon/></IconButton>  : null}
             
             {show ? null : (
-              <div className=" d-flex justify-content-center">
+              <div className=" d-flex flex-column justify-content-center align-items-center">
                 {subpageRender ? (
-                  <form onSubmit={handlenext}>
-                    <input type="text" id="next" ref={reff} />
+                  
+                  <form onSubmit={handlenext} className="">
+                    <input type="text" id="next" ref={reff} /> 
                   </form>
                 ) : null}
                 <ul className="w-75 ms-5">
                   {subpage?.data?.subpages.map((value) => (
+                    
                     <SubpagescomP value={value} />
                   ))}
                 </ul>

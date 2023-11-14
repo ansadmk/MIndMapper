@@ -21,7 +21,7 @@ import { FetchPages, createPageResponse, deletePage, setprofile } from "@/app/re
 
 const Subpagescomp = ({value}) => {
   const [state, setState] = useState(false);
-  
+  const [state1,setState1]=useState(false)
   const parent = useSelector(currentPage);
   const dispatch = useDispatch();
   const handleStates = (data) => {
@@ -82,16 +82,17 @@ const Subpagescomp = ({value}) => {
           type='text'
         />
           </Box>:
-            <div>
-              <Button variant="" onClick={() => handleStates(value)}>
-                {value.content}
-              </Button>
-              <IconButton onClick={() => setState(true)}>
+            <div className="d-flex ms-5 ps-2" onMouseEnter={()=>setState1(true)} onMouseLeave={()=>setState1(false)}>
+
+              {state1?<div className="d-flex"><IconButton onClick={() => setState(true)}>
                 <EditNoteIcon />
               </IconButton>
               <IconButton onClick={() => handleDelete(value)}>
                 <DeleteForeverIcon />
-              </IconButton>
+              </IconButton></div>:null}
+              <Button variant=""  onClick={() => handleStates(value)}>
+                {value.content}
+              </Button>
             </div>}
           </li>
         ) : null}

@@ -12,6 +12,8 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import ShareIcon from '@mui/icons-material/Share';
+import { IconButton } from "@mui/material";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -54,7 +56,7 @@ const NavBar = () => {
       </div>
       {page?.public ? <Button onClick={()=>handleUnPublic()}>unpublish</Button>:<Button  onClick={()=>handlePublic()}>publish</Button>}
       <div>
-
+       <IconButton><ShareIcon/></IconButton>
       </div>
     </div>
   );

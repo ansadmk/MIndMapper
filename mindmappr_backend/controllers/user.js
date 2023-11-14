@@ -91,11 +91,13 @@ module.exports = {
     }
   },
   createPages: async (req, res) => {
-    const { parent, content, role,public } = req.body;
+    const { parent, content, role, public1 } = req.body;
+
+    console.log(public1,role,'hello2');
     if(role!="main"){
       const pagefind=await pageSchema.findOne({_id:parent})
-      if (public) {
-        const page = await pageSchema.create({
+      if (public1) {
+        const page1 = await pageSchema.create({
           title: parent,
           owner: res.token.id,
           content: content,
@@ -104,11 +106,12 @@ module.exports = {
           ansester:pagefind.ansester,
           public:true
         });
-        if (page) {
+        console.log(page1,"public");
+        if (page1) {
           res.json({
             status: "success",
             message: "created",
-            data:page
+            data:page1
           });
         } else if(role=="main"){
           res.json({
@@ -125,6 +128,8 @@ module.exports = {
           role: role,
           ansester:pagefind.ansester
         });
+        console.log(page,"notpublic");
+
         if (page) {
           res.json({
             status: "success",

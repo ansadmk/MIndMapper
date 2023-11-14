@@ -15,14 +15,10 @@ export const FetchUsers = createAsyncThunk("redux/fetchUsers", async () => {
 export const createPageResponse = createAsyncThunk(
   "redux/create",
   async (data) => {
-    const { parent, role, content } = data;
+    console.log(data);
+    
     const resp = await axios.post(
-      "http://127.0.0.1:4000/api/user/createPage",
-      {
-        parent: parent,
-        role: role,
-        content: content,
-      },
+      "http://127.0.0.1:4000/api/user/createPage",data,
       {
         headers: {
           Authorization: `Bearer ${cookie}`,
