@@ -91,29 +91,54 @@ module.exports = {
     }
   },
   createPages: async (req, res) => {
-    const { parent, content, role } = req.body;
+    const { parent, content, role,public } = req.body;
     if(role!="main"){
       const pagefind=await pageSchema.findOne({_id:parent})
-    const page = await pageSchema.create({
-      title: parent,
-      owner: res.token.id,
-      content: content,
-      createdAt: Date.now(),
-      role: role,
-      ansester:pagefind.ansester
-    });
-    if (page) {
-      res.json({
-        status: "success",
-        message: "created",
-        data:page
-      });
-    } else if(role=="main"){
-      res.json({
-        status: "failed",
-        message: "not created",
-      });
-    }
+      if (public) {
+        const page = await pageSchema.create({
+          title: parent,
+          owner: res.token.id,
+          content: content,
+          createdAt: Date.now(),
+          role: role,
+          ansester:pagefind.ansester,
+          public:true
+        });
+        if (page) {
+          res.json({
+            status: "success",
+            message: "created",
+            data:page
+          });
+        } else if(role=="main"){
+          res.json({
+            status: "failed",
+            message: "not created",
+          });
+        }
+      } else {
+        const page = await pageSchema.create({
+          title: parent,
+          owner: res.token.id,
+          content: content,
+          createdAt: Date.now(),
+          role: role,
+          ansester:pagefind.ansester
+        });
+        if (page) {
+          res.json({
+            status: "success",
+            message: "created",
+            data:page
+          });
+        } else if(role=="main"){
+          res.json({
+            status: "failed",
+            message: "not created",
+          });
+        }
+      }
+    
   }else{
     const page = await pageSchema.create({
       title: parent,

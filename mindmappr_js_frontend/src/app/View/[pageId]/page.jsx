@@ -17,7 +17,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Avatar, Collapse, IconButton } from "@mui/material"
+import { Avatar} from "@mui/material"
 
 
  const Page = () => {
@@ -27,25 +27,18 @@ import { Avatar, Collapse, IconButton } from "@mui/material"
      dispatch(getAllPagesPublic())
   },[dispatch])
  const pages=  useSelector(PagesPublic)
- const [expanded, setExpanded] = useState(false);
-
- const handleExpandClick = async (value) => {
+ const [state,setState]=useState(true)
+ const [values,setValues]=useState('')
+ const handlesub = async (value) => {
      console.log(value.subpages);
+     if(state){
     await initializeEditor(value.subpages);
+    setState(false)
+     }
   
-  
-   setExpanded(!expanded);
+   
   };
-  const ExpandMore = styled((props) => {
-    const { expand, ...other } = props;
-    return <IconButton {...other}  />;
-  })(({ theme, expand }) => ({
-    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  }));
+  
 
 
 
@@ -87,37 +80,16 @@ const initializeEditor = async (value) => {
         <Typography gutterBottom variant="h5" component="div">
          {value.content}
         </Typography>
+        {pages?.data?.map(value=>value.ansester==pageId && value.role=="sub"? <Button>{value.content}</Button>:null  )}
         <div id="editorjs" className="prose max-w-full min-h-screen w-100"></div>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
         
-        
-        <div id="editorjs" className="prose max-w-full min-h-screen w-100"></div>
-      
-        </CardContent>
-      </Collapse>
       </CardContent>
       
       <CardActions disableSpacing>
       
-        <ExpandMore
-          expand={expanded}
-          onClick={()=>handleExpandClick(value)}
-          aria-expanded={expanded}
-          aria-label="show more"
-          
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
+        <Button onClick={()=>handlesub(value)}>Show more</Button>
       </CardActions>
-      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-        
-        
-        <div id="editorjs" className="prose max-w-full min-h-screen w-100"></div>
       
-        </CardContent>
-      </Collapse> */}
     </Card>:null)}</div>
   )
 }

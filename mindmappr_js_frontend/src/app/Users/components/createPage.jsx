@@ -91,13 +91,24 @@ const CreatePage = () => {
   function handlenext(e) {
     e.preventDefault();
     const content = e.target.next.value;
+    console.log(parent.public);
+    if (parent.public) {
+      dispatch(
+        createPageResponse({
+          parent: parent._id,
+          role: "sub",
+          content: content,
+          public:true
+        })
+      );
+    }else{
     dispatch(
       createPageResponse({
         parent: parent._id,
         role: "sub",
         content: content,
       })
-    );
+    );}
 
     dispatch(changesubpageRender("false"));
   }
@@ -105,9 +116,10 @@ const CreatePage = () => {
   const handleContent = (e) => {
     e.preventDefault();
     const content = e.target.val.value;
+    
     dispatch(
       setprofile({ pageid: parent._id, content: content, prev: parent._id })
-    );
+    )
    
     dispatch(changeEditable());
     dispatch(changeMainPageListRender());
