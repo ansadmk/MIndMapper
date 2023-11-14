@@ -192,7 +192,7 @@ const r=10
     <Box sx={{ display: "flex" }}>
       {cookie ? null : router.push("/")}
       <CssBaseline />
-      <AppBar position="fixed"  open={open}>
+      <AppBar position="fixed" color=""  open={open}>
         <Toolbar >
           <IconButton
             color="inherit"

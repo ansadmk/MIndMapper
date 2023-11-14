@@ -18,18 +18,13 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const page = useSelector(currentPage);
   const crumb = useSelector(PublicBreadCrumb);
-
+  console.log(crumb);
   
   const handleCrumb = (d, index) => {
     dispatch(changeCurrentPage(d));
     dispatch(changeBreadCrumb({ type: "select", data: index }));
   };
-  const handlePublic=()=>{
-    dispatch(setPublic({id:page.ansester}))
-  }
-  const handleUnPublic=()=>{
-    dispatch(setPublic({id:page.ansester,unpub:true}))
-  }
+  
   return (
     <div className="d-flex justify-content-start w-100 ">
       <div className="me-5 d-flex justify-content-start w-100">
@@ -43,7 +38,7 @@ const NavBar = () => {
               {data?.content?.content} /
             </Button>
           ))}
-
+          
         </div>
         
       </div>
