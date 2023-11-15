@@ -10,6 +10,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { IconButton } from '@mui/material';
+import upload from '@/app/components/upload';
 
 const style = {
   position: 'absolute',
@@ -49,16 +50,17 @@ const UploadpageImageModal = () => {
 
   };
   const handleSave= async ()=>{
-     const lin= await url.data.secure_url
-    setTimeout(()=>{dispatch(sendUrl({pageId:parent._id,avatarUrl:lin}))
+     const lin= await upload(file)
+    dispatch(sendUrl({pageId:parent._id,avatarUrl:lin}))
     dispatch(changeuploadcover({avatar:"false"}))
-  },2000)
+  
     
   }
-  const handleSave1=()=>{
-    setTimeout(()=>{dispatch(sendUrl({pageId:parent._id,coverUrl:url?.data?.secure_url}))
+  const handleSave1=async ()=>{
+    const val=await upload(file1)
+    dispatch(sendUrl({pageId:parent._id,coverUrl:val}))
     dispatch(changeuploadcover({cover:"false"}))
-  },2000)
+  
     
   }
   return (
@@ -83,7 +85,7 @@ const UploadpageImageModal = () => {
   <input type="file" style={{opacity:'0'}} className='w-25  position-absolute' onChange={(e)=>setFile(e.target.files[0])}/>
   </IconButton> 
   </Box>
-  <Button onClick={()=>handleCloud()}>upload</Button>
+ 
   <Button onClick={()=>handleSave()}>save</Button>
         </Box>
   
@@ -108,7 +110,7 @@ const UploadpageImageModal = () => {
   <input type="file" style={{opacity:'0'}} className='w-25  position-absolute' onChange={(e)=>setFile1(e.target.files[0])}/>
   </IconButton> 
   </Box>
-  <Button onClick={()=>handleCloud1()}>upload</Button>
+  
   <Button onClick={()=>handleSave1()}>save</Button>
         </Box>
   

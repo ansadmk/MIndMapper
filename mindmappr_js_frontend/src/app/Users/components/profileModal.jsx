@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { cloudinary, setprofile } from "@/app/redux/Axioses";
 import { useState } from "react";
 import Image from "next/image";
+import upload from "@/app/components/upload";
 
 const Profile = () => {
   const [files, setfile] = useState("");
@@ -37,16 +38,12 @@ const Profile = () => {
   };
   
   const handleCloud = (e) => {
-    const files=e.target.files[0]
-    const data = new FormData();
-    data.append("file", files);
-    data.append("upload_preset", "Avatar");
-    
-    dispatch(cloudinary(data));
+    const file=e.target.files[0]
+   setfile(file)
 
   };
   const handleurl=async ()=>{
-    const url= await cloudres.data.secure_url
+    const url= await upload(files)
    dispatch(setprofile({ url: url }))
     dispatch(changeProfileStats())
     dispatch(changeMainPageListRender())

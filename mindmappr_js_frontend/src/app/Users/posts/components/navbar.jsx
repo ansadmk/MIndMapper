@@ -18,6 +18,7 @@ import { getCookie } from 'cookies-next';
 import { getDetails } from '@/app/redux/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { FetchUsers } from '@/app/redux/Axioses';
+import Asynchronous from './searchBar';
 
 const pages = ['users',];
 const settings = ['Logout'];
@@ -74,7 +75,7 @@ function ResponsiveAppBar() {
           >
             MindMappers
           </Typography>
-
+          <Asynchronous/>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"

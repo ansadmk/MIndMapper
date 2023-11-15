@@ -137,6 +137,7 @@ const slice1 = createSlice({
     editor:false,
     CurrentPublicPage:[],
     PublicBreadCrumb:[],
+    search:''
     
      
   },
@@ -226,12 +227,18 @@ const slice1 = createSlice({
       //   state.breadCrumb.splice(a)
       // }
     },
+    changeSearch: (state, action) => {
+    
+      state.search = action.payload ;
+  
+    
+  },
    
   },
 });
 export const PublicStatus = (s) => s.Axios.PublicStatus;
 export const PublicBreadCrumb = (s) => s.profileStats.PublicBreadCrumb
-
+export const searchitem=(s)=>s.profileStats.search
 export const PagesPublic = (s) => s.Axios.PagesPublic;
 export const Noti=(s)=>s.Axios.Noti
 export const modalupload = (s) => s.profileStats.uploadcover
@@ -272,7 +279,7 @@ export const {
   changeEditable,
   changesubpageRender,
   changeuploadcover,
-  changeeditor,changeCurrentPublicPage
+  changeeditor,changeCurrentPublicPage,changeSearch
 } = slice1.actions;
 export const Modalslice = slice1.reducer;
 export default slice.reducer;
