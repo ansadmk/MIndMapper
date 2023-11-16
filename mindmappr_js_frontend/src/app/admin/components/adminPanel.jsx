@@ -14,6 +14,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { deleteCookie, getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { MenuItem } from "@mui/material";
+import Asynchronous from "./searchBar";
 
 const pages = ["Users", "Anounnce", "Logout",'Notifications'];
 
@@ -141,6 +142,7 @@ function adminPanel() {
             MindMapper <i> AdminPanel</i>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Asynchronous/>
             {pages.map((page) => (
               <Button
                 key={page}

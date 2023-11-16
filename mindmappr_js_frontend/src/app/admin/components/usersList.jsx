@@ -10,7 +10,8 @@ import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
+
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -21,6 +22,9 @@ const Item = styled(Paper)(({ theme }) => ({
   maxWidth: 400,
 }));
 const usersList = () => {
+  const searchParams = useSearchParams()
+ 
+  const search = searchParams.get('values')
   const dispatch=useDispatch()
   const router=useRouter()
   const users=useSelector(getUsersForAdmin)
@@ -40,6 +44,27 @@ const usersList = () => {
   }
   return (
     <div className='d-flex align-items-center  h-75'>
+
+      {search?<Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{users?.data?.map(value=>
+      value.username.toLowerCase().includes(search.toLowerCase())?
+    <Item
+      sx={{
+        my: 1,
+        mx: 'auto',
+        p: 2,
+      }}
+    >
+      <Stack spacing={2} direction="row" alignItems="center">
+     
+        <Avatar src={value.image} alt='' />
+        <Typography noWrap  >{value.username}</Typography>
+        
+        
+        <Button onClick={()=>changeuser({value:value,page:users?.pages.filter((val)=>val.owner==value._id)})}>View & Notify</Button>
+      </Stack>
+    </Item>:null
+    
+  )} </Box>:
     <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{users?.data?.map(value=>
     <Item
       sx={{
@@ -49,13 +74,16 @@ const usersList = () => {
       }}
     >
       <Stack spacing={2} direction="row" alignItems="center">
+     
         <Avatar src={value.image} alt='' />
         <Typography noWrap  >{value.username}</Typography>
+        
+        
         <Button onClick={()=>changeuser({value:value,page:users?.pages.filter((val)=>val.owner==value._id)})}>View & Notify</Button>
       </Stack>
     </Item>
     
-  )} </Box>
+  )} </Box>}
   </div>
   )
 }

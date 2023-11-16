@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { currentUser } from '@/app/redux/Admin/adminSlice';
 import { useRouter } from 'next/navigation';
 import { notify } from '@/app/redux/Admin/AdminAxioses';
+import Link from 'next/link';
 
 const page = () => {
   const router=useRouter()
@@ -36,7 +37,7 @@ const page = () => {
       <ol>
       
      {
-      user?.page?.map(value=><li>{value.content}</li>)
+      user?.page?.map(value=><li><Link href={`/View/${value._id}`}>{value.content}</Link></li>)
      }
       
       </ol>
