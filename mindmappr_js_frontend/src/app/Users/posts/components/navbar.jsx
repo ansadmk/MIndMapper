@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 import { getDetails } from '@/app/redux/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { FetchUsers } from '@/app/redux/Axioses';
@@ -38,6 +38,13 @@ function ResponsiveAppBar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+  const handleout = () => {
+    deleteCookie("token")
+    
+   
+    router.push("/");
+    
   };
 
   const handleCloseUserMenu = () => {
@@ -171,7 +178,7 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center" onClick={()=>handleout()}>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>

@@ -27,6 +27,7 @@ import usersList from "@/app/admin/components/usersList";
 import { getUsersForAdmin } from "@/app/redux/Admin/adminSlice";
 import { getUsersList } from "@/app/redux/Admin/AdminAxioses";
 import { useRouter } from "next/navigation";
+import { deleteCookie } from "cookies-next";
 
 export default function page() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ export default function page() {
     dispatch(FetchUsers());
     dispatch(getUsersList());
   }, [dispatch]);
+  
   const users = useSelector(getUsersForAdmin);
   console.log(users);
   const pages = useSelector(allPages);
@@ -47,7 +49,7 @@ export default function page() {
       {search ? (
         <div className="d-flex flex-column gap-3">
           {pages?.data?.map((value) =>
-            value.public && value.role == "main" && value.content.includes(search) ? (
+            value.public && value.role == "main" && value.content.toLowerCase().includes(search.toLowerCase()) ? (
               <Card sx={{ maxWidth: 345 }} className=" w-100 ">
                 <CardHeader
                   avatar={

@@ -32,7 +32,7 @@ const handlesub=async(e)=>{
    
     if(res.data.message=="adminlogged"){
       setCookie("adminToken",res.data.jwt_token)
-      toast.success("logged in success for Admin")
+  
     
       
       
@@ -40,7 +40,7 @@ const handlesub=async(e)=>{
     }
     else{
       setCookie("token",res.data.jwt_token)
-      toast.success("logged in success")
+    
 
     router.push("/Users")}
    
