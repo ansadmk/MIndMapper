@@ -1,11 +1,13 @@
 import Image from "next/image"
 import Header from "./components/Header"
 import Pen from './components/pen.gif'
+import { ToastContainer } from "react-toastify"
 
 
 export default function Home() {
   return (
     <>
+     <ToastContainer/>
     <Header/>
     <div className="d-flex flex-column">
       

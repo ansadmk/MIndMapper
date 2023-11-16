@@ -42,12 +42,13 @@ export default function page() {
   const search = useSelector(searchitem);
  
   return (
-    <div className=" d-flex h-100 justify-content-center align-items-center mt-1 w-100 container">
+    <div className=" d-flex h-75 justify-content-center align-items-center    w-100 container">
+      <div className="h-75">
       {search ? (
-        <div className="row gap-3">
+        <div className="d-flex flex-column gap-3">
           {pages?.data?.map((value) =>
             value.public && value.role == "main" && value.content.includes(search) ? (
-              <Card sx={{ maxWidth: 345 }} className="col w-100 ">
+              <Card sx={{ maxWidth: 345 }} className=" w-100 ">
                 <CardHeader
                   avatar={
                     value.avatar ? (
@@ -102,7 +103,7 @@ export default function page() {
           )}
         </div>
       ) : (
-        <div className="row gap-3">
+        <div className="d-flex flex-column gap-3">
           {pages?.data?.map((value) =>
             value.public && value.role == "main" ? (
               <Card sx={{ maxWidth: 345 }} className="col w-100 ">
@@ -160,6 +161,8 @@ export default function page() {
           )}
         </div>
       )}
+      </div>
+      
     </div>
   );
 }

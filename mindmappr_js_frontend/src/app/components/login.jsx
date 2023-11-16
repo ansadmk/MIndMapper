@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux'
 import { FetchPages, FetchUsers } from '../redux/Axioses'
 import { changeMainPageListRender } from '../redux/slice'
 import { Box, TextField } from '@mui/material'
+import { toast } from 'react-toastify'
 
 const login = () => {
 const router =useRouter()
@@ -31,21 +32,21 @@ const handlesub=async(e)=>{
    
     if(res.data.message=="adminlogged"){
       setCookie("adminToken",res.data.jwt_token)
+      toast.success("logged in success for Admin")
     
-    alert("logged in success for Admin")
-    
-   
+      
+      
       router.push("/admin")
     }
     else{
-    setCookie("token",res.data.jwt_token)
+      setCookie("token",res.data.jwt_token)
+      toast.success("logged in success")
 
-      alert("logged in success")
-   router.push("/Users")}
+    router.push("/Users")}
    
   }
   else{
-    alert("failed")
+    toast.error("failed")
   }
 }
   return (

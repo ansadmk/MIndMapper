@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import SessionProvider from "./Users/components/sessionProvider"
 import { getServerSession } from 'next-auth'
 import StoreProvider from "./redux/StoreProvider";
+import { ToastContainer } from "react-toastify";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,7 +21,7 @@ export default async function RootLayout({ children }) {
     <StoreProvider>
     <html lang="en">
       <body className={inter.className}>
-        
+        <ToastContainer/>
       <SessionProvider session={session}>
         
         {children}

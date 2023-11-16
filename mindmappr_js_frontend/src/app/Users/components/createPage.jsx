@@ -174,6 +174,8 @@ const CreatePage = () => {
             )}
             {parent ?<IconButton className='container m-auto w-25' onClick={()=> dispatch(changesubpageRender("true"))}><NoteAddIcon/></IconButton>  : null}
             
+
+            <div className="d-flex flex-column justify-content-">
             {show ? null : (
               <div className=" d-flex flex-column justify-content-center align-items-center">
                 {subpageRender ? (
@@ -190,8 +192,10 @@ const CreatePage = () => {
                 </ul>
               </div>
             )}
-
-            <div ><Subpagescomp /></div>
+                <Subpagescomp />
+              
+              </div>
+           
             <UploadpageImageModal />
           </div>
         </div>
