@@ -48,7 +48,7 @@ const usersList = () => {
     setPage(value);
   };
   return (
-    <div className='d-flex align-items-center  h-75'>
+    <div className='d-flex flex-column  justify-content-center gap-0 align-items-center  h-100 w-100 mt-5'>
 
      { (search?<Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{users?.data?.map(value=>
       value.username.toLowerCase().includes(search.toLowerCase())?
@@ -69,7 +69,12 @@ const usersList = () => {
       </Stack>
     </Item>:null
     
-  )} </Box>:
+  )} 
+   <Stack spacing={2}>
+    <Typography>Page: {page}</Typography>
+    <Pagination count={3} page={page} onChange={handleChange} />
+  </Stack>
+  </Box>:
     <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{users?.data?.map(value=>
     <Item
       sx={{
@@ -88,11 +93,14 @@ const usersList = () => {
       </Stack>
     </Item>
     
-  )} </Box>)}
+    
+  )} 
   <Stack spacing={2}>
-      <Typography>Page: {page}</Typography>
-      <Pagination count={10} page={page} onChange={handleChange} />
-    </Stack>
+    <Typography>Page: {page}</Typography>
+    <Pagination count={3} page={page} onChange={handleChange} />
+  </Stack>
+  </Box>)}
+  
   </div>
   )
 }

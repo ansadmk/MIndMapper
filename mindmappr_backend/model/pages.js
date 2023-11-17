@@ -10,7 +10,7 @@ const pageSchema=mongoose.Schema({
     cover:String,
     subpages:Object,
     public:Boolean,
-    permitted:[],
+    
     ansester:mongoose.Schema.ObjectId,
     Likes:[{type:mongoose.Schema.ObjectId ,ref:"Likes"}]
     

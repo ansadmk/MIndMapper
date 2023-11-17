@@ -4,7 +4,12 @@ const notiSchema = require("../model/notification");
 
 module.exports = {
   getUsers: async (req, res) => {
-    const user = await userSchema.find();
+    const {pageno}=req.body
+    
+    const user = await userSchema.find()
+    
+    const user1 = await userSchema.find().limit(pageno*10).skip((pageno-1)*10)
+    console.log(user1);
     const pages = await pageSchema.find();
     if (user) {
       res.json({

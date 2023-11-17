@@ -1,6 +1,6 @@
 const express=require('express')
 const user = require('../controllers/user')
-const auth = require('../middlewares/userAuth')
+const auth = require('../middlewares/Auth')
 const handle = require('../middlewares/ErrorHandler')
 const router=express.Router()
 const {register,login,userDetails,createPages,fetchpages,setProfile,setCoverAvatar,deletePage,fetchSpecpages,getNoti,getAllPages,setPublic,getAllPagesPublic}=user

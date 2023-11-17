@@ -5,7 +5,7 @@ const pageSchema = require("../model/pages");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { uservalid } = require("../model/SchemaValidation");
-const  axios= require( "axios");
+
 const likeSchema = require("../model/likeSchema");
 module.exports = {
   register: async (req, res) => {
@@ -157,7 +157,7 @@ module.exports = {
     
 
     if (page) {
-     const up=await pageSchema.updateOne({_id:page._id},{$set:{ansester:page._id}})
+     await pageSchema.updateOne({_id:page._id},{$set:{ansester:page._id}})
      
       res.json({
         status: "success",
