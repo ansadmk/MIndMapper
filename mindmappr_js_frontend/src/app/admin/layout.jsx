@@ -4,6 +4,8 @@ import { Inter } from 'next/font/google'
 import 'bootstrap/dist/css/bootstrap.css'
 import AdminPanel from './components/adminPanel'
 import StoreProvider from '../redux/StoreProvider'
+import { Suspense } from 'react'
+import Loading from './loading'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,7 +24,8 @@ export default function RootLayout({
       
       <body className={inter.className}>
       <AdminPanel/>
-        {children}
+      <Suspense fallback={<Loading/>}> {children}</Suspense>
+       
         
         </body>
     </html>

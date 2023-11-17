@@ -9,8 +9,9 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { Button } from '@mui/material'
+import { Button, Pagination } from '@mui/material'
 import { useRouter, useSearchParams } from 'next/navigation'
+import Image from 'next/image'
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -23,7 +24,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 const usersList = () => {
   const searchParams = useSearchParams()
- 
   const search = searchParams.get('values')
   const dispatch=useDispatch()
   const router=useRouter()
@@ -38,14 +38,19 @@ const usersList = () => {
       location.reload(false);
     }
   },[])
+  
   const changeuser=(value)=>{
       dispatch(setCurrentUser(value))
       router.push("/admin/detailsPage")
   }
+  const [page, setPage] =useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
   return (
     <div className='d-flex align-items-center  h-75'>
 
-      {search?<Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{users?.data?.map(value=>
+     { (search?<Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{users?.data?.map(value=>
       value.username.toLowerCase().includes(search.toLowerCase())?
     <Item
       sx={{
@@ -83,7 +88,11 @@ const usersList = () => {
       </Stack>
     </Item>
     
-  )} </Box>}
+  )} </Box>)}
+  <Stack spacing={2}>
+      <Typography>Page: {page}</Typography>
+      <Pagination count={10} page={page} onChange={handleChange} />
+    </Stack>
   </div>
   )
 }

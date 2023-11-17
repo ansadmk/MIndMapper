@@ -36,7 +36,7 @@ import { Avatar, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import SubpagescomP from "./pageCreator";
 import Subpagescomp from "./subpages";
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import NoteAddIcon from "@mui/icons-material/NoteAdd";
 const CreatePage = () => {
   const reff = useRef(null);
   const subpage = useSelector(fetchpageres);
@@ -59,11 +59,9 @@ const CreatePage = () => {
     }
   });
   useEffect(() => {
-   
-      dispatch(FetchSpecificPage(parent._id));
-      dispatch(PageState(false));
-    
-  },[dispatch]);
+    dispatch(FetchSpecificPage(parent._id));
+    dispatch(PageState(false));
+  }, [dispatch]);
   useEffect(() => {
     function handleClickOutside(event) {
       if (reff.current && !reff.current.contains(event.target)) {
@@ -98,17 +96,18 @@ const CreatePage = () => {
           parent: parent._id,
           role: "sub",
           content: content,
-          public1:"true"
+          public1: "true",
         })
       );
-    }else{
-    dispatch(
-      createPageResponse({
-        parent: parent._id,
-        role: "sub",
-        content: content,
-      })
-    );}
+    } else {
+      dispatch(
+        createPageResponse({
+          parent: parent._id,
+          role: "sub",
+          content: content,
+        })
+      );
+    }
 
     dispatch(changesubpageRender("false"));
   }
@@ -116,11 +115,11 @@ const CreatePage = () => {
   const handleContent = (e) => {
     e.preventDefault();
     const content = e.target.val.value;
-    
+
     dispatch(
       setprofile({ pageid: parent._id, content: content, prev: parent._id })
-    )
-   
+    );
+
     dispatch(changeEditable());
     dispatch(changeMainPageListRender());
     dispatch(PageState(true));
@@ -152,7 +151,11 @@ const CreatePage = () => {
           </div>
           <div className="d-flex flex-column justify-content-center">
             {edit ? (
-              <form action="" onSubmit={handleContent} className="d-flex justify-content-center">
+              <form
+                action=""
+                onSubmit={handleContent}
+                className="d-flex justify-content-center"
+              >
                 <input
                   type="text"
                   defaultValue={page?.data?.content}
@@ -172,30 +175,25 @@ const CreatePage = () => {
                 <h2>{page?.data?.content}</h2>
               </Button>
             )}
-            {parent ?<IconButton className='container m-auto w-25' onClick={()=> dispatch(changesubpageRender("true"))}><NoteAddIcon/></IconButton>  : null}
-            
+            {parent ? (
+              <div className="container m-auto d-flex justify-content-start w-25">
+              <IconButton
+                className=" "
+                onClick={() => dispatch(changesubpageRender("true"))}
+              >
+                <NoteAddIcon />
+              </IconButton>
+              </div>
+            ) : null}
 
-            <div className="d-flex flex-column justify-content-">
-            {show ? null : (
-              <div className=" d-flex flex-column justify-content-center align-items-center">
-                {subpageRender ? (
-                  
-                  <form onSubmit={handlenext} className="">
-                    <input type="text" id="next" ref={reff} /> 
-                  </form>
-                ) : null}
-                <ul className="w-75 ms-5">
-                  {subpage?.data?.subpages.map((value) => (
-                    
-                    <SubpagescomP value={value} />
-                  ))}
-                </ul>
-              </div>
-            )}
-                <Subpagescomp />
-              
-              </div>
-           
+              {show ? null : (
+            <ul className="d-flex flex-column align-items-center  ">
+                
+                
+                <Subpagescomp subpageRender={subpageRender} subpage={subpage} handlenext={handlenext} />
+            </ul>
+              )}
+
             <UploadpageImageModal />
           </div>
         </div>

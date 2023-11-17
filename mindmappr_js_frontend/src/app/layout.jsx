@@ -21,7 +21,7 @@ export default async function RootLayout({ children }) {
     <StoreProvider>
     <html lang="en">
       <body className={inter.className}>
-        <ToastContainer/>
+        
       <SessionProvider session={session}>
         
         {children}

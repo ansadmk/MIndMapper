@@ -13,8 +13,9 @@ import {
   showPageForm,
 } from "@/app/redux/slice";
 import { setprofile } from "@/app/redux/Axioses";
+import SubpagescomP from "./pageCreator";
 
-const Subpagescomp = () => {
+const Subpagescomp = ({subpageRender ,subpage ,handlenext}) => {
   const [state, setState] = useState(null);
   const [show, setShow] = useState(true);
   const reff = useRef(null);
@@ -59,13 +60,24 @@ const Subpagescomp = () => {
   });
 
   return (
-    <>
-      <div className="container d-flex justify-content-center w-100">
-        {showform ? null : (
-          <div id="editorjs" className="prose max-w-full min-h-screen w-100"></div>
-        )}
-      </div>
-    </>
+   
+          <li id="editorjs" className="prose max-w-full min-h-screen d-flex flex-column align-items-center">
+             {subpageRender ? (
+                    <form onSubmit={handlenext} className="">
+                      <input type="text" id="next" ref={reff} />
+                    </form>
+                  ) : null}
+
+                  {subpage?.data?.subpages
+                    .filter((val) => val.title == parent._id)
+                    .map((value) => (
+                      <div className="d-flex flex-column w-100 align-items-start">
+                        <SubpagescomP value={value} />
+                      </div>
+                      
+                    ))}
+          </li>
+      
   );
 };
 

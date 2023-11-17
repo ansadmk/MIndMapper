@@ -28,6 +28,9 @@ import { getUsersForAdmin } from "@/app/redux/Admin/adminSlice";
 import { getUsersList } from "@/app/redux/Admin/AdminAxioses";
 import { useRouter } from "next/navigation";
 import { deleteCookie } from "cookies-next";
+import { toast } from "react-toastify";
+import copy from "copy-to-clipboard";
+import { Snackbar } from "@mui/material";
 
 export default function page() {
   const dispatch = useDispatch();
@@ -43,8 +46,10 @@ export default function page() {
   const pages = useSelector(allPages);
   const search = useSelector(searchitem);
  
+
   return (
     <div className=" d-flex h-75 justify-content-center align-items-center    w-100 container">
+
       <div className="h-75">
       {search ? (
         <div className="d-flex flex-column gap-3">
@@ -93,10 +98,14 @@ export default function page() {
                   </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
-                  <IconButton aria-label="add to favorites">
+                  {/* <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
-                  </IconButton>
-                  <IconButton aria-label="share">
+                  </IconButton> */}
+                  <IconButton   onClick={() =>{
+                  copy(`http://localhost:3000/View/${value._id}`)
+                  alert('copied')
+                } 
+                } >
                     <ShareIcon />
                   </IconButton>
                 </CardActions>
@@ -151,10 +160,13 @@ export default function page() {
                   </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
-                  <IconButton aria-label="add to favorites">
+                  {/* <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
-                  </IconButton>
-                  <IconButton aria-label="share">
+                  </IconButton> */}
+                  <IconButton  onClick={() =>{
+                  copy(`http://localhost:3000/View/${value._id}`)
+                  alert('copied')
+                } }>
                     <ShareIcon />
                   </IconButton>
                 </CardActions>
@@ -164,7 +176,6 @@ export default function page() {
         </div>
       )}
       </div>
-      
     </div>
   );
 }

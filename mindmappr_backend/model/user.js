@@ -5,8 +5,7 @@ const userSchema=mongoose.Schema({
     email:String,
     image:String,
     fullName:String,
-    createdAt:Date,
-    accountinfo:Object,
+    createdAt:Date
   
     
 

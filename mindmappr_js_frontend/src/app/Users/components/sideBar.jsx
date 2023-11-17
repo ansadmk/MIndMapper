@@ -46,7 +46,7 @@ import {
   Stack,
 } from "@mui/material";
 import { FetchPages, FetchUsers, getNoti } from "@/app/redux/Axioses";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import FindInPageIcon from "@mui/icons-material/FindInPage";
 import Asynchronous from "./searchBar";
 import moment from "moment";
@@ -56,6 +56,7 @@ import { getCookie } from "cookies-next";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import NavBar from "./NavBar";
 import SignpostIcon from '@mui/icons-material/Signpost';
+import Loading from "../loading";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -189,6 +190,7 @@ const r=10
   const router = useRouter();
   const cookie = getCookie("token");
   return (
+    
     <Box sx={{ display: "flex" }}>
       {cookie ? null : router.push("/")}
       <CssBaseline />
@@ -466,5 +468,7 @@ const r=10
         <Welcome />
       </Box>
     </Box>
+    
+
   );
 }

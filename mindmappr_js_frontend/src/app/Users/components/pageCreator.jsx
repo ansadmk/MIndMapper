@@ -63,10 +63,8 @@ const Subpagescomp = ({value}) => {
     
   }
   return (
-    <div>
-     
-        {value.title == parent._id ? (
-          <li>
+    
+          <div className="w-100 ">
             { state ?
             <Box
             component="form"
@@ -82,7 +80,7 @@ const Subpagescomp = ({value}) => {
           type='text'
         />
           </Box>:
-            <div className="d-flex ms-5 ps-2" onMouseEnter={()=>setState1(true)} onMouseLeave={()=>setState1(false)}>
+            <div className="d-flex " onMouseEnter={()=>setState1(true)} onMouseLeave={()=>setState1(false)}>
 
               {state1?<div className="d-flex"><IconButton onClick={() => setState(true)}>
                 <EditNoteIcon />
@@ -90,14 +88,12 @@ const Subpagescomp = ({value}) => {
               <IconButton onClick={() => handleDelete(value)}>
                 <DeleteForeverIcon />
               </IconButton></div>:null}
-              <Button variant=""  onClick={() => handleStates(value)}>
+              <Button variant="" className="p-0 mb-1" onClick={() => handleStates(value)}>
                 {value.content}
               </Button>
             </div>}
-          </li>
-        ) : null}
-      
-    </div>
+          </div>
+        
   );
 };
 export default Subpagescomp

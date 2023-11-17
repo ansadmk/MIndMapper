@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const userSchema = mongoose.Schema({
+const noti = mongoose.Schema({
    to:mongoose.SchemaTypes.ObjectId,
   type: String,
   msg: String,
@@ -7,4 +7,4 @@ const userSchema = mongoose.Schema({
   time: Date,
 });
 
-module.exports = mongoose.model("notification", userSchema);
+module.exports = mongoose.model("notification", noti);

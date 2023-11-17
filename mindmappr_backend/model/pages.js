@@ -12,6 +12,7 @@ const pageSchema=mongoose.Schema({
     public:Boolean,
     permitted:[],
     ansester:mongoose.Schema.ObjectId,
+    Likes:[{type:mongoose.Schema.ObjectId ,ref:"Likes"}]
     
 
 })

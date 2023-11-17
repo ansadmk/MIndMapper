@@ -5,7 +5,8 @@ const pageSchema = require("../model/pages");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { uservalid } = require("../model/SchemaValidation");
-const  axios= require( "axios")
+const  axios= require( "axios");
+const likeSchema = require("../model/likeSchema");
 module.exports = {
   register: async (req, res) => {
     const { error, value } = uservalid.validate(req.body);
@@ -312,5 +313,19 @@ module.exports = {
            data:pages
         })
  },
+ addLikes:async(req,res)=>{
+  const {contentId}=req.body
+  await likeSchema.create({
+    contentId:contentId,
+    ownerId:res.token.id,
+    time:Date.now()
+  })
+  await pages.updateOne({_id:contentId},{$push:{Likes:res.token.id}})
+  res.json({
+    status:"success",
+      message:"successfully done",
+      
+   })
+ }
   
 };

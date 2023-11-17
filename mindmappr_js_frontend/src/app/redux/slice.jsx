@@ -4,7 +4,6 @@ import {
   FetchUsers,
   createPageResponse,
   FetchPages,
-  cloudinary,
   setprofile,
   deletePage,
   sendUrl,
@@ -26,8 +25,6 @@ const slice = createSlice({
     FetchPageres: {},
     FetchSpecPageStatus: "standby",
     FetchSpecPageres: {},
-    cloudstatus: "standby",
-    cloudResponse: "",
     setProfile: "",
     deletePagestatus: "",
     uploadurlstatus: "",
@@ -80,16 +77,7 @@ const slice = createSlice({
       .addCase(FetchSpecificPage.rejected, (state) => {
         state.FetchSpecPageStatus = "failed";
       })
-      .addCase(cloudinary.pending, (state) => {
-        state.cloudstatus = "loading";
-      })
-      .addCase(cloudinary.fulfilled, (state, action) => {
-        state.cloudstatus = "succeeded";
-        state.cloudResponse = action.payload;
-      })
-      .addCase(cloudinary.rejected, (state) => {
-        state.cloudstatus = "failed";
-      })
+     
       .addCase(setprofile.fulfilled, (state, action) => {
         state.setProfile = action.payload;
       })

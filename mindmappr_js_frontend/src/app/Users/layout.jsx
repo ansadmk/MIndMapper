@@ -1,11 +1,13 @@
-"use client "
+
 import { Inter } from 'next/font/google'
 import 'bootstrap/dist/css/bootstrap.css'
 import SessionProvider from "./components/sessionProvider"
 import { getServerSession } from 'next-auth'
 import StoreProvider from '../redux/StoreProvider'
+import { Suspense } from 'react'
+import Loading from './loading'
 
-
+const Element=0
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,7 +28,7 @@ export default async function RootLayout({
       
       <body className={inter.className} >
        
-      <SessionProvider session={session}>{children}</SessionProvider>
+      <Suspense fallback={<Loading/>}> <SessionProvider session={session}>{children}</SessionProvider></Suspense>
      
        
         </body>
