@@ -5,9 +5,10 @@ import Sign from './sign'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { Box, TextField } from '@mui/material'
+import { axiosInstance } from '../redux/axiosInstance'
 
 
-const register = () => {
+const register = ({close}) => {
   const router=useRouter()
   const handleSub= async (e)=>{
     
@@ -19,15 +20,16 @@ const register = () => {
     
     if(password==confirm){
       
-     const res= await axios.post("http://127.0.0.1:4000/api/user/register",{
+     const res= await axiosInstance.post("/api/user/register",{
       "username":username,
       "email":email,
       "password":password
     })
+    console.log(res);
      if(res.data.status=="success"){
           
-          alert("successfully logged in")
-     
+          alert("successfully registered in")
+           close()
      }else{
       
         alert("failed")

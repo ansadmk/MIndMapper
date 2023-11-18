@@ -5,11 +5,11 @@ const notiSchema = require("../model/notification");
 module.exports = {
   getUsers: async (req, res) => {
     const {pageno}=req.body
-    
-    const user = await userSchema.find()
-    
-    const user1 = await userSchema.find().limit(pageno*10).skip((pageno-1)*10)
-    console.log(user1);
+    console.log(pageno);
+    // const user = await userSchema.find()
+    if (!pageno) {
+      const user = await userSchema.find()
+    console.log(user);
     const pages = await pageSchema.find();
     if (user) {
       res.json({
@@ -19,6 +19,18 @@ module.exports = {
         pages: pages,
       });
     }
+    }else if(pageno){
+    const user1 = await userSchema.find().limit(pageno*10).skip((pageno-1)*10)
+    console.log(user1);
+    const pages = await pageSchema.find();
+    if (user1) {
+      res.json({
+        status: "success",
+        message: "fetched successfully",
+        data: user1,
+        pages: pages,
+      });
+    }}
   },
   notify: async (req, res) => {
     const { msg, sub, type, to } = req.body;

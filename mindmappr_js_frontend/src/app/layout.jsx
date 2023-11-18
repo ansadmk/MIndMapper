@@ -5,7 +5,8 @@ import SessionProvider from "./Users/components/sessionProvider"
 import { getServerSession } from 'next-auth'
 import StoreProvider from "./redux/StoreProvider";
 import { ToastContainer } from "react-toastify";
-
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,9 +24,9 @@ export default async function RootLayout({ children }) {
       <body className={inter.className}>
         
       <SessionProvider session={session}>
-        
+        <Suspense fallback={<Loading/>}>
         {children}
-       
+        </Suspense>
         </SessionProvider>
         
       </body>

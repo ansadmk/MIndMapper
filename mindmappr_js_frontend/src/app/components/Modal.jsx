@@ -45,7 +45,7 @@ const popup = () => {
             <Modal.Title>register</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Register/>
+            <Register close={handlereg}/>
           </Modal.Body>
           
         </Modal>

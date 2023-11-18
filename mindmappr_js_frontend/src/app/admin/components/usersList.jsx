@@ -30,7 +30,7 @@ const usersList = () => {
   const users=useSelector(getUsersForAdmin)
   console.log(users,"list");
   useEffect(()=>{
-    function dis(){dispatch(getUsersList())}
+    function dis(){dispatch(getUsersList({pageno:1}))}
     dis()
     if (!window.location.hash) {
       window.location = window.location + "#loaded";
@@ -38,19 +38,21 @@ const usersList = () => {
       location.reload(false);
     }
   },[])
-  
+  console.log(parseFloat(users?.data?.length)/parseFloat(10));
   const changeuser=(value)=>{
       dispatch(setCurrentUser(value))
       router.push("/admin/detailsPage")
   }
   const [page, setPage] =useState(1);
   const handleChange = (event, value) => {
+    console.log(value);
+    dispatch(getUsersList({pageno:value}))
     setPage(value);
   };
   return (
     <div className='d-flex flex-column  justify-content-center gap-0 align-items-center  h-100 w-100 mt-5'>
 
-     { (search?<Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{users?.data?.map(value=>
+     { (search?<Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{users?.data?.map((value)=>
       value.username.toLowerCase().includes(search.toLowerCase())?
     <Item
       sx={{
@@ -70,10 +72,7 @@ const usersList = () => {
     </Item>:null
     
   )} 
-   <Stack spacing={2}>
-    <Typography>Page: {page}</Typography>
-    <Pagination count={3} page={page} onChange={handleChange} />
-  </Stack>
+   
   </Box>:
     <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{users?.data?.map(value=>
     <Item
@@ -97,7 +96,7 @@ const usersList = () => {
   )} 
   <Stack spacing={2}>
     <Typography>Page: {page}</Typography>
-    <Pagination count={3} page={page} onChange={handleChange} />
+    <Pagination count={users?.data?.length/10<1 ?  1: users?.data?.length/10+1} page={page} onChange={handleChange} />
   </Stack>
   </Box>)}
   

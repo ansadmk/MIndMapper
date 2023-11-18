@@ -281,7 +281,8 @@ module.exports = {
            
       },
       getAllPages:async(req,res)=>{
-             const pages=await pageSchema.find({public:true})
+        const {pageno}=req.body
+             const pages=await pageSchema.find({public:true}).limit(pageno*10).skip((pageno-1)*10)
              const user = await userSchema.find();
 
              res.json({
@@ -326,6 +327,7 @@ module.exports = {
       message:"successfully done",
       
    })
- }
+ },
+ 
   
 };

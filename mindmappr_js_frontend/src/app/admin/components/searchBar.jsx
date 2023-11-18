@@ -4,6 +4,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { changeSearch, fetchpageres } from "@/app/redux/slice";
 import SearchIcon from '@mui/icons-material/Search';
 import { useRouter } from "next/navigation";
+import { getUsersList } from "@/app/redux/Admin/AdminAxioses";
 export default function Asynchronous() {
   const dispatch = useDispatch();
   const pages = useSelector(fetchpageres);
@@ -27,7 +28,11 @@ export default function Asynchronous() {
           ),
         }}
         variant="outlined"
-        onChange={(e)=>router.push(`/admin?values=${e.target.value}`)}
+        onChange={(e)=>{
+          dispatch(getUsersList())
+          router.push(`/admin?values=${e.target.value}`)
+      
+      }}
       />
       
     </Box>

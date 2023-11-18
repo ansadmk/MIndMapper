@@ -1,10 +1,12 @@
 
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Underline from '@editorjs/underline';
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import Table from "@editorjs/table";
 import List from "@editorjs/list";
+import Translate from '@editorjs/translate-inline';
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeeditor,
@@ -14,7 +16,7 @@ import {
 } from "@/app/redux/slice";
 import { setprofile } from "@/app/redux/Axioses";
 import SubpagescomP from "./pageCreator";
-
+import Checklist from '@editorjs/checklist'
 const Subpagescomp = ({subpageRender ,subpage ,handlenext}) => {
   const [state, setState] = useState(null);
   const [show, setShow] = useState(true);
@@ -32,7 +34,15 @@ const Subpagescomp = ({subpageRender ,subpage ,handlenext}) => {
         header: Header,
         table: Table,
         list: List,
+       
+        checklist: {
+          class: Checklist,
+          inlineToolbar: true,
+        },
+        underline:Underline,
+        // translator:Translate
       },
+      
       placeholder: "TYPE HERE",
 
       data: parent.subpages,
@@ -61,7 +71,7 @@ const Subpagescomp = ({subpageRender ,subpage ,handlenext}) => {
 
   return (
    
-          <li id="editorjs" className="prose max-w-full min-h-screen d-flex flex-column align-items-center">
+          <li id="editorjs" className="prose max-w-full min-h-screen d-flex flex-column align-items-center gap-0  ">
              {subpageRender ? (
                     <form onSubmit={handlenext} className="">
                       <input type="text" id="next" ref={reff} />
