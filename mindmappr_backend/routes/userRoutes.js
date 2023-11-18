@@ -15,7 +15,7 @@ router.patch('/setprofile',auth,handle(setProfile))
 router.delete('/deletepage/:id/:content',auth,handle(deletePage))
 router.put('/coveravatar',auth,handle(setCoverAvatar))
 router.get('/getUsersNoti',auth,handle(getNoti))
-router.get('/getAllPages',auth,handle(getAllPages))
+router.post('/getAllPages',auth,handle(getAllPages))
 router.get('/getAllPagesPublic',handle(getAllPagesPublic))
 router.put('/setPublic',auth,handle(setPublic))
 module.exports=router

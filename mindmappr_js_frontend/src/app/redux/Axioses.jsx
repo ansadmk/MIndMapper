@@ -68,7 +68,7 @@ export const getNoti = createAsyncThunk("redux/getNoti", async () => {
   return respo.data;
 });
 export const getAllPages = createAsyncThunk("redux/getAllPages", async (data) => {
-  const respo = await axiosInstance.get("/api/user/getAllPages",data);
+  const respo = await axiosInstance.post("/api/user/getAllPages",data);
   return respo.data;
 });
 export const setPublic = createAsyncThunk(

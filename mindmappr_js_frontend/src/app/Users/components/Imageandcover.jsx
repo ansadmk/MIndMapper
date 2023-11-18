@@ -19,7 +19,7 @@ const ImageForPages = () => {
   return (
     
     <div
-      className="w-75 d-flex justify-content-center flex-column h-100  "
+      className="w-100 d-flex justify-content-center flex-column h-100  "
       onMouseEnter={() => setIsShown(true)}
       onMouseLeave={() => setIsShown(false)}
 
@@ -61,7 +61,7 @@ const ImageForPages = () => {
       >
 
         {parent.avatar ? (
-          <div className="w-100 d-flex justify-content-center">
+          <div className="w-100 d-flex justify-content-start ms-5">
             <Avatar src={parent.avatar} sx={{maxHeight:120,maxWidth:120}}  className="bg-white h-100 w-100  "/>
           </div>
         ) : null}

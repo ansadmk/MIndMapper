@@ -69,6 +69,7 @@ const register = ({close}) => {
          
           variant="filled"
           type='text'
+          required
         />
        <TextField
           id="email"
@@ -77,12 +78,13 @@ const register = ({close}) => {
           
           variant="filled"
           type="email"
+          required
         />
         <TextField
           id="password"
           label="Password"
           placeholder="Enter your password here"
-         
+         required
           variant="filled"
           type="password"
         />
@@ -90,7 +92,7 @@ const register = ({close}) => {
           id="confirm"
           label="Confirm Password"
           placeholder="Confirm your password here"
-          
+          required
           variant="filled"
           type="password"
         />

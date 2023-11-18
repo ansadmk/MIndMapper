@@ -58,6 +58,7 @@ const login = () => {
         placeholder="Enter your username here"
         variant="filled"
         type="text"
+        required
       />
       <TextField
         id="password"

@@ -6,7 +6,8 @@ import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import Table from "@editorjs/table";
 import List from "@editorjs/list";
-import Translate from '@editorjs/translate-inline';
+import InlineCode from '@editorjs/inline-code';
+import Paragraph from '@editorjs/paragraph';
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeeditor,
@@ -34,14 +35,25 @@ const Subpagescomp = ({subpageRender ,subpage ,handlenext}) => {
         header: Header,
         table: Table,
         list: List,
-       
+        
         checklist: {
           class: Checklist,
           inlineToolbar: true,
         },
         underline:Underline,
-        // translator:Translate
+        InlineCode: {
+          class: InlineCode,
+          shortcut: 'CMD+SHIFT+M',
+        },
+        
+        paragraph: {
+          class: Paragraph,
+          inlineToolbar: true,
+          preserveBlank:true
+        },
+       
       },
+      
       
       placeholder: "TYPE HERE",
 
@@ -71,7 +83,7 @@ const Subpagescomp = ({subpageRender ,subpage ,handlenext}) => {
 
   return (
    
-          <li id="editorjs" className="prose max-w-full min-h-screen d-flex flex-column align-items-center gap-0  ">
+          <li id="editorjs" className="  ">
              {subpageRender ? (
                     <form onSubmit={handlenext} className="">
                       <input type="text" id="next" ref={reff} />
@@ -81,7 +93,7 @@ const Subpagescomp = ({subpageRender ,subpage ,handlenext}) => {
                   {subpage?.data?.subpages
                     .filter((val) => val.title == parent._id)
                     .map((value) => (
-                      <div className="d-flex flex-column w-100 align-items-start">
+                      <div className="d-flex flex-column w-100">
                         <SubpagescomP value={value} />
                       </div>
                       

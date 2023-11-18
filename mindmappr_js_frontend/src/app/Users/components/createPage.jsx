@@ -125,7 +125,7 @@ const CreatePage = () => {
     dispatch(PageState(true));
   };
   return (
-    <div className="  ">
+    <div className="">
       {show ? (
         <form
           className={`d-flex ${
@@ -149,7 +149,7 @@ const CreatePage = () => {
           >
             {parent ? <ImageForPages /> : null}
           </div>
-          <div className="d-flex flex-column justify-content-center">
+          <div className="d-flex flex-column justify-content-start">
             {edit ? (
               <form
                 action=""
@@ -169,8 +169,8 @@ const CreatePage = () => {
                 onClick={() => {
                   dispatch(changeEditable("true"));
                 }}
-                style={{ zIndex: "10" }}
-                className=""
+                
+                className="w-25"
               >
                 <h2>{page?.data?.content}</h2>
               </Button>
@@ -187,7 +187,7 @@ const CreatePage = () => {
             ) : null}
 
               {show ? null : (
-            <ul className="d-flex flex-column align-items-center  ">
+            <ul className="d-flex flex-column align-items-start  justify-content-start   ">
                 
                 
                 <Subpagescomp subpageRender={subpageRender} subpage={subpage} handlenext={handlenext} />

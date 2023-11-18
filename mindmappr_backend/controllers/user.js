@@ -282,13 +282,16 @@ module.exports = {
       },
       getAllPages:async(req,res)=>{
         const {pageno}=req.body
-             const pages=await pageSchema.find({public:true}).limit(pageno*10).skip((pageno-1)*10)
+        console.log(pageno);
+             const pages1=await pageSchema.find({public:true,role:"main"}).limit(pageno*10).skip((pageno-1)*10)
+             const pages=await pageSchema.find({public:true,role:"main"})
              const user = await userSchema.find();
-
+               console.log(pages1);
              res.json({
               status:"success",
                 message:"successfully fetched",
                 data:pages,
+                data1:pages1,
                 user:user
              })
       },

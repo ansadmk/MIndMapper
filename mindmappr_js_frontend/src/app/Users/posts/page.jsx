@@ -31,150 +31,177 @@ import { deleteCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import copy from "copy-to-clipboard";
 import { Snackbar } from "@mui/material";
+import { Pagination } from "@mui/material";
+import Stack from "@mui/material/Stack";
 
 export default function page() {
   const dispatch = useDispatch();
   const router = useRouter();
   useEffect(() => {
-    dispatch(getAllPages());
+    dispatch(getAllPages({ pageno: 1 }));
     dispatch(FetchUsers());
     dispatch(getUsersList());
   }, [dispatch]);
-  
+
   const users = useSelector(getUsersForAdmin);
   console.log(users);
   const pages = useSelector(allPages);
   const search = useSelector(searchitem);
- 
+  const [page, setPage] = useState(1);
+  const handleChange1 = (event, value) => {
+    console.log(value);
+    dispatch(getAllPages({ pageno: value }));
+    setPage(value);
+  };
 
   return (
     <div className=" d-flex h-75 justify-content-center align-items-center    w-100 container">
-
       <div className="h-75">
-      {search ? (
-        <div className="d-flex flex-column gap-3">
-          {pages?.data?.map((value) =>
-            value.public && value.role == "main" && value.content.toLowerCase().includes(search.toLowerCase()) ? (
-              <Card sx={{ maxWidth: 345 }} className=" w-100 ">
-                <CardHeader
-                  avatar={
-                    value.avatar ? (
-                      <Avatar
-                        src={
-                          pages?.user?.filter(
-                            (val) => val._id == value.owner
-                          )[0].image
-                        }
-                      />
-                    ) : (
-                      <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                        {pages?.user
-                          ?.filter((val) => val._id == value.owner)[0]
-                          .username.charAt(0)}
-                      </Avatar>
-                    )
-                  }
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
-                  title={
-                    pages?.user?.filter((val) => val._id == value.owner)[0]
-                      .username
-                  }
-                  subheader={moment(value.createdAt).fromNow()}
-                />
-                <CardMedia
-                  component="img"
-                  height="194"
-                  image={value.avatar}
-                  alt=""
-                  onClick={() => router.push(`/View/${value._id}`)}
-                />
-                <CardContent>
-                  <Typography variant="body2" color="text.secondary">
-                    {value.content}
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                  {/* <IconButton aria-label="add to favorites">
+        {search ? (
+          <div className="d-flex flex-column gap-3">
+            {pages?.data?.map((value) =>
+              (value.public &&
+                value.role == "main" &&
+                value.content.toLowerCase().includes(search.toLowerCase())) ||
+              pages?.user
+                ?.filter((val) => val._id == value.owner)[0]
+                .username.toLowerCase()
+                .includes(search.toLowerCase()) ? (
+                <Card sx={{ maxWidth: 345 }} className=" w-100 ">
+                  <CardHeader
+                    avatar={
+                      value.avatar ? (
+                        <Avatar
+                          src={
+                            pages?.user?.filter(
+                              (val) => val._id == value.owner
+                            )[0].image
+                          }
+                        />
+                      ) : (
+                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                          {pages?.user
+                            ?.filter((val) => val._id == value.owner)[0]
+                            .username.charAt(0)}
+                        </Avatar>
+                      )
+                    }
+                    action={
+                      <IconButton aria-label="settings">
+                        <MoreVertIcon />
+                      </IconButton>
+                    }
+                    title={
+                      pages?.user?.filter((val) => val._id == value.owner)[0]
+                        .username
+                    }
+                    subheader={moment(value.createdAt).fromNow()}
+                  />
+                  <CardMedia
+                    component="img"
+                    height="194"
+                    image={value.avatar}
+                    alt=""
+                    onClick={() => router.push(`/View/${value._id}`)}
+                  />
+                  <CardContent>
+                    <Typography variant="body2" color="text.secondary">
+                      {value.content}
+                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    {/* <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
                   </IconButton> */}
-                  <IconButton   onClick={() =>{
-                  copy(`http://localhost:3000/View/${value._id}`)
-                  alert('copied')
-                } 
-                } >
-                    <ShareIcon />
-                  </IconButton>
-                </CardActions>
-              </Card>
-            ) : null
-          )}
-        </div>
-      ) : (
-        <div className="d-flex flex-column gap-3">
-          {pages?.data?.map((value) =>
-            value.public && value.role == "main" ? (
-              <Card sx={{ maxWidth: 345 }} className="col w-100 ">
-                <CardHeader
-                  avatar={
-                    value.avatar ? (
-                      <Avatar
-                        src={
-                          pages?.user?.filter(
-                            (val) => val._id == value.owner
-                          )[0].image
-                        }
-                      />
-                    ) : (
-                      <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                        {pages?.user
-                          ?.filter((val) => val._id == value.owner)[0]
-                          .username.charAt(0)}
-                      </Avatar>
-                    )
-                  }
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
+                    <IconButton
+                      onClick={() => {
+                        copy(`http://localhost:3000/View/${value._id}`);
+                        alert("copied");
+                      }}
+                    >
+                      <ShareIcon />
                     </IconButton>
-                  }
-                  title={
-                    pages?.user?.filter((val) => val._id == value.owner)[0]
-                      .username
-                  }
-                  subheader={moment(value.createdAt).fromNow()}
-                />
-                <CardMedia
-                  component="img"
-                  height="194"
-                  image={value.avatar}
-                  alt=""
-                  onClick={() => router.push(`/View/${value._id}`)}
-                />
-                <CardContent>
-                  <Typography variant="body2" color="text.secondary">
-                    {value.content}
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                  {/* <IconButton aria-label="add to favorites">
+                  </CardActions>
+                </Card>
+              ) : null
+            )}
+          </div>
+        ) : (
+          <div className="d-flex flex-column gap-3">
+            {pages?.data1?.map((value) =>
+              value.public && value.role == "main" ? (
+                <Card sx={{ maxWidth: 345 }} className="col w-100 ">
+                  <CardHeader
+                    avatar={
+                      value.avatar ? (
+                        <Avatar
+                          src={
+                            pages?.user?.filter(
+                              (val) => val._id == value.owner
+                            )[0].image
+                          }
+                        />
+                      ) : (
+                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                          {pages?.user
+                            ?.filter((val) => val._id == value.owner)[0]
+                            .username.charAt(0)}
+                        </Avatar>
+                      )
+                    }
+                    action={
+                      <IconButton aria-label="settings">
+                        <MoreVertIcon />
+                      </IconButton>
+                    }
+                    title={
+                      pages?.user?.filter((val) => val._id == value.owner)[0]
+                        .username
+                    }
+                    subheader={moment(value.createdAt).fromNow()}
+                  />
+                  <CardMedia
+                    component="img"
+                    height="194"
+                    image={value.avatar}
+                    alt=""
+                    onClick={() => router.push(`/View/${value._id}`)}
+                  />
+                  <CardContent>
+                    <Typography variant="body2" color="text.secondary">
+                      {value.content}
+                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    {/* <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
                   </IconButton> */}
-                  <IconButton  onClick={() =>{
-                  copy(`http://localhost:3000/View/${value._id}`)
-                  alert('copied')
-                } }>
-                    <ShareIcon />
-                  </IconButton>
-                </CardActions>
-              </Card>
-            ) : null
-          )}
-        </div>
-      )}
+                    <IconButton
+                      onClick={() => {
+                        copy(`http://localhost:3000/View/${value._id}`);
+                        alert("copied");
+                      }}
+                    >
+                      <ShareIcon />
+                    </IconButton>
+                  </CardActions>
+                </Card>
+              ) : null
+            )}
+            <Stack spacing={2}>
+              <Typography>Page: {page}</Typography>
+              <Pagination
+                count={
+                  pages?.data1?.length / 10 < 1
+                    ? 1
+                    : pages?.data1?.length / 10 + 1
+                }
+                page={page}
+                onChange={handleChange1}
+              />
+            </Stack>
+          </div>
+        )}
       </div>
     </div>
   );
