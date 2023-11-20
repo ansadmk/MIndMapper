@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import SessionProvider from "./Users/components/sessionProvider"
 import { getServerSession } from 'next-auth'
 import StoreProvider from "./redux/StoreProvider";
-import { ToastContainer } from "react-toastify";
 import { Suspense } from "react";
 import Loading from "./loading";
 

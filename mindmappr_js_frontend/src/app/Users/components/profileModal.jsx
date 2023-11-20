@@ -17,7 +17,12 @@ import { cloudinary, setprofile } from "@/app/redux/Axioses";
 import { useState } from "react";
 import Image from "next/image";
 import upload from "@/app/components/upload";
-
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { IconButton } from '@mui/material';
+import { Box, TextField } from "@mui/material";
+import {
+  Avatar
+} from "@mui/material";
 const Profile = () => {
   const [files, setfile] = useState("");
   const profilestats = useSelector(ProfileStats);
@@ -70,23 +75,21 @@ const Profile = () => {
             <li class="list-group-item active" aria-current="true">
               <div class="  d-flex gap-3 align-items-center">
                 {user?.data?.image ? (
-                  <img src={user?.data?.image} alt="" width={64} height={64} />
+                   <Avatar
+                   alt="Natacha"
+                   src={user?.data?.image}
+                   className="fs-1"
+                 />
                 ) : (
-                  <Image
-                    src="/user.png"
-                    alt="me"
-                    width="64"
-                    height="64"
-                    className="me-3"
-                  />
+                  <Avatar>
+                    {user?.data?.username.charAt(0).toUpperCase()}
+                  </Avatar>
                 )}
-                 
-                <input
-                  type="file"
-                  className="h-25  "
-                  onChange={(e) => handleCloud(e)}
-                  
-                />
+                 <IconButton className='position-relative '>
+   <CloudUploadIcon/>
+  <input type="file" style={{opacity:'0'}} className='w-25  position-absolute' onChange={(e)=>handleCloud(e)}/>
+  </IconButton> 
+              
                 <Button
                   variant=""
                   onClick={() =>handleurl()}                  
@@ -99,12 +102,15 @@ const Profile = () => {
             <li class="list-group-item">
               
                 <form onSubmit={handleusername} className="d-flex justify-content-center gap-5">
-                  <input
-                    type="text"
-                    id="username"
-                    placeholder="Change Username"
-                    defaultValue={user?.data?.username}
-                  />
+                <TextField
+        id="username"
+        label="Username"
+        placeholder="Enter your username here"
+        variant="filled"
+        type="text"
+        defaultValue={user?.data?.username}
+        required
+      />
                   <Button type="submit">Change Username</Button>
                 </form>
               

@@ -79,13 +79,13 @@ export default function Asynchronous() {
           InputProps={{
             ...params.InputProps,
             endAdornment: (
-              <>
+              <div>
                 {loading ? (
                   <CircularProgress color="inherit" size={20} />
                 ) : null}
                 {params.InputProps.endAdornment}
 
-              </>
+              </div>
             ),
           }}
         />

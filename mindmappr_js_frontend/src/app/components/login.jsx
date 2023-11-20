@@ -30,7 +30,7 @@ const login = () => {
     if (res.data.status === "success") {
       if (res.data.message == "adminlogged") {
         setCookie("adminToken", res.data.jwt_token);
-
+         console.log('hhh');
         router.push("/admin");
       } else {
         setCookie("token", res.data.jwt_token);

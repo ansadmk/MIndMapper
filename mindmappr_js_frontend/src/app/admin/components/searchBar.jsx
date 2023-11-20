@@ -13,7 +13,7 @@ export default function Asynchronous() {
  
 
   return (
-    <>
+    <div>
      <Box sx={{ '& > :not(style)': { m: 1 } }}>
       
       <TextField
@@ -36,6 +36,6 @@ export default function Asynchronous() {
       />
       
     </Box>
-    </>
+    </div>
   );
 }

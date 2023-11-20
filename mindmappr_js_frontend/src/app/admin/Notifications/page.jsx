@@ -54,7 +54,7 @@ const page = () => {
        <ListItemText
          primary={value.sub}
          secondary={
-           <React.Fragment>
+           <div>
              <Typography
                sx={{ display: "inline" }}
                component="span"
@@ -64,7 +64,7 @@ const page = () => {
                {value.msg}
                {' '}{' '} {moment(value.time).fromNow()}
              </Typography>
-           </React.Fragment>
+           </div>
          }
        />
      </ListItem>

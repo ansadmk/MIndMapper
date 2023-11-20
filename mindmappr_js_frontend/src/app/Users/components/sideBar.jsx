@@ -229,14 +229,14 @@ const r=10
           onClick={() => handledis()}
         >
           {data?.user ? (
-            <>
+            <div>
               <img
                 src={data?.user?.image}
                 alt=""
                 className="img-fluid w-25 h-25"
               />
               <div className="text-center mt-4">hello {data?.user?.name}</div>
-            </>
+            </div>
           ) : (
             <Stack direction="row">
               {user?.data?.image ? (
@@ -352,7 +352,7 @@ const r=10
                       <ListItemText
                         primary={data.sub}
                         secondary={
-                          <>
+                          <div>
                             <Typography
                               sx={{ display: "inline" }}
                               component="span"
@@ -361,7 +361,7 @@ const r=10
                             >
                               {data.msg} {moment(data.time).fromNow()}
                             </Typography>
-                          </>
+                          </div>
                         }
                       />
                     </ListItem>

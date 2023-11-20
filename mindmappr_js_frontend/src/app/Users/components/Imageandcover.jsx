@@ -30,7 +30,7 @@ const ImageForPages = () => {
         onMouseLeave={() => setIsShown(false)}
         className={`col  ${parent.cover ? "h-100":"h-100 "}`}
       >
-        <Card className=" w-100 ">
+        <Card className=" w-100 container-fluid ">
         {isShown ? (
           <IconButton
             onClick={() => dispatch(changeuploadcover({ cover: "true" }))}
@@ -62,7 +62,7 @@ const ImageForPages = () => {
 
         {parent.avatar ? (
           <div className="w-100 d-flex justify-content-start ms-5">
-            <Avatar src={parent.avatar} sx={{maxHeight:120,maxWidth:120}}  className="bg-white h-100 w-100  "/>
+            <Avatar src={parent.avatar} alt='' sx={{width:120,height:120}}/>
           </div>
         ) : null}
         {isShown ? (

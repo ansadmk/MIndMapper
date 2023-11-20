@@ -56,10 +56,13 @@ export default function page() {
 
   return (
     <div className=" d-flex h-75 justify-content-center align-items-center    w-100 container">
-      <div className="h-75">
+      <div className="h-75 ">
         {search ? (
-          <div className="d-flex flex-column gap-3">
-            {pages?.data?.map((value) =>
+          <div className="gap-1 row">
+            
+            <h1>showing related to {search}</h1>
+          {
+            pages?.data?.map((value) =>
               (value.public &&
                 value.role == "main" &&
                 value.content.toLowerCase().includes(search.toLowerCase())) ||
@@ -67,7 +70,7 @@ export default function page() {
                 ?.filter((val) => val._id == value.owner)[0]
                 .username.toLowerCase()
                 .includes(search.toLowerCase()) ? (
-                <Card sx={{ maxWidth: 345 }} className=" w-100 ">
+                <Card sx={{ maxWidth: 345 }} className="  col-3">
                   <CardHeader
                     avatar={
                       value.avatar ? (
@@ -127,10 +130,10 @@ export default function page() {
             )}
           </div>
         ) : (
-          <div className="d-flex flex-column gap-3">
+          <div className="row gap-1">
             {pages?.data1?.map((value) =>
               value.public && value.role == "main" ? (
-                <Card sx={{ maxWidth: 345 }} className="col w-100 ">
+                <Card sx={{ maxWidth: 345 }} className="col-3  ">
                   <CardHeader
                     avatar={
                       value.avatar ? (

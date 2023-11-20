@@ -10,10 +10,10 @@ import MiniDrawer from "./components/sideBar"
 export default function Home() {
   
   return (
-    <>
+    <div>
     <MiniDrawer/>
          <Profile/>
-    </>
+    </div>
     // <div className="d-flex align-items-center flex-column h-100">
     //       <Welcome/>
     //       <Profile/>
