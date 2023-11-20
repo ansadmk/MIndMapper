@@ -55,7 +55,7 @@ function adminPanel() {
   };
 
   return (
-    <AppBar position="static" color="">
+    <AppBar position="sticky" color="">
       {cookie ? null : router.push("/")}
       <Container maxWidth="xl">
         <Toolbar disableGutters>

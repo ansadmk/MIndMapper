@@ -70,7 +70,7 @@ export default function page() {
                 ?.filter((val) => val._id == value.owner)[0]
                 .username.toLowerCase()
                 .includes(search.toLowerCase()) ? (
-                <Card sx={{ maxWidth: 345 }} className="  col-3">
+                <Card sx={{ maxWidth: 345 }} className="  col-md-3 col-12">
                   <CardHeader
                     avatar={
                       value.avatar ? (
@@ -133,7 +133,7 @@ export default function page() {
           <div className="row gap-1">
             {pages?.data1?.map((value) =>
               value.public && value.role == "main" ? (
-                <Card sx={{ maxWidth: 345 }} className="col-3  ">
+                <Card sx={{ maxWidth: 345 }} className="col-md-3 col-12   ">
                   <CardHeader
                     avatar={
                       value.avatar ? (

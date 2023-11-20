@@ -50,9 +50,9 @@ const usersList = () => {
     setPage(value);
   };
   return (
-    <div className='d-flex flex-column  justify-content-center gap-0 align-items-center  h-100 w-100 mt-5'>
-
-     { (search?<Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{users?.data?.map((value)=>
+    <div className='d-flex flex-column  justify-content-center gap-0 align-items-center   w-100 mt-5'>
+   
+     { (search?<Box sx={{ flexGrow: 1, overflow: 'auto', px: 3 }} >{users?.data?.map((value)=>
       value.username.toLowerCase().includes(search.toLowerCase())?
     <Item
       sx={{

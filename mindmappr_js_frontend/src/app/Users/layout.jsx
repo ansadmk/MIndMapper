@@ -6,6 +6,7 @@ import { getServerSession } from 'next-auth'
 import StoreProvider from '../redux/StoreProvider'
 import { Suspense } from 'react'
 import Loading from './loading'
+import Profile from "./components/profileModal"
 
 const Element=0
 
@@ -30,7 +31,7 @@ export default async function RootLayout({
        
       <Suspense fallback={<Loading/>}> <SessionProvider session={session}>{children}</SessionProvider></Suspense>
      
-       
+      <Profile/>
         </body>
     </html>
     </StoreProvider>
