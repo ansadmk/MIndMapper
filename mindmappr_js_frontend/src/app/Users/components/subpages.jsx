@@ -83,7 +83,7 @@ const Subpagescomp = ({subpageRender ,subpage ,handlenext}) => {
 
   return (
    
-          <li id="editorjs" className="  ">
+          <li id="editorjs" className="  " style={{overflowWrap: "break-word"}}>
              {subpageRender ? (
                     <form onSubmit={handlenext} className="">
                       <input type="text" id="next" ref={reff} />

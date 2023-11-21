@@ -94,7 +94,7 @@ module.exports = {
   createPages: async (req, res) => {
     const { parent, content, role, public1 } = req.body;
 
-    console.log(public1,role,'hello2');
+    
     if(role!="main"){
       const pagefind=await pageSchema.findOne({_id:parent})
       if (public1) {
@@ -107,7 +107,7 @@ module.exports = {
           ansester:pagefind.ansester,
           public:true
         });
-        console.log(page1,"public");
+       
         if (page1) {
           res.json({
             status: "success",
@@ -129,7 +129,7 @@ module.exports = {
           role: role,
           ansester:pagefind.ansester
         });
-        console.log(page,"notpublic");
+        
 
         if (page) {
           res.json({
@@ -201,7 +201,7 @@ module.exports = {
   },
   setProfile:async(req,res)=>{
     const {Image,name,pageId,content,prev,sub,test}=req.body
-    console.log(test,pageId);
+    
     if(Image || name){
   await userSchema.updateOne({_id:res.token.id}, { $set:{ image: Image ,username:name}})
     res.json({
@@ -263,7 +263,7 @@ module.exports = {
            const common=await notiSchema.find({type:"public"})
            const private=await notiSchema.find({to:res.token.id})
            const all=common.concat(private)
-           console.log(common);
+           
            if (all) {
             res.json({
               status:"success",
@@ -282,11 +282,11 @@ module.exports = {
       },
       getAllPages:async(req,res)=>{
         const {pageno}=req.body
-        console.log(pageno);
+       
              const pages1=await pageSchema.find({public:true,role:"main"}).limit(pageno*10).skip((pageno-1)*10)
              const pages=await pageSchema.find({public:true,role:"main"})
              const user = await userSchema.find();
-               console.log(pages1);
+              
              res.json({
               status:"success",
                 message:"successfully fetched",
@@ -319,12 +319,14 @@ module.exports = {
  },
  addLikes:async(req,res)=>{
   const {contentId}=req.body
-  await likeSchema.create({
+  const like=await likeSchema.create({
     contentId:contentId,
     ownerId:res.token.id,
     time:Date.now()
   })
-  await pages.updateOne({_id:contentId},{$push:{Likes:res.token.id}})
+  console.log(like);
+  
+  await pages.updateOne({_id:contentId},{$push:{Likes:like._id}})
   res.json({
     status:"success",
       message:"successfully done",

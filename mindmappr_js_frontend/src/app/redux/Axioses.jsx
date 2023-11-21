@@ -21,7 +21,7 @@ export const FetchPages = createAsyncThunk("redux/fetchpages", async () => {
 export const FetchSpecificPage = createAsyncThunk(
   "redux/fetchspecpages",
   async (id) => {
-    console.log(id);
+    
     const respo = await axiosInstance.get(`/api/user/getPages/${id}`);
     return respo.data;
   }
@@ -30,7 +30,7 @@ export const FetchSpecificPage = createAsyncThunk(
 export const setprofile = createAsyncThunk(
   "redux/setprofile",
   async ({ url, name, pageid, content, prev, sub, test }) => {
-    console.log(test);
+    
     const response = await axiosInstance.patch("/api/user/setprofile", {
       Image: url,
       name: name,
@@ -74,7 +74,7 @@ export const getAllPages = createAsyncThunk("redux/getAllPages", async (data) =>
 export const setPublic = createAsyncThunk(
   "redux/setPublic",
   async ({ id, unpub }) => {
-    console.log(id, unpub);
+   
     const respo = await axiosInstance.put("/api/user/setPublic", { id, unpub });
     return respo.data;
   }
@@ -83,6 +83,13 @@ export const getAllPagesPublic = createAsyncThunk(
   "redux/getAllPagesPublic",
   async () => {
     const respo = await axiosInstance.get("/api/user/getAllPagesPublic");
+    return respo.data;
+  }
+);
+export const setlike = createAsyncThunk(
+  "redux/setlike",
+  async (data) => {
+    const respo = await axiosInstance.post("/api/user/like",data);
     return respo.data;
   }
 );

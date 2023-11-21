@@ -28,11 +28,11 @@ import { Avatar} from "@mui/material"
      dispatch(getAllPagesPublic())
   },[dispatch])
  const pages=  useSelector(PagesPublic)
- console.log(pages);
+ 
  const [state,setState]=useState(true)
  const [values,setValues]=useState('')
  const handlesub = async (value) => {
-     console.log(value.subpages);
+    
      if(state){
     await initializeEditor(value.subpages);
     setState(false)
@@ -69,7 +69,7 @@ const initializeEditor = async (value) => {
  
  const current=useSelector(CurrentPublicPage)
  
-  console.log(current);
+  
   return (
     <div className="w-100 d-flex justify-content-center align-items-center h-100  ">{pages?.data?.map(value=>value._id==pageId?<div className="w-100 d-flex flex-column justify-content-center align-items-center h-75 rounded-5   border shadow container" >
       <img

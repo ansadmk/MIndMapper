@@ -37,6 +37,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import SubpagescomP from "./pageCreator";
 import Subpagescomp from "./subpages";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import * as React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+
+
 const CreatePage = () => {
   const reff = useRef(null);
   const subpage = useSelector(fetchpageres);
@@ -89,7 +95,7 @@ const CreatePage = () => {
   function handlenext(e) {
     e.preventDefault();
     const content = e.target.next.value;
-    console.log(parent.public);
+   
     if (parent.public) {
       dispatch(
         createPageResponse({
@@ -126,6 +132,7 @@ const CreatePage = () => {
   };
   return (
     <div className="">
+         <Container fixed >
       {show ? (
         <form
           className={`d-flex ${
@@ -198,6 +205,7 @@ const CreatePage = () => {
           </div>
         </div>
       )}
+      </Container>
     </div>
   );
 };

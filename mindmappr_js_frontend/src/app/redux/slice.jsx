@@ -199,7 +199,7 @@ const slice1 = createSlice({
       }
     },
     changeCurrentPublicPage:(state,action)=>{
-      console.log(action.payload);
+      
       state.CurrentPublicPage=action.payload
     },
     changePublicBreadCrumb: (state, action) => {

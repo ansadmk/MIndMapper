@@ -18,7 +18,7 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const page = useSelector(currentPage);
   const crumb = useSelector(PublicBreadCrumb);
-  console.log(crumb);
+ 
   
   const handleCrumb = (d, index) => {
     dispatch(changeCurrentPage(d));

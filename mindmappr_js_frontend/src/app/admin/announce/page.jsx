@@ -15,7 +15,7 @@ const page = () => {
     e.preventDefault()
     const msg=e.target.val.value
     const sub=e.target.sub.value
-    console.log(msg);
+   
     dispatch(notify({msg:msg,sub:sub,type:false}))
     router.push('/admin')
   }

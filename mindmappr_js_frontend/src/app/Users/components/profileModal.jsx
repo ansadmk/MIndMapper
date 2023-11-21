@@ -32,7 +32,7 @@ const Profile = () => {
   const { data } = useSession();
   const dispatch = useDispatch();
   const router = useRouter();
-  console.log(ProfileStats);
+ 
   const handle1 = () => dispatch(changeProfileStats());
   const handleout = () => {
     data ? signOut() : deleteCookie("token");

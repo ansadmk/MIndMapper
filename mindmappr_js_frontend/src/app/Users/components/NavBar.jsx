@@ -46,7 +46,8 @@ const NavBar = () => {
     dispatch(setPublic({ id: page.ansester, unpub: true }));
   };
   return (
-    <div className="d-flex justify-content-end w-100 ">
+    <div className="d-flex justify-content-end w-100 overflow-y-auto
+     " style={{overflowWrap: "break-word"}}>
       <div className="me-5 d-flex justify-content-end w-100">
         <div className="d-flex">
           {crumb?.map((data, index) => (

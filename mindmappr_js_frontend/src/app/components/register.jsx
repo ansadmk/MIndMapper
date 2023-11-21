@@ -25,7 +25,7 @@ const register = ({close}) => {
       "email":email,
       "password":password
     })
-    console.log(res);
+  
      if(res.data.status=="success"){
           
           alert("successfully registered in")

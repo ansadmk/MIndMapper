@@ -3,9 +3,9 @@ import axios from "axios";
 
 const upload = async (file) => {
   const data = new FormData();
-  // console.log("this is data",data);
+  
   data.append("file", file);
-  console.log(file);
+  
   data.append("upload_preset", "avatar");
 
   try {
@@ -16,7 +16,7 @@ const upload = async (file) => {
     });
     
     if (res.status === 200) {
-      console.log("Upload successful:", res.data.url);
+      
       return res.data.url;
     } else {
       console.error("Upload failed. Response:", res);

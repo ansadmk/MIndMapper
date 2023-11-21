@@ -28,24 +28,24 @@ const usersList = () => {
   const dispatch=useDispatch()
   const router=useRouter()
   const users=useSelector(getUsersForAdmin)
-  console.log(users,"list");
+  
   useEffect(()=>{
     function dis(){dispatch(getUsersList({pageno:1}))}
     dis()
     if (!window.location.hash) {
       window.location = window.location + "#loaded";
-      console.log(window.location.hash);
+      
       location.reload(false);
     }
   },[])
-  console.log(parseFloat(users?.data?.length)/parseFloat(10));
+ 
   const changeuser=(value)=>{
       dispatch(setCurrentUser(value))
       router.push("/admin/detailsPage")
   }
   const [page, setPage] =useState(1);
   const handleChange = (event, value) => {
-    console.log(value);
+    
     dispatch(getUsersList({pageno:value}))
     setPage(value);
   };

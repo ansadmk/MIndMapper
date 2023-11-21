@@ -20,7 +20,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchUsers, getAllPages } from "@/app/redux/Axioses";
+import { FetchUsers, getAllPages, setlike } from "@/app/redux/Axioses";
 import { allPages, searchitem } from "@/app/redux/slice";
 import moment from "moment";
 import usersList from "@/app/admin/components/usersList";
@@ -44,12 +44,12 @@ export default function page() {
   }, [dispatch]);
 
   const users = useSelector(getUsersForAdmin);
-  console.log(users);
+
   const pages = useSelector(allPages);
   const search = useSelector(searchitem);
   const [page, setPage] = useState(1);
   const handleChange1 = (event, value) => {
-    console.log(value);
+    
     dispatch(getAllPages({ pageno: value }));
     setPage(value);
   };
@@ -176,9 +176,9 @@ export default function page() {
                     </Typography>
                   </CardContent>
                   <CardActions disableSpacing>
-                    {/* <IconButton aria-label="add to favorites">
+                    <IconButton aria-label="add to favorites"  onClick={()=>dispatch(setlike({contentId:value._id}))}>
                     <FavoriteIcon />
-                  </IconButton> */}
+                  </IconButton>
                     <IconButton
                       onClick={() => {
                         copy(`http://localhost:3000/View/${value._id}`);
