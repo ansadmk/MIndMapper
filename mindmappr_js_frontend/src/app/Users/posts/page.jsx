@@ -21,7 +21,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchUsers, getAllPages, setlike } from "@/app/redux/Axioses";
-import { allPages, searchitem } from "@/app/redux/slice";
+import { allPages, getDetails, searchitem } from "@/app/redux/slice";
 import moment from "moment";
 import usersList from "@/app/admin/components/usersList";
 import { getUsersForAdmin } from "@/app/redux/Admin/adminSlice";
@@ -34,17 +34,18 @@ import { Snackbar } from "@mui/material";
 import { Pagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
 
+const r=0
 export default function page() {
   const dispatch = useDispatch();
+  const user = useSelector(getDetails);                                                                                                        r
   const router = useRouter();
   useEffect(() => {
     dispatch(getAllPages({ pageno: 1 }));
     dispatch(FetchUsers());
     dispatch(getUsersList());
   }, [dispatch]);
-
-  const users = useSelector(getUsersForAdmin);
-
+  
+  
   const pages = useSelector(allPages);
   const search = useSelector(searchitem);
   const [page, setPage] = useState(1);
@@ -53,7 +54,7 @@ export default function page() {
     dispatch(getAllPages({ pageno: value }));
     setPage(value);
   };
-
+  
   return (
     <div className=" d-flex h-75 justify-content-center align-items-center    w-100 container">
       <div className="h-75 ">
@@ -113,9 +114,11 @@ export default function page() {
                     </Typography>
                   </CardContent>
                   <CardActions disableSpacing>
-                    {/* <IconButton aria-label="add to favorites">
+                  <IconButton aria-label="add to favorites"  onClick={()=>{dispatch(setlike({contentId:value._id}))
+                dispatch(FetchUsers());
+                }}>
                     <FavoriteIcon />
-                  </IconButton> */}
+                  </IconButton>
                     <IconButton
                       onClick={() => {
                         copy(`http://localhost:3000/View/${value._id}`);
@@ -176,9 +179,15 @@ export default function page() {
                     </Typography>
                   </CardContent>
                   <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites"  onClick={()=>dispatch(setlike({contentId:value._id}))}>
+                   {user?.data?.liked?.filter(i=>i.contentId==value._id)[0]? <IconButton aria-label="add to favorites" style={{color:"red"}} onClick={()=>{dispatch(setlike({contentId:user?.data?.liked?.filter(i=>i.contentId==value._id)[0]._id,no:true}))
+                dispatch(FetchUsers());
+                }}>
                     <FavoriteIcon />
-                  </IconButton>
+                  </IconButton> :<IconButton aria-label="add to favorites"   onClick={()=>{dispatch(setlike({contentId:value._id}))
+                dispatch(FetchUsers());
+                }}>
+                    <FavoriteIcon />
+                  </IconButton>}
                     <IconButton
                       onClick={() => {
                         copy(`http://localhost:3000/View/${value._id}`);

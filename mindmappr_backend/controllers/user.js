@@ -81,13 +81,13 @@ module.exports = {
     }
   },
   userDetails: async (req, res) => {
-    const user = await userSchema.findOne({ _id: res.token.id });
-
+    const user = await userSchema.find({ _id: res.token.id }).populate('liked');
+    console.log(user);
     if (user) {
       res.json({
         status: "success",
         message: "fetched successfully",
-        data: user,
+        data: user[0],
       });
     }
   },
@@ -318,7 +318,21 @@ module.exports = {
         })
  },
  addLikes:async(req,res)=>{
-  const {contentId}=req.body
+  const {contentId,no}=req.body
+  if(no){
+    await likeSchema.deleteOne({
+      _id:contentId
+    })
+    console.log(like);
+    
+    await pages.updateOne({_id:contentId},{$pull:{Likes:contentId}})
+    await userSchema.updateOne({_id:res.token.id},{$pull:{liked:contentId}})
+    res.json({
+      status:"success",
+        message:"successfully done",
+        
+     })
+  }else{
   const like=await likeSchema.create({
     contentId:contentId,
     ownerId:res.token.id,
@@ -327,11 +341,12 @@ module.exports = {
   console.log(like);
   
   await pages.updateOne({_id:contentId},{$push:{Likes:like._id}})
+  await userSchema.updateOne({_id:res.token.id},{$push:{liked:like._id}})
   res.json({
     status:"success",
       message:"successfully done",
       
-   })
+   })}
  },
  
   

@@ -211,7 +211,11 @@ const r=10
           <NavBar />
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={open}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+      >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
@@ -463,7 +467,7 @@ const r=10
           </Box>
         ) : null}
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
         <DrawerHeader />
         <Welcome />
       </Box>

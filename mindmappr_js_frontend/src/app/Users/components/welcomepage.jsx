@@ -10,7 +10,7 @@ export default function Welcome() {
  
  
   return (
-    <div className="h-100 w-100">
+    <div className="">
       
       <CreatePage/>
       

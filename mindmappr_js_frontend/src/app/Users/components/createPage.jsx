@@ -130,9 +130,10 @@ const CreatePage = () => {
     dispatch(changeMainPageListRender());
     dispatch(PageState(true));
   };
+  
   return (
     <div className="">
-         <Container fixed >
+         <Container maxWidth="lg" >
       {show ? (
         <form
           className={`d-flex ${

@@ -5,8 +5,8 @@ const userSchema=mongoose.Schema({
     email:{type:String, required: true},
     image:String,
     fullName:String,
-    createdAt:Date
-  
+    createdAt:Date,
+     liked:[{type:mongoose.Schema.ObjectId ,ref:"Likes"}]
     
 
 })

@@ -9,6 +9,7 @@ import { Avatar, Card, CardMedia, IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
+import Container from '@mui/material/Container';
 
 const ImageForPages = () => {
   const parent = useSelector(currentPage);
@@ -18,7 +19,7 @@ const ImageForPages = () => {
 
   return (
     
-    <div
+    <Container
       className="w-100 d-flex justify-content-center flex-column h-100  "
       onMouseEnter={() => setIsShown(true)}
       onMouseLeave={() => setIsShown(false)}
@@ -44,7 +45,7 @@ const ImageForPages = () => {
           
             <CardMedia
               sx={{ height: "50vh" }}
-              className=" img-fluid w-100"
+              className=" img-fluid "
               image={parent.cover}
               title="Cover"
             />
@@ -75,7 +76,7 @@ const ImageForPages = () => {
           </IconButton>
         ) : null}{" "}
       </div>
-    </div>
+    </Container>
   );
 };
 

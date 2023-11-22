@@ -2,7 +2,7 @@ require('dotenv').config()
 const mongoose=require('mongoose')
 const cors=require('cors')
 
-mongoose.connect("mongodb://127.0.0.1/mindmapper")
+mongoose.connect(process.env.DATABASE_ADDRESS)
 const express=require('express')
 const app=express()
 const admin=require('./routes/adminRoutes')
