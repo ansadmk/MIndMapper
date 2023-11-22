@@ -344,8 +344,9 @@ const r=10
               className="h-25"
             >
               {Notify?.data ? (
-                Notify?.data?.map((data) => (
+                Notify?.data?.map((data,index) => (
                   <List
+                  key={index}
                     sx={{
                       width: "100%",
                       maxWidth: 360,

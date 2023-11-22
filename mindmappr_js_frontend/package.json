@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
+    
   },
   "dependencies": {
     "@editorjs/checklist": "^1.6.0",
@@ -44,8 +44,6 @@
     "redux-thunk": "^2.4.2"
   },
   "devDependencies": {
-    "@editorjs/translate-inline": "^1.0.0-rc.0",
-    "eslint": "^8",
-    "eslint-config-next": "13.5.4"
+    "@editorjs/translate-inline": "^1.0.0-rc.0"
   }
 }
