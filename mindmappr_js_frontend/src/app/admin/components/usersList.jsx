@@ -32,11 +32,11 @@ const UsersList = () => {
   useEffect(()=>{
     function dis(){dispatch(getUsersList({pageno:1}))}
     dis()
-    if (!window.location.hash) {
-      window.location = window.location + "#loaded";
+    // if (!window.location.hash) {
+    //   window.location = window.location + "#loaded";
       
-      location.reload(false);
-    }
+    //   location.reload(false);
+    // }
   },[])
  
   const changeuser=(value)=>{
