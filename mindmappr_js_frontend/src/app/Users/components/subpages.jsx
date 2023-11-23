@@ -1,7 +1,6 @@
 
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Underline from '@editorjs/underline';
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import Table from "@editorjs/table";
@@ -40,7 +39,7 @@ const Subpagescomp = ({subpageRender ,subpage ,handlenext}) => {
           class: Checklist,
           inlineToolbar: true,
         },
-        underline:Underline,
+        
         InlineCode: {
           class: InlineCode,
           shortcut: 'CMD+SHIFT+M',
@@ -92,8 +91,8 @@ const Subpagescomp = ({subpageRender ,subpage ,handlenext}) => {
 
                   {subpage?.data?.subpages
                     .filter((val) => val.title == parent._id)
-                    .map((value) => (
-                      <div className="d-flex flex-column w-100">
+                    .map((value,index) => (
+                      <div className="d-flex flex-column w-100" key={index}>
                         <SubpagescomP value={value} />
                       </div>
                       

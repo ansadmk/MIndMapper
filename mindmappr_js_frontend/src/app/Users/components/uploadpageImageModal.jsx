@@ -1,5 +1,5 @@
 'use client'
-import {  sendUrl } from '@/app/redux/Axioses';
+import { cloudinary, sendUrl } from '@/app/redux/Axioses';
 import { changeuploadcover, cloudResponse, currentPage, modalupload } from '@/app/redux/slice';
 
 import Box from '@mui/material/Box';
@@ -35,7 +35,20 @@ const UploadpageImageModal = () => {
 
   const handleClose = () => dispatch(changeuploadcover({avatar:"false"}))
 
-  
+  const handleCloud = () => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "Avatar");
+    dispatch(cloudinary(data));
+
+  };
+  const handleCloud1 = () => {
+    const data = new FormData();
+    data.append("file", file1);
+    data.append("upload_preset", "Avatar");
+    dispatch(cloudinary(data));
+
+  };
   const handleSave= async ()=>{
      const lin= await upload(file)
     dispatch(sendUrl({pageId:parent._id,avatarUrl:lin}))

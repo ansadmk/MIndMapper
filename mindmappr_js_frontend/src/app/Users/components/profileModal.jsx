@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { deleteCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
-import {  setprofile } from "@/app/redux/Axioses";
+import { cloudinary, setprofile } from "@/app/redux/Axioses";
 import { useState } from "react";
 import Image from "next/image";
 import upload from "@/app/components/upload";

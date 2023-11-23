@@ -52,10 +52,10 @@ const NavBar = () => {
         <div className="d-flex">
           {crumb?.map((data, index) => (
             <Button
+            key={index}
               variant=""
               onClick={() => handleCrumb(data.content, index)}
               className="nav-link"
-              key={index}
             >
               {data?.content?.content} /
             </Button>

@@ -430,8 +430,9 @@ const r=10
         {open ? (
           <Box sx={{ flexGrow: 1, overflow: "hidden", px: 3 }} className="overflow-auto" >
             
-            {pages?.data?.mainpages?.map((data) => (
+            {pages?.data?.mainpages?.map((data,index) => (
               <Item
+              key={index}
                 sx={{
                   my: 1,
                   mx: "auto",

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint":"next lint"
+    "lint": "next lint"
   },
   "dependencies": {
     "@editorjs/checklist": "^1.6.0",
@@ -16,7 +16,6 @@
     "@editorjs/list": "^1.8.0",
     "@editorjs/paragraph": "^2.11.3",
     "@editorjs/table": "^2.2.2",
-    "@editorjs/underline": "^1.1.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.15",
@@ -29,10 +28,6 @@
     "cookies-next": "^4.0.0",
     "copy-to-clipboard": "^3.3.3",
     "editorjs-paragraph-with-alignment": "^3.0.0",
-    "eslint": "^8.54.0",
-    "eslint-config-next": "^14.0.3",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
     "moment": "^2.29.4",
     "next": "13.5.4",
     "next-auth": "^4.23.2",
@@ -48,6 +43,8 @@
     "redux-thunk": "^2.4.2"
   },
   "devDependencies": {
-    "@editorjs/translate-inline": "^1.0.0-rc.0"
+    "@editorjs/translate-inline": "^1.0.0-rc.0",
+    "eslint": "^8",
+    "eslint-config-next": "13.5.4"
   }
 }

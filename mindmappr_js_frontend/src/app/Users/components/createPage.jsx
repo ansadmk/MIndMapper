@@ -65,7 +65,7 @@ const CreatePage = () => {
     }
   });
   useEffect(() => {
-    dispatch(FetchSpecificPage(parent._id));
+    dispatch(FetchSpecificPage(parent?._id));
     dispatch(PageState(false));
   }, [dispatch]);
   useEffect(() => {
