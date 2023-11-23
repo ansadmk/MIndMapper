@@ -2,7 +2,7 @@
 import { Inter } from 'next/font/google'
 import 'bootstrap/dist/css/bootstrap.css'
 
-import { getServerSession } from 'next-auth'
+
 import StoreProvider from '../../redux/StoreProvider'
 import Navbar from './Navbar'
 
@@ -18,7 +18,7 @@ export const metadata = {
 export default async function RootLayout({
   children,
 }) {
-  const session= await getServerSession()
+  
   
   
   return (

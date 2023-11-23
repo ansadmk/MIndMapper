@@ -1,8 +1,7 @@
 
 import { Inter } from 'next/font/google'
 import 'bootstrap/dist/css/bootstrap.css'
-import SessionProvider from "./components/sessionProvider"
-import { getServerSession } from 'next-auth'
+
 import StoreProvider from '../redux/StoreProvider'
 import { Suspense } from 'react'
 import Loading from './loading'
@@ -20,7 +19,7 @@ export const metadata = {
 export default async function RootLayout({
   children,
 }) {
-  const session= await getServerSession()
+  
   
   
   return (
@@ -29,7 +28,7 @@ export default async function RootLayout({
       
       <body className={inter.className} >
        
-      <Suspense fallback={<Loading/>}> <SessionProvider session={session}>{children}</SessionProvider></Suspense>
+      <Suspense fallback={<Loading/>}> {children}</Suspense>
      
       <Profile/>
         </body>

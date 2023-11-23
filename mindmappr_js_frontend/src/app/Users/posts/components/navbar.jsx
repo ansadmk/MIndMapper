@@ -54,10 +54,10 @@ function ResponsiveAppBar() {
 
   useEffect(() => {
     dispatch(FetchUsers());
-    // if (!window.location.hash) {
-    //   window.location = window.location + "#loaded";
-    //   location.reload(false);
-    // }
+    if (!window.location.hash) {
+      window.location = window.location + "#loaded";
+      location.reload(false);
+    }
   }, []);
 
   return (

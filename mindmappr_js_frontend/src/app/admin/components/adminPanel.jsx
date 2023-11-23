@@ -10,7 +10,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import Image from "next/image";
-import { signIn, signOut, useSession } from "next-auth/react";
+
 import { deleteCookie, getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { MenuItem } from "@mui/material";
@@ -21,7 +21,7 @@ const pages = ["Users", "Anounnce", "Logout",'Notifications'];
 function AdminPanel() {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
-  const { data } = useSession();
+
   const cookie = getCookie("adminToken");
   const router = useRouter();
   const handleOpenNavMenu = (event) => {
@@ -33,7 +33,7 @@ function AdminPanel() {
   };
 
   const handleout = () => {
-    data ? signOut() : deleteCookie("adminToken");
+    deleteCookie("adminToken");
     router.push("/");
   };
 

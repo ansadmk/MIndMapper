@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 // import Modal from 'react-bootstrap/Modal';
 import Login from "./login";
 import Register from "./register";
-import { signIn, signOut, useSession } from "next-auth/react";
+
 import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
 import { ToastContainer } from "react-toastify";
@@ -23,15 +23,13 @@ const style = {
 };
 
 const Popup = () => {
-  const { data } = useSession();
+  
   const router = useRouter();
   const [show, setShow] = useState({ log: false, reg: false });
   const cookie = getCookie("token");
   const handlelog = () => setShow({ log: !show.log, reg: false });
   const handlereg = () => setShow({ log: false, reg: !show.reg });
-  useEffect(() => {
-    data?.user.name ? router.push("/Users") : null;
-  });
+  
   return (
     <div className="d-flex">
       {!cookie ? null : router.push("/Users")}
