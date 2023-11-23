@@ -63,7 +63,7 @@ export default function Pagecomp() {
             
             <h1>showing related to {search}</h1>
           {
-            pages?.data?.map((value) =>
+            pages?.data?.map((value,i) =>
               (value.public &&
                 value.role == "main" &&
                 value.content.toLowerCase().includes(search.toLowerCase())) ||
@@ -71,7 +71,7 @@ export default function Pagecomp() {
                 ?.filter((val) => val._id == value.owner)[0]
                 .username.toLowerCase()
                 .includes(search.toLowerCase()) ? (
-                <Card sx={{ maxWidth: 345 }} className="  col-md-3 col-12">
+                <Card sx={{ maxWidth: 345 }} className="  col-md-3 col-12" key={i}>
                   <CardHeader
                     avatar={
                       value.avatar ? (
@@ -134,9 +134,9 @@ export default function Pagecomp() {
           </div>
         ) : (
           <div className="row gap-1">
-            {pages?.data1?.map((value) =>
+            {pages?.data1?.map((value,i) =>
               value.public && value.role == "main" ? (
-                <Card sx={{ maxWidth: 345 }} className="col-md-3 col-12   ">
+                <Card sx={{ maxWidth: 345 }} className="col-md-3 col-12   " key={i}>
                   <CardHeader
                     avatar={
                       value.avatar ? (

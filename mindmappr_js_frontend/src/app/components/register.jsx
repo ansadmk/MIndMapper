@@ -8,7 +8,7 @@ import { Box, TextField } from '@mui/material'
 import { axiosInstance } from '../redux/axiosInstance'
 
 
-const register = ({close}) => {
+const Register = ({close}) => {
   const router=useRouter()
   const handleSub= async (e)=>{
     
@@ -104,4 +104,4 @@ const register = ({close}) => {
   )
 }
 
-export default register
+export default Register

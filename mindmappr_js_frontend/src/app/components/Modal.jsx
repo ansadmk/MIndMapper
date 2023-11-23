@@ -22,7 +22,7 @@ const style = {
   p: 4,
 };
 
-const popup = () => {
+const Popup = () => {
   const { data } = useSession();
   const router = useRouter();
   const [show, setShow] = useState({ log: false, reg: false });
@@ -91,4 +91,4 @@ const popup = () => {
     </div>
   );
 };
-export default popup;
+export default Popup;

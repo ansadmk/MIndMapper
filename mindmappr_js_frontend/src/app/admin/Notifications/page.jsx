@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
     maxWidth: 400,
   }));
 
-const page = () => {
+const Page = () => {
     const dispatch=useDispatch()
     const users=useSelector(getUsersForAdmin)
     
@@ -32,8 +32,8 @@ const page = () => {
   }
   return (
     <div className='d-flex align-items-center  h-75'>
-    <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{noti?.data?.map(value=>
-    <div className='d-flex'>
+    <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{noti?.data?.map((value,i)=>
+    <div className='d-flex' key={i}>
      <List
      sx={{
        width: "100%",
@@ -80,4 +80,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

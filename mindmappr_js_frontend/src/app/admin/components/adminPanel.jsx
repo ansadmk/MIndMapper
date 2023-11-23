@@ -18,7 +18,7 @@ import Asynchronous from "./searchBar";
 
 const pages = ["Users", "Anounnce", "Logout",'Notifications'];
 
-function adminPanel() {
+function AdminPanel() {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const { data } = useSession();
@@ -158,4 +158,4 @@ function adminPanel() {
     </AppBar>
   );
 }
-export default adminPanel;
+export default AdminPanel;

@@ -13,7 +13,7 @@ import { Box, TextField } from "@mui/material";
 import { toast } from "react-toastify";
 import { axiosInstance } from "../redux/axiosInstance";
 
-const login = () => {
+const Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -73,4 +73,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

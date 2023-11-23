@@ -171,10 +171,10 @@ const r=10
     dispatch(FetchUsers());
     dispatch(FetchPages());
     dispatch(getNoti());
-    if (!window.location.hash) {
-      window.location = window.location + "#loaded";
-      location.reload(false);
-    }
+    // if (!window.location.hash) {
+    //   window.location = window.location + "#loaded";
+    //   location.reload(false);
+    // }
   }, []);
 
   useEffect(() => {
