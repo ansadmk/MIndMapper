@@ -41,15 +41,15 @@ function AdminPanel() {
     if (s != 1) {
       handleCloseNavMenu();
     }
-    setting == "Logout"
+    setting === "Logout"
       ? handleout()
-      : setting == "Anounnce"
+      : setting === "Anounnce"
       ? router.push("/admin/announce")
-      : setting == "Users"
+      : setting === "Users"
       ? router.push("/admin")
       : null;
 
-      if (setting=="Notifications") {
+      if (setting==="Notifications") {
         router.push('/admin/Notifications')
       }
   };

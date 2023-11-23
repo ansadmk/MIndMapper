@@ -46,9 +46,9 @@ const Page = () => {
        <ListItemAvatar>
          <Avatar
            alt="Remy Sharp"
-           src={value.type=="public"?null:users?.data?.filter(val=>val._id==value.to)[0]?.image}
+           src={value.type==="public"?null:users?.data?.filter(val=>val._id===value.to)[0]?.image}
          />
-         {value.type=="public"?"public":users?.data?.filter(val=>val._id==value.to)[0]?.username}
+         {value.type==="public"?"public":users?.data?.filter(val=>val._id===value.to)[0]?.username}
        
        </ListItemAvatar>
        <ListItemText

@@ -65,10 +65,10 @@ export default function Pagecomp() {
           {
             pages?.data?.map((value,i) =>
               (value.public &&
-                value.role == "main" &&
+                value.role === "main" &&
                 value.content.toLowerCase().includes(search.toLowerCase())) ||
               pages?.user
-                ?.filter((val) => val._id == value.owner)[0]
+                ?.filter((val) => val._id === value.owner)[0]
                 .username.toLowerCase()
                 .includes(search.toLowerCase()) ? (
                 <Card sx={{ maxWidth: 345 }} className="  col-md-3 col-12" key={i}>
@@ -78,14 +78,14 @@ export default function Pagecomp() {
                         <Avatar
                           src={
                             pages?.user?.filter(
-                              (val) => val._id == value.owner
+                              (val) => val._id === value.owner
                             )[0].image
                           }
                         />
                       ) : (
                         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
                           {pages?.user
-                            ?.filter((val) => val._id == value.owner)[0]
+                            ?.filter((val) => val._id === value.owner)[0]
                             .username.charAt(0)}
                         </Avatar>
                       )
@@ -96,7 +96,7 @@ export default function Pagecomp() {
                       </IconButton>
                     }
                     title={
-                      pages?.user?.filter((val) => val._id == value.owner)[0]
+                      pages?.user?.filter((val) => val._id === value.owner)[0]
                         .username
                     }
                     subheader={moment(value.createdAt).fromNow()}
@@ -135,7 +135,7 @@ export default function Pagecomp() {
         ) : (
           <div className="row gap-1">
             {pages?.data1?.map((value,i) =>
-              value.public && value.role == "main" ? (
+              value.public && value.role === "main" ? (
                 <Card sx={{ maxWidth: 345 }} className="col-md-3 col-12   " key={i}>
                   <CardHeader
                     avatar={
@@ -143,14 +143,14 @@ export default function Pagecomp() {
                         <Avatar
                           src={
                             pages?.user?.filter(
-                              (val) => val._id == value.owner
+                              (val) => val._id === value.owner
                             )[0].image
                           }
                         />
                       ) : (
                         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
                           {pages?.user
-                            ?.filter((val) => val._id == value.owner)[0]
+                            ?.filter((val) => val._id === value.owner)[0]
                             .username.charAt(0)}
                         </Avatar>
                       )
@@ -161,7 +161,7 @@ export default function Pagecomp() {
                       </IconButton>
                     }
                     title={
-                      pages?.user?.filter((val) => val._id == value.owner)[0]
+                      pages?.user?.filter((val) => val._id === value.owner)[0]
                         .username
                     }
                     subheader={moment(value.createdAt).fromNow()}
@@ -179,7 +179,7 @@ export default function Pagecomp() {
                     </Typography>
                   </CardContent>
                   <CardActions disableSpacing>
-                   {user?.data?.liked?.filter(i=>i.contentId==value._id)[0]? <IconButton aria-label="add to favorites" style={{color:"red"}} onClick={()=>{dispatch(setlike({contentId:user?.data?.liked?.filter(i=>i.contentId==value._id)[0]._id,no:true}))
+                   {user?.data?.liked?.filter(i=>i.contentId===value._id)[0]? <IconButton aria-label="add to favorites" style={{color:"red"}} onClick={()=>{dispatch(setlike({contentId:user?.data?.liked?.filter(i=>i.contentId=== value._id)[0]._id,no:true}))
                 dispatch(FetchUsers());
                 }}>
                     <FavoriteIcon />

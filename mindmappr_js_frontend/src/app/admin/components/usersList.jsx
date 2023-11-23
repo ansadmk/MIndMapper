@@ -68,7 +68,7 @@ const UsersList = () => {
         <Typography noWrap  >{value.username}</Typography>
         
         
-        <Button onClick={()=>changeuser({value:value,page:users?.pages.filter((val)=>val.owner==value._id)})}>View & Notify</Button>
+        <Button onClick={()=>changeuser({value:value,page:users?.pages.filter((val)=>val.owner===value._id)})}>View & Notify</Button>
       </Stack>
     </Item>:null
     
@@ -90,7 +90,7 @@ const UsersList = () => {
         <Typography noWrap  >{value.username}</Typography>
         
         
-        <Button onClick={()=>changeuser({value:value,page:users?.pages.filter((val)=>val.owner==value._id)})}>View & Notify</Button>
+        <Button onClick={()=>changeuser({value:value,page:users?.pages.filter((val)=>val.owner===value._id)})}>View & Notify</Button>
       </Stack>
     </Item>
     

@@ -71,7 +71,7 @@ const initializeEditor = async (value) => {
  
   
   return (
-    <div className="w-100 d-flex justify-content-center align-items-center h-100  ">{pages?.data?.map((value,i)=>value._id==pageId?<div key={i} className="w-100 d-flex flex-column justify-content-center align-items-center h-75 rounded-5   border shadow container" >
+    <div className="w-100 d-flex justify-content-center align-items-center h-100  ">{pages?.data?.map((value,i)=>value._id===pageId?<div key={i} className="w-100 d-flex flex-column justify-content-center align-items-center h-75 rounded-5   border shadow container" >
       <img
         className="w-50 h-50 rounded-5 img-fluid"
         src={value.cover}
@@ -82,7 +82,7 @@ const initializeEditor = async (value) => {
         <Typography gutterBottom variant="h5" component="div">
          {value.content}
         </Typography>
-        {pages?.data?.map((value,i)=>value.ansester==pageId && value.role=="sub"? <Button key={i} variant="" onClick={()=>router.push(`/View/${value._id}`)}>{value.content}</Button>:null  )}
+        {pages?.data?.map((value,i)=>value.ansester===pageId && value.role==="sub"? <Button key={i} variant="" onClick={()=>router.push(`/View/${value._id}`)}>{value.content}</Button>:null  )}
         <div id="editorjs" className="prose max-w-full min-h-screen w-100  " style={{maxHeight:100}}></div>
         
       

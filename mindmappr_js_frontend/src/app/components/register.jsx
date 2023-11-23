@@ -1,8 +1,7 @@
 "use client"
 import React from 'react'
-import { Form , Alert, Button} from 'react-bootstrap'
-import Sign from './sign'
-import axios from 'axios'
+import { Button} from 'react-bootstrap'
+
 import { useRouter } from 'next/navigation'
 import { Box, TextField } from '@mui/material'
 import { axiosInstance } from '../redux/axiosInstance'
@@ -18,7 +17,7 @@ const Register = ({close}) => {
     const password=e.target.password.value
     const confirm=e.target.confirm.value
     
-    if(password==confirm){
+    if(password===confirm){
       
      const res= await axiosInstance.post("/api/user/register",{
       "username":username,
@@ -26,7 +25,7 @@ const Register = ({close}) => {
       "password":password
     })
   
-     if(res.data.status=="success"){
+     if(res.data.status==="success"){
           
           alert("successfully registered in")
            close()
@@ -96,7 +95,7 @@ const Register = ({close}) => {
           variant="filled"
           type="password"
         />
-        <Sign/>
+        
        <Button type="submit">submit</Button>
     </Box>
     

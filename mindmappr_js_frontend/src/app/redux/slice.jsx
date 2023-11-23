@@ -150,18 +150,18 @@ const slice1 = createSlice({
     },
     changeEditable: (state, action) => {
           
-      if (action.payload == "false") {
+      if (action.payload === "false") {
         state.editable = false;
-      } else if (action.payload == "true") {
+      } else if (action.payload === "true") {
         state.editable = true;
       } else {
         state.editable = !state.editable;
       }
     },
     changesubpageRender: (state, action) => {
-      if (action.payload == "false") {
+      if (action.payload === "false") {
         state.subpagerender = false;
-      } else if (action.payload == "true") {
+      } else if (action.payload === "true") {
         state.subpagerender = true;
       } else {
         state.subpagerender = !state.subpagerender;
@@ -171,9 +171,9 @@ const slice1 = createSlice({
       const { data, type } = action.payload;
       if (type == "push") {
         state.breadCrumb.push(data);
-      } else if (type == "clear") {
+      } else if (type === "clear") {
         state.breadCrumb = [];
-      } else if (type == "select") {
+      } else if (type === "select") {
         state.breadCrumb.splice(data + 1);
       }
       // else if(action.payload.type=="pop"){
@@ -188,13 +188,13 @@ const slice1 = createSlice({
     },
     changeuploadcover: (state, action) => {
       const  {avatar,cover}=action.payload
-      if (avatar == "false") {
+      if (avatar === "false") {
         state.uploadcover.avatar = false;
-      } else if (cover == "true") {
+      } else if (cover === "true") {
         state.uploadcover.cover = true;
-      }  else if (cover == "false") {
+      }  else if (cover === "false") {
         state.uploadcover.cover = false;
-      } else if (avatar == "true") {
+      } else if (avatar === "true") {
         state.uploadcover.avatar = true;
       }
     },
@@ -204,11 +204,11 @@ const slice1 = createSlice({
     },
     changePublicBreadCrumb: (state, action) => {
       const { data, type } = action.payload;
-      if (type == "push") {
+      if (type === "push") {
         state.breadCrumb.push(data);
-      } else if (type == "clear") {
+      } else if (type === "clear") {
         state.breadCrumb = [];
-      } else if (type == "select") {
+      } else if (type === "select") {
         state.breadCrumb.splice(data + 1);
       }
       // else if(action.payload.type=="pop"){

@@ -90,7 +90,7 @@ const Subpagescomp = ({subpageRender ,subpage ,handlenext}) => {
                   ) : null}
 
                   {subpage?.data?.subpages
-                    .filter((val) => val.title == parent._id)
+                    .filter((val) => val.title ===parent._id)
                     .map((value,index) => (
                       <div className="d-flex flex-column w-100" key={index}>
                         <SubpagescomP value={value} />
