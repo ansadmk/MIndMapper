@@ -41,7 +41,7 @@ const usersList = () => {
  
   const changeuser=(value)=>{
       dispatch(setCurrentUser(value))
-      router.push("/admin/detailsPage")
+      router?.push("/admin/detailsPage")
   }
   const [page, setPage] =useState(1);
   const handleChange = (event, value) => {

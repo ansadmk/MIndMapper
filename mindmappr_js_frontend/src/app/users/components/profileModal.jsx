@@ -38,7 +38,7 @@ const Profile = () => {
     data ? signOut() : deleteCookie("token");
     dispatch(changeProfileStats())
    
-    router.push("/");
+    router?.push("/");
     
   };
   

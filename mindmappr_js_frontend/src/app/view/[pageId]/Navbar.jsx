@@ -8,7 +8,7 @@ import {
   changeMainPageListRender,
   currentPage,
 } from "@/app/redux/slice";
-import { useRouter } from "next/navigation";
+
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";

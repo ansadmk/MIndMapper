@@ -1,15 +1,14 @@
 "use client"
 import React from 'react'
 import { Form , Alert, Button} from 'react-bootstrap'
-import Sign from './sign'
-import axios from 'axios'
-import { useRouter } from 'next/navigation'
+
+
 import { Box, TextField } from '@mui/material'
 import { axiosInstance } from '../redux/axiosInstance'
 
 
 const register = ({close}) => {
-  const router=useRouter()
+  
   const handleSub= async (e)=>{
     
     e.preventDefault()
@@ -44,13 +43,7 @@ const register = ({close}) => {
 
   }
   return (
-    // <form className='p-5 d-flex flex-column gap-2' onSubmit={handleSub} >
-    //     <input type="text" placeholder="username" id="username" className='mb-2' />
-    //     <input type="email" placeholder="email" id="email" className='mb-2' />
-    //     <input type="password" placeholder='password' id='password' />
-    //     <input type="password" placeholder="confirm" id="confirm" className='mt-2' />
-    //    <input className='w-100 m-auto mt-4' type='submit' value="submit"/>
-      
+    
        <Box
       component="form"
       sx={{
@@ -96,7 +89,7 @@ const register = ({close}) => {
           variant="filled"
           type="password"
         />
-        <Sign/>
+      
        <Button type="submit">submit</Button>
     </Box>
     

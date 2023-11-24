@@ -7,7 +7,7 @@ import {
   changeMainPageListRender,
   currentPage,
 } from "@/app/redux/slice";
-import { useRouter } from "next/navigation";
+
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -93,10 +93,10 @@ const NavBar = () => {
         >
           {page.public ? (
             <div className="border p-3">
-              {`http://localhost:3000/View/${page._id}`}
+              {`http://localhost:3000/view/${page._id}`}
               <IconButton
                 onClick={() =>
-                  copy(`http://localhost:3000/View/${page._id}`, {
+                  copy(`http://localhost:3000/view/${page._id}`, {
                     debug: true,
                     message: "copied",
                   })

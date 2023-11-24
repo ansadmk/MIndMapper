@@ -7,14 +7,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { styled } from '@mui/material/styles';
 import EditorJS from "@editorjs/editorjs";
-import Header from "@editorjs/header";
-import Table from "@editorjs/table";
-import List from "@editorjs/list";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Avatar} from "@mui/material"
@@ -30,7 +23,7 @@ import { Avatar} from "@mui/material"
  const pages=  useSelector(PagesPublic)
  
  const [state,setState]=useState(true)
- const [values,setValues]=useState('')
+
  const handlesub = async (value) => {
     
      if(state){
@@ -67,7 +60,7 @@ const initializeEditor = async (value) => {
   
    
  
- const current=useSelector(CurrentPublicPage)
+
  
   
   return (
@@ -82,7 +75,7 @@ const initializeEditor = async (value) => {
         <Typography gutterBottom variant="h5" component="div">
          {value.content}
         </Typography>
-        {pages?.data?.map(value=>value.ansester==pageId && value.role=="sub"? <Button variant="" onClick={()=>router.push(`/View/${value._id}`)}>{value.content}</Button>:null  )}
+        {pages?.data?.map(value=>value.ansester==pageId && value.role=="sub"? <Button variant="" onClick={()=>router?.push(`/view/${value._id}`)}>{value.content}</Button>:null  )}
         <div id="editorjs" className="prose max-w-full min-h-screen w-100  " style={{maxHeight:100}}></div>
         
       

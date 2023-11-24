@@ -32,7 +32,7 @@ const popup = () => {
  
   return (
     <div className="d-flex">
-      {!cookie ? null : router.push("/Users")}
+      {!cookie ? null : router?.push("/users")}
       <Button variant="" onClick={handlelog}>
         Login
       </Button>

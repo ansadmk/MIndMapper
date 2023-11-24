@@ -106,7 +106,7 @@ export default function Pagecomp() {
                     height="194"
                     image={value.avatar}
                     alt=""
-                    onClick={() => router.push(`/View/${value._id}`)}
+                    onClick={() => router?.push(`/view/${value._id}`)}
                   />
                   <CardContent>
                     <Typography variant="body2" color="text.secondary">
@@ -121,7 +121,7 @@ export default function Pagecomp() {
                   </IconButton>
                     <IconButton
                       onClick={() => {
-                        copy(`http://localhost:3000/View/${value._id}`);
+                        copy(`http://localhost:3000/view/${value._id}`);
                         alert("copied");
                       }}
                     >
@@ -171,7 +171,7 @@ export default function Pagecomp() {
                     height="194"
                     image={value.avatar}
                     alt=""
-                    onClick={() => router.push(`/View/${value._id}`)}
+                    onClick={() => router?.push(`/view/${value._id}`)}
                   />
                   <CardContent>
                     <Typography variant="body2" color="text.secondary">
@@ -190,7 +190,7 @@ export default function Pagecomp() {
                   </IconButton>}
                     <IconButton
                       onClick={() => {
-                        copy(`http://localhost:3000/View/${value._id}`);
+                        copy(`http://localhost:3000/view/${value._id}`);
                         alert("copied");
                       }}
                     >

@@ -34,7 +34,7 @@ function adminPanel() {
 
   const handleout = () => {
     deleteCookie("adminToken");
-    router.push("/");
+    router?.push("/");
   };
 
   const bar = (setting, s) => {
@@ -44,13 +44,13 @@ function adminPanel() {
     setting == "Logout"
       ? handleout()
       : setting == "Anounnce"
-      ? router.push("/admin/announce")
+      ? router?.push("/admin/announce")
       : setting == "Users"
-      ? router.push("/admin")
+      ? router?.push("/admin")
       : null;
 
       if (setting=="Notifications") {
-        router.push('/admin/Notifications')
+        router?.push('/admin/notifications')
       }
   };
 

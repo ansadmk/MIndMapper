@@ -192,7 +192,7 @@ const r=10
   return (
     
     <Box sx={{ display: "flex" }}>
-      {cookie ? null : router.push("/")}
+      {cookie ? null : router?.push("/")}
       <CssBaseline />
       <AppBar position="fixed" color=""  open={open}>
         <Toolbar >
@@ -399,7 +399,7 @@ const r=10
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
-             onClick={()=>router.push('/Users/posts')}
+             onClick={()=>router?.push('/Users/posts')}
             >
               <ListItemIcon
                 sx={{

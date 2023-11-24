@@ -17,7 +17,7 @@ const page = () => {
     const sub=e.target.sub.value
    
     dispatch(notify({msg:msg,sub:sub,type:false}))
-    router.push('/admin')
+    router?.push('/admin')
   }
   return (
     <div className='h-75 d-flex justify-content-center align-items-center flex-column gap-0 '>

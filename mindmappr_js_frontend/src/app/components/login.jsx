@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 import { Form, Button } from "react-bootstrap";
-import Sign from "./sign";
-import axios from "axios";
+
 import { useRouter } from "next/navigation";
 
 import { setCookie } from "cookies-next";
@@ -31,11 +30,11 @@ const login = () => {
       if (res.data.message == "adminlogged") {
         setCookie("adminToken", res.data.jwt_token);
         
-        router.push("/admin");
+        router?.push("/admin");
       } else {
         setCookie("token", res.data.jwt_token);
 
-        router.push("/Users");
+        router?.push("/users");
       }
     } else {
       alert("failed");
@@ -68,7 +67,7 @@ const login = () => {
         type="password"
       />
       <Button type="submit">submit</Button>
-      <Sign />
+      
     </Box>
   );
 };

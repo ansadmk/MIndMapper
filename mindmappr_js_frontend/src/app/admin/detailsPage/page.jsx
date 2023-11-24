@@ -18,11 +18,11 @@ const page = () => {
     const msg=e.target.val.value
     const sub=e.target.sub.value
      dispatch(notify({msg:msg,sub:sub,type:true,to:user.value._id}))
-     router.push('/admin')
+     router?.push('/admin')
   }
   return (
     <div className='d-flex h-75  container justify-content-center align-items-center'>
-      {user.value ?null:router.push('/admin')}
+      {user.value ?null:router?.push('/admin')}
       <div className="w-50 d-flex justify-content-center container flex-sm-column  align-items-center   h-100  mt-5"><div className="w-100 row  gap-5 rounded-5 justify-content-center align-items-center h-100 me-5" >
       <Container className='border'>
       <img
@@ -40,7 +40,7 @@ const page = () => {
       <ol>
       
      {
-      user?.page?.map(value=><li><Link href={`/View/${value._id}`}>{value.content}</Link></li>)
+      user?.page?.map(value=><li><Link href={`/view/${value._id}`}>{value.content}</Link></li>)
      }
       
       </ol>

@@ -30,7 +30,7 @@ export default function Asynchronous() {
         variant="outlined"
         onChange={(e)=>{
           dispatch(getUsersList())
-          router.push(`/admin?values=${e.target.value}`)
+          router?.push(`/admin?values=${e.target.value}`)
       
       }}
       />
