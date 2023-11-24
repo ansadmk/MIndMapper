@@ -1,6 +1,6 @@
 
 
-import MiniDrawer from "./components/sideBar"
+import MiniDrawer from "./components/dynamic"
 
 
 
