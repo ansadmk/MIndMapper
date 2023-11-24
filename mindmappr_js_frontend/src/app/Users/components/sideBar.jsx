@@ -50,7 +50,7 @@ import { Suspense, useEffect, useState } from "react";
 import FindInPageIcon from "@mui/icons-material/FindInPage";
 import Asynchronous from "./searchBar";
 import moment from "moment";
-import { useSession } from "next-auth/react";
+
 import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -186,7 +186,7 @@ const r=10
     }
   });
   const handledis = () => dispatch(changeProfileStats());
-  const { data } = useSession();
+  
   const router = useRouter();
   const cookie = getCookie("token");
   return (
@@ -232,16 +232,7 @@ const r=10
           className="d-flex link justify-content-start w-0 h-0 border p-5"
           onClick={() => handledis()}
         >
-          {data?.user ? (
-            <div>
-              <img
-                src={data?.user?.image}
-                alt=""
-                className="img-fluid w-25 h-25"
-              />
-              <div className="text-center mt-4">hello {data?.user?.name}</div>
-            </div>
-          ) : (
+          
             <Stack direction="row">
               {user?.data?.image ? (
                 <div className="d-flex gap-2">
@@ -261,7 +252,7 @@ const r=10
                 </div>
               )}
             </Stack>
-          )}
+          
         </div>:null}
           <ListItem disablePadding sx={{ display: "block" }}>
             <ListItemButton

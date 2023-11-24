@@ -1,5 +1,5 @@
 "use client";
-import { signIn, signOut, useSession } from "next-auth/react";
+
 import Modal from "react-bootstrap/Modal";
 import {
   ProfileStats,
@@ -27,9 +27,9 @@ const Profile = () => {
   const [files, setfile] = useState("");
   const profilestats = useSelector(ProfileStats);
 
-  const cloudres = useSelector(cloudResponse);
+  
   const user = useSelector(getDetails);
-  const { data } = useSession();
+  
   const dispatch = useDispatch();
   const router = useRouter();
  

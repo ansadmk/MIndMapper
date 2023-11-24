@@ -1,8 +1,7 @@
 
 import { Inter } from 'next/font/google'
 import 'bootstrap/dist/css/bootstrap.css'
-import SessionProvider from "../../Users/components/sessionProvider"
-import { getServerSession } from 'next-auth'
+
 import StoreProvider from '../../redux/StoreProvider'
 import ResponsiveAppBar from './components/navbar'
 import { ToastContainer } from 'react-toastify'
@@ -21,7 +20,7 @@ export const metadata = {
 export default async function RootLayout({
   children,
 }) {
-  const session= await getServerSession()
+ 
   
   
   return (
@@ -30,9 +29,9 @@ export default async function RootLayout({
       
       <body className={inter.className} >
       <ToastContainer/>
-      <SessionProvider session={session}> 
+      
       <ResponsiveAppBar/><Suspense fallback={<Loading/>}> 
-      {children}</Suspense> </SessionProvider>
+      {children}</Suspense> 
      
        
         </body>
