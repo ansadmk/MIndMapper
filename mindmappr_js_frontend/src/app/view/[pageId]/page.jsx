@@ -75,7 +75,7 @@ const initializeEditor = async (value) => {
         <Typography gutterBottom variant="h5" component="div">
          {value.content}
         </Typography>
-        {pages?.data?.map(value=>value.ansester==pageId && value.role=="sub"? <Button variant="" onClick={()=>router?.push(`/view/${value._id}`)}>{value.content}</Button>:null  )}
+        {pages?.data?.map(value=>value.ansester==pageId && value.role=="sub"? <Button variant="" onClick={()=>router.push(`/view/${value._id}`)}>{value.content}</Button>:null  )}
         <div id="editorjs" className="prose max-w-full min-h-screen w-100  " style={{maxHeight:100}}></div>
         
       

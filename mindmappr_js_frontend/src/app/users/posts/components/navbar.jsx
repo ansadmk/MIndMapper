@@ -43,7 +43,7 @@ function ResponsiveAppBar() {
     deleteCookie("token")
     
    
-    router?.push("/");
+    router.push("/");
     
   };
 

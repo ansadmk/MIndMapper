@@ -192,7 +192,7 @@ export default function MiniDrawer() {
   const cookie = getCookie("token");
   useEffect(() => {
     if (!cookie) {
-      router?.push("/");
+      router.push("/");
     }
   });
   return (
@@ -408,7 +408,7 @@ export default function MiniDrawer() {
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
-              onClick={() => router?.push("/Users/posts")}
+              onClick={() => router.push("/Users/posts")}
             >
               <ListItemIcon
                 sx={{
