@@ -15,7 +15,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
 
- 
+  
   return (
     <StoreProvider>
     <html lang="en">
