@@ -4,13 +4,13 @@ const cookie = getCookie("adminToken");
 const usercookie = getCookie("token");
 
  export const axiosInstanceAdmin=axios.create({
-    baseURL:"http://13.53.207.81",
+    baseURL:"https://13.53.207.81",
     headers: {
       Authorization: `Bearer ${cookie}`,
     },
   })
   export const axiosInstance=axios.create({
-    baseURL:"http://13.53.207.81",
+    baseURL:"https://13.53.207.81",
     headers: {
       Authorization: `Bearer ${usercookie}`,
     },
