@@ -34,7 +34,6 @@ const NavBar = () => {
               variant=""
               onClick={() => handleCrumb(data.content, index)}
               className="nav-link"
-              key={index}
             >
               {data?.content?.content} /
             </Button>

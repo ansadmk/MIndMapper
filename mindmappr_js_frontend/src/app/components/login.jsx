@@ -1,18 +1,19 @@
 "use client";
 import React from "react";
-import {Button } from "react-bootstrap";
-
-
+import { Form, Button } from "react-bootstrap";
+import Sign from "./sign";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { setCookie } from "cookies-next";
 import { useDispatch } from "react-redux";
-
+import { FetchPages, FetchUsers } from "../redux/Axioses";
+import { changeMainPageListRender } from "../redux/slice";
 import { Box, TextField } from "@mui/material";
-
+import { toast } from "react-toastify";
 import { axiosInstance } from "../redux/axiosInstance";
 
-const Login = () => {
+const login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -27,7 +28,7 @@ const Login = () => {
     });
 
     if (res.data.status === "success") {
-      if (res.data.message === "adminlogged") {
+      if (res.data.message == "adminlogged") {
         setCookie("adminToken", res.data.jwt_token);
         
         router.push("/admin");
@@ -67,9 +68,9 @@ const Login = () => {
         type="password"
       />
       <Button type="submit">submit</Button>
-      
+      <Sign />
     </Box>
   );
 };
 
-export default Login;
+export default login;

@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
     maxWidth: 400,
   }));
 
-const Page = () => {
+const page = () => {
     const dispatch=useDispatch()
     const users=useSelector(getUsersForAdmin)
     
@@ -32,8 +32,8 @@ const Page = () => {
   }
   return (
     <div className='d-flex align-items-center  h-75'>
-    <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{noti?.data?.map((value,i)=>
-    <div className='d-flex' key={i}>
+    <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{noti?.data?.map(value=>
+    <div className='d-flex'>
      <List
      sx={{
        width: "100%",
@@ -46,9 +46,9 @@ const Page = () => {
        <ListItemAvatar>
          <Avatar
            alt="Remy Sharp"
-           src={value.type==="public"?null:users?.data?.filter(val=>val._id===value.to)[0]?.image}
+           src={value.type=="public"?null:users?.data?.filter(val=>val._id==value.to)[0]?.image}
          />
-         {value.type==="public"?"public":users?.data?.filter(val=>val._id===value.to)[0]?.username}
+         {value.type=="public"?"public":users?.data?.filter(val=>val._id==value.to)[0]?.username}
        
        </ListItemAvatar>
        <ListItemText
@@ -80,4 +80,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default page

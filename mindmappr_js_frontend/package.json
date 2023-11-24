@@ -43,8 +43,6 @@
     "redux-thunk": "^2.4.2"
   },
   "devDependencies": {
-    "@editorjs/translate-inline": "^1.0.0-rc.0",
-    "eslint": "^8",
-    "eslint-config-next": "13.5.4"
+    "@editorjs/translate-inline": "^1.0.0-rc.0"
   }
 }

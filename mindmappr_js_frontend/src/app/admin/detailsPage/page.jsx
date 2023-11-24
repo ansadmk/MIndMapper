@@ -9,7 +9,7 @@ import { notify } from '@/app/redux/Admin/AdminAxioses';
 import Link from 'next/link';
 import Container from '@mui/material/Container';
 
-const Page = () => {
+const page = () => {
   const router=useRouter()
   const dispatch=useDispatch()
   const user=useSelector(currentUser)
@@ -40,7 +40,7 @@ const Page = () => {
       <ol>
       
      {
-      user?.page?.map((value,i)=><li key={i}><Link href={`/View/${value._id}`}>{value.content}</Link></li>)
+      user?.page?.map(value=><li><Link href={`/View/${value._id}`}>{value.content}</Link></li>)
      }
       
       </ol>
@@ -75,4 +75,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default page

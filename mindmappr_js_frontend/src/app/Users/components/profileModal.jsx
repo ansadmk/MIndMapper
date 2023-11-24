@@ -1,5 +1,5 @@
 "use client";
-
+import { signIn, signOut, useSession } from "next-auth/react";
 import Modal from "react-bootstrap/Modal";
 import {
   ProfileStats,
@@ -29,13 +29,13 @@ const Profile = () => {
 
   const cloudres = useSelector(cloudResponse);
   const user = useSelector(getDetails);
-  
+  const { data } = useSession();
   const dispatch = useDispatch();
   const router = useRouter();
  
   const handle1 = () => dispatch(changeProfileStats());
   const handleout = () => {
-    deleteCookie("token");
+    data ? signOut() : deleteCookie("token");
     dispatch(changeProfileStats())
    
     router.push("/");

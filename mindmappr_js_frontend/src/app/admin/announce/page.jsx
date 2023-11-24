@@ -8,7 +8,7 @@ import { notify } from '@/app/redux/Admin/AdminAxioses';
 import { useRouter } from 'next/navigation';
 
 
-const Page = () => {
+const page = () => {
   const dispatch=useDispatch()
   const router=useRouter()
   const handleNoti=(e)=>{
@@ -43,4 +43,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default page

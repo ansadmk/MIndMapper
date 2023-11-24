@@ -10,7 +10,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import Image from "next/image";
-
+import { signIn, signOut, useSession } from "next-auth/react";
 import { deleteCookie, getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { MenuItem } from "@mui/material";
@@ -18,10 +18,10 @@ import Asynchronous from "./searchBar";
 
 const pages = ["Users", "Anounnce", "Logout",'Notifications'];
 
-function AdminPanel() {
+function adminPanel() {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
-
+  const { data } = useSession();
   const cookie = getCookie("adminToken");
   const router = useRouter();
   const handleOpenNavMenu = (event) => {
@@ -33,7 +33,7 @@ function AdminPanel() {
   };
 
   const handleout = () => {
-    deleteCookie("adminToken");
+    data ? signOut() : deleteCookie("adminToken");
     router.push("/");
   };
 
@@ -41,15 +41,15 @@ function AdminPanel() {
     if (s != 1) {
       handleCloseNavMenu();
     }
-    setting === "Logout"
+    setting == "Logout"
       ? handleout()
-      : setting === "Anounnce"
+      : setting == "Anounnce"
       ? router.push("/admin/announce")
-      : setting === "Users"
+      : setting == "Users"
       ? router.push("/admin")
       : null;
 
-      if (setting==="Notifications") {
+      if (setting=="Notifications") {
         router.push('/admin/Notifications')
       }
   };
@@ -158,4 +158,4 @@ function AdminPanel() {
     </AppBar>
   );
 }
-export default AdminPanel;
+export default adminPanel;

@@ -22,7 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
   maxWidth: 400,
 }));
-const UsersList = () => {
+const usersList = () => {
   const searchParams = useSearchParams()
   const search = searchParams.get('values')
   const dispatch=useDispatch()
@@ -32,11 +32,11 @@ const UsersList = () => {
   useEffect(()=>{
     function dis(){dispatch(getUsersList({pageno:1}))}
     dis()
-    // if (!window.location.hash) {
-    //   window.location = window.location + "#loaded";
+    if (!window.location.hash) {
+      window.location = window.location + "#loaded";
       
-    //   location.reload(false);
-    // }
+      location.reload(false);
+    }
   },[])
  
   const changeuser=(value)=>{
@@ -52,10 +52,9 @@ const UsersList = () => {
   return (
     <div className='d-flex flex-column  justify-content-center gap-0 align-items-center   w-100 mt-5'>
    
-     { (search?<Box sx={{ flexGrow: 1, overflow: 'auto', px: 3 }} >{users?.data?.map((value,i)=>
+     { (search?<Box sx={{ flexGrow: 1, overflow: 'auto', px: 3 }} >{users?.data?.map((value)=>
       value.username.toLowerCase().includes(search.toLowerCase())?
     <Item
-    key={i}
       sx={{
         my: 1,
         mx: 'auto',
@@ -68,16 +67,15 @@ const UsersList = () => {
         <Typography noWrap  >{value.username}</Typography>
         
         
-        <Button onClick={()=>changeuser({value:value,page:users?.pages.filter((val)=>val.owner===value._id)})}>View & Notify</Button>
+        <Button onClick={()=>changeuser({value:value,page:users?.pages.filter((val)=>val.owner==value._id)})}>View & Notify</Button>
       </Stack>
     </Item>:null
     
   )} 
    
   </Box>:
-    <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{users?.data?.map((value,i)=>
+    <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} >{users?.data?.map(value=>
     <Item
-    key={i}
       sx={{
         my: 1,
         mx: 'auto',
@@ -90,7 +88,7 @@ const UsersList = () => {
         <Typography noWrap  >{value.username}</Typography>
         
         
-        <Button onClick={()=>changeuser({value:value,page:users?.pages.filter((val)=>val.owner===value._id)})}>View & Notify</Button>
+        <Button onClick={()=>changeuser({value:value,page:users?.pages.filter((val)=>val.owner==value._id)})}>View & Notify</Button>
       </Stack>
     </Item>
     
@@ -106,4 +104,4 @@ const UsersList = () => {
   )
 }
 
-export default UsersList
+export default usersList
