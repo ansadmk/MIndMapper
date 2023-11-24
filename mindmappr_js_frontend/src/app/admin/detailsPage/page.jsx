@@ -1,6 +1,6 @@
 "use client"
 import { Box, IconButton, TextField, Card,CardMedia,Typography,CardContent,CardActions,Button} from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import SendIcon from '@mui/icons-material/Send';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentUser } from '@/app/redux/Admin/adminSlice';
@@ -20,9 +20,12 @@ const page = () => {
      dispatch(notify({msg:msg,sub:sub,type:true,to:user.value._id}))
      router?.push('/admin')
   }
+  useEffect(
+    ()=>{if(!user.value){router?.push('/admin')}}
+  )
   return (
     <div className='d-flex h-75  container justify-content-center align-items-center'>
-      {user.value ?null:router?.push('/admin')}
+   
       <div className="w-50 d-flex justify-content-center container flex-sm-column  align-items-center   h-100  mt-5"><div className="w-100 row  gap-5 rounded-5 justify-content-center align-items-center h-100 me-5" >
       <Container className='border'>
       <img
@@ -53,7 +56,7 @@ const page = () => {
       noValidate
       autoComplete="off"
       className=' d-flex flex-column justify-content-center align-items-center mt-3 me-3'
-      onSubmit={handleNoti}
+      onSubmit={(e)=>handleNoti(e)}
     >
       <TextField id="sub" label="subject"  variant="outlined" /> <br />
        <TextField

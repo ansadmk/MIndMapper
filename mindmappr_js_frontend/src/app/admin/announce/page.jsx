@@ -27,7 +27,7 @@ const page = () => {
       noValidate
       autoComplete="off"
       className=' d-flex flex-column justify-content-center align-items-center mt-3 me-3'
-      onSubmit={handleNoti}
+      onSubmit={(e)=>handleNoti(e)}
     >
       <TextField id="sub" label="subject"  variant="outlined" /> <br />
        <TextField

@@ -55,7 +55,7 @@ import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import NavBar from "./NavBar";
-import SignpostIcon from '@mui/icons-material/Signpost';
+import SignpostIcon from "@mui/icons-material/Signpost";
 import Loading from "../loading";
 const drawerWidth = 240;
 
@@ -85,7 +85,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
- 
+
   ...theme.mixins.toolbar,
 }));
 
@@ -133,8 +133,8 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function MiniDrawer() {
-const dispatch = useDispatch();
-const r=10
+  const dispatch = useDispatch();
+  const r = 10;
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl2, setAnchorEl2] = useState(null);
   const Notify = useSelector(Noti);
@@ -158,7 +158,8 @@ const r=10
   const [open, setOpen] = useState(true);
   const pages = useSelector(fetchpageres);
   const handlePageCreation = () => dispatch(changeShowPageForm(true));
-  const user = useSelector(getDetails);                                                                                                        r
+  const user = useSelector(getDetails);
+  r;
   const renderpage = useSelector(changemainPageListRender);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -186,16 +187,20 @@ const r=10
     }
   });
   const handledis = () => dispatch(changeProfileStats());
-  
+
   const router = useRouter();
   const cookie = getCookie("token");
+  useEffect(() => {
+    if (!cookie) {
+      router?.push("/");
+    }
+  });
   return (
-    
     <Box sx={{ display: "flex" }}>
-      {cookie ? null : router?.push("/")}
+      {/* {cookie ? null : router?.push("/")} */}
       <CssBaseline />
-      <AppBar position="fixed" color=""  open={open}>
-        <Toolbar >
+      <AppBar position="fixed" color="" open={open}>
+        <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -211,7 +216,9 @@ const r=10
           <NavBar />
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}
+      <Drawer
+        variant="permanent"
+        open={open}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
         }}
@@ -226,34 +233,34 @@ const r=10
           </IconButton>
         </DrawerHeader>
         <Divider />
-       
+
         <List>
-        {open?<div
-          className="d-flex link justify-content-start w-0 h-0 border p-5"
-          onClick={() => handledis()}
-        >
-          
-            <Stack direction="row">
-              {user?.data?.image ? (
-                <div className="d-flex gap-2">
-                  <Avatar
-                    alt="Natacha"
-                    src={user?.data?.image}
-                    className="fs-1"
-                  />
-                  <h1>{user?.data?.username}</h1>
-                </div>
-              ) : (
-                <div className="d-flex gap-2">
-                  <Avatar>
-                    {user?.data?.username.charAt(0).toUpperCase()}
-                  </Avatar>
-                  <h1>{user?.data?.username}</h1>
-                </div>
-              )}
-            </Stack>
-          
-        </div>:null}
+          {open ? (
+            <div
+              className="d-flex link justify-content-start w-0 h-0 border p-5"
+              onClick={() => handledis()}
+            >
+              <Stack direction="row">
+                {user?.data?.image ? (
+                  <div className="d-flex gap-2">
+                    <Avatar
+                      alt="Natacha"
+                      src={user?.data?.image}
+                      className="fs-1"
+                    />
+                    <h1>{user?.data?.username}</h1>
+                  </div>
+                ) : (
+                  <div className="d-flex gap-2">
+                    <Avatar>
+                      {user?.data?.username.charAt(0).toUpperCase()}
+                    </Avatar>
+                    <h1>{user?.data?.username}</h1>
+                  </div>
+                )}
+              </Stack>
+            </div>
+          ) : null}
           <ListItem disablePadding sx={{ display: "block" }}>
             <ListItemButton
               sx={{
@@ -335,9 +342,9 @@ const r=10
               className="h-25"
             >
               {Notify?.data ? (
-                Notify?.data?.map((data,index) => (
+                Notify?.data?.map((data, index) => (
                   <List
-                  key={index}
+                    key={index}
                     sx={{
                       width: "100%",
                       maxWidth: 360,
@@ -388,9 +395,11 @@ const r=10
                 <AddCircleIcon fontSize="large" />
               </ListItemIcon>
 
-              <ListItemText primary={"Create page"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={"Create page"}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
-            
           </ListItem>
           <ListItem disablePadding sx={{ display: "block" }}>
             <ListItemButton
@@ -399,7 +408,7 @@ const r=10
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
-             onClick={()=>router?.push('/Users/posts')}
+              onClick={() => router?.push("/Users/posts")}
             >
               <ListItemIcon
                 sx={{
@@ -411,19 +420,23 @@ const r=10
                 <SignpostIcon fontSize="large" />
               </ListItemIcon>
 
-              <ListItemText primary={"MindMappers"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={"MindMappers"}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
-            
           </ListItem>
         </List>
         <Divider />
 
         {open ? (
-          <Box sx={{ flexGrow: 1, overflow: "hidden", px: 3 }} className="overflow-auto" >
-            
-            {pages?.data?.mainpages?.map((data,index) => (
+          <Box
+            sx={{ flexGrow: 1, overflow: "hidden", px: 3 }}
+            className="overflow-auto"
+          >
+            {pages?.data?.mainpages?.map((data, index) => (
               <Item
-              key={index}
+                key={index}
                 sx={{
                   my: 1,
                   mx: "auto",
@@ -452,8 +465,9 @@ const r=10
                   }}
                 >
                   <Avatar src={data.avatar} alt="" />
-                  <Typography noWrap className="w-25">{data.content}</Typography>
-                  
+                  <Typography noWrap className="w-25">
+                    {data.content}
+                  </Typography>
                 </Stack>
               </Item>
             ))}
@@ -465,7 +479,5 @@ const r=10
         <Welcome />
       </Box>
     </Box>
-    
-
   );
 }

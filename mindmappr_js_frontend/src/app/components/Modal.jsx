@@ -29,10 +29,12 @@ const popup = () => {
   const cookie = getCookie("token");
   const handlelog = () => setShow({ log: !show.log, reg: false });
   const handlereg = () => setShow({ log: false, reg: !show.reg });
- 
+ useEffect(()=>{
+  if(cookie ){router?.push("/users")}
+ })
   return (
     <div className="d-flex">
-      {!cookie ? null : router?.push("/users")}
+      
       <Button variant="" onClick={handlelog}>
         Login
       </Button>

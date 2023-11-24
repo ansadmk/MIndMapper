@@ -8,7 +8,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { deleteCookie, getCookie } from "cookies-next";
@@ -53,10 +53,12 @@ function adminPanel() {
         router?.push('/admin/notifications')
       }
   };
-
+      useEffect(()=>{
+        if(!cookie) {router.push("/")}
+      })
   return (
     <AppBar position="sticky" color="">
-      {cookie ? null : router.push("/")}
+      
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Image
