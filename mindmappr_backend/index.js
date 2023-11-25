@@ -7,8 +7,9 @@ const express=require('express')
 const app=express()
 const admin=require('./routes/adminRoutes')
 const user=require('./routes/userRoutes')
-app.enable('trust proxy')
-app.use(cors())
+
+app.use(cors());
+
 app.use(express.json())
 app.use('/api/admin',admin)
 app.use('/api/user',user)
