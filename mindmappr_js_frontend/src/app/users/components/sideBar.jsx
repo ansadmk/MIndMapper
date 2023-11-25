@@ -408,7 +408,7 @@ export default function MiniDrawer() {
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
-              onClick={() => router.push("/Users/posts")}
+              onClick={() => router.push("/users/posts")}
             >
               <ListItemIcon
                 sx={{
