@@ -5,7 +5,7 @@ import {
   ProfileStats,
   changeMainPageListRender,
   changeProfileStats,
-  cloudResponse,
+  
   getDetails,
   
 } from "@/app/redux/slice";
@@ -13,9 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { deleteCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
-import { cloudinary, setprofile } from "@/app/redux/Axioses";
+import {setprofile } from "@/app/redux/Axioses";
 import { useState } from "react";
-import Image from "next/image";
+
 import upload from "@/app/components/upload";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { IconButton } from '@mui/material';
@@ -35,7 +35,7 @@ const Profile = () => {
  
   const handle1 = () => dispatch(changeProfileStats());
   const handleout = () => {
-    data ? signOut() : deleteCookie("token");
+    deleteCookie("token");
     dispatch(changeProfileStats())
    
     router.push("/");
