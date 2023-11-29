@@ -93,10 +93,10 @@ const NavBar = () => {
         >
           {page.public ? (
             <div className="border p-3">
-              {`http://localhost:3000/view/${page._id}`}
+              {`https://site.mindmappr.me/view/${page._id}`}
               <IconButton
                 onClick={() =>
-                  copy(`http://localhost:3000/view/${page._id}`, {
+                  copy(`https://site.mindmappr.me/view/${page._id}`, {
                     debug: true,
                     message: "copied",
                   })
