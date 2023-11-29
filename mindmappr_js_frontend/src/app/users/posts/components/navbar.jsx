@@ -21,7 +21,7 @@ import { FetchUsers } from '@/app/redux/Axioses';
 import Asynchronous from './searchBar';
 
 
-const settings = ['Logout'];
+const settings = ['Logout',"myNotions"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] =useState(null);
@@ -133,7 +133,7 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" onClick={()=>handleout()}>{setting}</Typography>
+                  <Typography textAlign="center" onClick={()=>setting=="Logout"?handleout():router.push('/users')}>{setting}</Typography>
                 </MenuItem>
           
 
